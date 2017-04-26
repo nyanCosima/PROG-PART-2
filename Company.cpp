@@ -1,8 +1,6 @@
 #include "Company.h"
 
 
-
-
 Company::Company(string name, string driversFile, string linesFile){
 
 }
