@@ -210,3 +210,13 @@ void quitOrContinue()
 		exit(1);
 	}
 }
+
+
+/*
+Função simples para limpar o ecrã.
+*/
+void clearScreen()
+{
+	for (int i = 0; i < 50; i++)
+		cout << '\n';
+}

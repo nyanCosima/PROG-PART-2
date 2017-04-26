@@ -24,15 +24,6 @@ extern string driversFileName, linesFileName;
 extern vector<Line> linesData;
 extern vector<Driver> driversData;
 
-
-//Função para limpar a consola, independentemente do sistema operativo
-#ifdef _WIN32
-#define clearScreen() system("cls");
-#else
-#define clearScreen() system("clear");
-#endif
-
-
 //Função para possibilitar o uso de carateres portugueses caso o sistema operativo seja o windows
 #ifdef _WIN32
 #include <windows.h>
@@ -40,7 +31,6 @@ extern vector<Driver> driversData;
 #else
 #define setPTChar() void
 #endif
-
 
 //Declaração das funções
 
@@ -65,6 +55,7 @@ void driversInterface();
 void schedulesInterface();
 void searchInterface();
 void quitOrContinue();
+void clearScreen();
 
 //Pesquisa
 void searchStop();
