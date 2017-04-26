@@ -36,5 +36,7 @@ void searchStop()
 				cout << ", ";
 			cout << lines[c];
 		}
+		
+		cout << endl;
 	}
 }

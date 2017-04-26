@@ -58,7 +58,7 @@ void savingChanges()
 
 	while (!validInput)
 	{
-		cout << endl << "Deseja guardar as alterações? (S/N) : ";
+		cout <<  "Deseja guardar as alterações? (S/N) : ";
 
 		if (cin >> userChoice && (userChoice == 'S' || userChoice == 'N' || userChoice == 's' || userChoice == 'n'))
 		{
