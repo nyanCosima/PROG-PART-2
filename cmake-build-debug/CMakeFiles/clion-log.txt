@@ -1,4 +1,0 @@
-"/Users/beamendes/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/163.13906.23/CLion.app/Contents/bin/cmake/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2"
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/cmake-build-debug
