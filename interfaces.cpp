@@ -1,0 +1,212 @@
+#include "myTypes.h"
+
+/*
+Interface principal entre o programa e o utilizador. Apresenta no ecrã as funcionalidades principais, recebe
+a escolha do utilizador e devolve-a ao programa.
+*/
+void mainUserInterface()
+{
+	int userChoice;
+
+	cout << "Sistema de gestão de informação - SEMPRARROLAR" << endl;
+	cout << "Funcionalidades disponíveis" << endl << endl;
+	cout << "1 - Gestão de linhas" << endl;
+	cout << "2 - Gestão de condutores" << endl;
+	cout << "3 - Visualização de horários" << endl;
+	cout << "4 - Pesquisa" << endl;
+	cout << "5 - Sair" << endl << endl;
+
+	userChoice = verifyInput(1, 5);
+
+	clearScreen(); //Limpa a consola para melhorar o aspeto e simplicidade do programa
+
+	if (userChoice == 1)
+		linesInterface();
+	else if (userChoice == 2)
+		driversInterface();
+	else if (userChoice == 3)
+		schedulesInterface();
+	else if (userChoice == 4)
+		searchInterface();
+	else if (userChoice == 5)
+	{
+		savingChanges();
+		cout << "Programa terminado! Pressione ENTER para fechar." << endl;
+		exit(1);
+	}
+}
+
+/*
+Sub-interface dedicada à gestão de linhas. Apresenta as funcionalidades disponíveis, recebe a escolha
+do utilizador e inicializa a função pedida
+*/
+void linesInterface()
+{
+	int userChoice;
+
+	cout << "Gestão de linhas" << endl;
+	cout << "Funcionalidades disponíveis" << endl << endl;
+	cout << "1 - Criar linha" << endl;
+	cout << "2 - Alterar linha" << endl;
+	cout << "3 - Remover linha" << endl;
+	cout << "4 - Voltar" << endl << endl;
+
+	userChoice = verifyInput(1, 4);
+
+	clearScreen();
+
+	switch (userChoice)
+	{
+	case 1:// createLine(linesData);
+		quitOrContinue();
+		break;
+	case 2: //editLine(linesData);
+		quitOrContinue();
+		break;
+	case 3: //removeLine(linesData);
+		quitOrContinue();
+		break;
+	case 4: mainUserInterface();
+		break;
+	}
+}
+
+/*
+Sub-interface dedicada à gestão de condutores. Apresenta as funcionalidades disponíveis, recebe a escolha
+do utilizador e inicializa a função pedida
+*/
+void driversInterface()
+{
+	int userChoice;
+
+	cout << "Gestão de condutores" << endl;
+	cout << "Funcionalidades disponíveis" << endl << endl;
+	cout << "1 - Criar condutor" << endl;
+	cout << "2 - Alterar condutor" << endl;
+	cout << "3 - Remover condutor" << endl;
+	cout << "4 - Estado do condutor" << endl;
+	cout << "5 - Voltar" << endl << endl;
+
+	userChoice = verifyInput(1, 5);
+
+	clearScreen();
+
+	switch (userChoice)
+	{
+	case 1:// createDriver(driversData);
+		quitOrContinue();
+		break;
+	case 2: //editDriver(driversData);
+		quitOrContinue();
+		break;
+	case 3: //removeDriver(driversData);
+		quitOrContinue();
+		break;
+	case 4:// showShifts(driversData);
+		quitOrContinue();
+		break;
+	case 5: mainUserInterface();
+		break;
+	}
+}
+
+/*
+Sub-interface dedicada à gestão de horários. Apresenta as funcionalidades disponíveis, recebe a escolha
+do utilizador e inicializa a função pedida
+*/
+void schedulesInterface()
+{
+	int userChoice;
+
+	cout << "Gestão de horarios" << endl;
+	cout << "Funcionalidades disponíveis" << endl << endl;
+	cout << "1 - Horário de uma paragem" << endl;
+	cout << "2 - Horário de uma linha " << endl;
+	cout << "3 - Voltar" << endl << endl;
+
+	userChoice = verifyInput(1, 3);
+
+	clearScreen();
+
+	switch (userChoice)
+	{
+	case 1:// stopSchedule(linesData);
+		quitOrContinue();
+		break;
+	case 2:// lineSchedule(linesData);
+		quitOrContinue();
+		break;
+	case 3: mainUserInterface();
+		break;
+	}
+}
+
+/*
+Sub-interface dedicada à pesquisa de informação. Apresenta as funcionalidades disponíveis, recebe a escolha
+do utilizador e inicializa a função pedida
+*/
+void searchInterface()
+{
+	int userChoice;
+
+	cout << "Pesquisa" << endl;
+	cout << "Funcionalidades disponíveis" << endl << endl;
+	cout << "1 - Procurar paragem" << endl;
+	cout << "2 - Condutores disponíveis" << endl;
+	cout << "3 - Percurso entre paragens" << endl;
+	cout << "4 - Voltar" << endl << endl;
+
+	userChoice = verifyInput(1, 4);
+
+	clearScreen();
+
+	switch (userChoice)
+	{
+	case 1: searchStop();
+		quitOrContinue();
+		break;
+	case 2:// availableDrivers(driversData);
+		quitOrContinue();
+		break;
+	case 3:// routeCalculator(linesData);
+		quitOrContinue();
+		break;
+	case 4: mainUserInterface();
+		break;
+	}
+}
+
+/*
+Pergunta ao utilizador se pretente efetuar outra operação ou terminar o programa.
+Também assegura que este insere um valor válido.
+*/
+void quitOrContinue()
+{
+	char userChoice;
+	bool validInput = false;
+
+	while (!validInput)
+	{
+		cout << "Deseja efetuar outra operação? (S/N) : ";
+		if (cin >> userChoice && (userChoice == 'S' || userChoice == 'N' || userChoice == 's' || userChoice == 'n'))
+			validInput = true;
+		else
+		{
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Opção inválida, tente novamente..." << endl << endl;
+		}
+	}
+
+	if (userChoice == 'S' || userChoice == 's')
+	{
+		clearScreen();
+		mainUserInterface();
+	}
+	else
+	{
+		savingChanges();
+		cout << endl << "Programa terminado! Pressione ENTER para fechar." << endl << endl;
+		exit(1);
+	}
+}

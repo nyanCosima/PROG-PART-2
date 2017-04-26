@@ -30,7 +30,7 @@ vector<string> readLines()
         fileContent.push_back(line);
     }
 
-    cout << "sup bitch" << endl << endl;
+    cout << "Conteúdos lidos!" << endl << endl;
 
     in_stream.close();
 

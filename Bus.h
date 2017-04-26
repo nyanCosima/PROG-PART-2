@@ -22,8 +22,8 @@ class Bus{
   unsigned int getLineId() const;
   vector<Shift> getSchedule() const;
   // set methods
-    unsigned int setDriverId() const;
-    unsigned int setLineId() const;
+    void setDriverId() const;
+    void setLineId() const;
   // other methods
 
 };
