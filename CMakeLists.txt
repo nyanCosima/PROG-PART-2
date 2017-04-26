@@ -14,6 +14,6 @@ set(SOURCE_FILES
         Line.h
         main.cpp
         Shift.cpp
-        Shift.h)
+        Shift.h readingFiles.cpp myTypes.h SavingFiles.cpp)
 
 add_executable(PROG_PART_2 ${SOURCE_FILES})

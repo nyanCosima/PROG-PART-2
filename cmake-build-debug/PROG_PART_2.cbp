@@ -102,6 +102,9 @@
 		<Unit filename="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/Line.h">
 			<Option target="PROG_PART_2"/>
 		</Unit>
+		<Unit filename="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/SavingFiles.cpp">
+			<Option target="PROG_PART_2"/>
+		</Unit>
 		<Unit filename="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/Shift.cpp">
 			<Option target="PROG_PART_2"/>
 		</Unit>
@@ -109,6 +112,12 @@
 			<Option target="PROG_PART_2"/>
 		</Unit>
 		<Unit filename="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/main.cpp">
+			<Option target="PROG_PART_2"/>
+		</Unit>
+		<Unit filename="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/myTypes.h">
+			<Option target="PROG_PART_2"/>
+		</Unit>
+		<Unit filename="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/readingFiles.cpp">
 			<Option target="PROG_PART_2"/>
 		</Unit>
 		<Unit filename="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/CMakeLists.txt">

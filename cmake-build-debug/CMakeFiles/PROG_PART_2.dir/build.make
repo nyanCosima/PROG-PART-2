@@ -201,6 +201,54 @@ CMakeFiles/PROG_PART_2.dir/Shift.cpp.o.provides: CMakeFiles/PROG_PART_2.dir/Shif
 CMakeFiles/PROG_PART_2.dir/Shift.cpp.o.provides.build: CMakeFiles/PROG_PART_2.dir/Shift.cpp.o
 
 
+CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o: CMakeFiles/PROG_PART_2.dir/flags.make
+CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o: ../readingFiles.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o -c "/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/readingFiles.cpp"
+
+CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/readingFiles.cpp" > CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.i
+
+CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/readingFiles.cpp" -o CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.s
+
+CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o.requires:
+
+.PHONY : CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o.requires
+
+CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o.provides: CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o.requires
+	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o.provides.build
+.PHONY : CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o.provides
+
+CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o.provides.build: CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o
+
+
+CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o: CMakeFiles/PROG_PART_2.dir/flags.make
+CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o: ../SavingFiles.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o -c "/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/SavingFiles.cpp"
+
+CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/SavingFiles.cpp" > CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.i
+
+CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/SavingFiles.cpp" -o CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.s
+
+CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o.requires:
+
+.PHONY : CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o.requires
+
+CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o.provides: CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o.requires
+	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o.provides.build
+.PHONY : CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o.provides
+
+CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o.provides.build: CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o
+
+
 # Object files for target PROG_PART_2
 PROG_PART_2_OBJECTS = \
 "CMakeFiles/PROG_PART_2.dir/Bus.cpp.o" \
@@ -208,7 +256,9 @@ PROG_PART_2_OBJECTS = \
 "CMakeFiles/PROG_PART_2.dir/Driver.cpp.o" \
 "CMakeFiles/PROG_PART_2.dir/Line.cpp.o" \
 "CMakeFiles/PROG_PART_2.dir/main.cpp.o" \
-"CMakeFiles/PROG_PART_2.dir/Shift.cpp.o"
+"CMakeFiles/PROG_PART_2.dir/Shift.cpp.o" \
+"CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o" \
+"CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o"
 
 # External object files for target PROG_PART_2
 PROG_PART_2_EXTERNAL_OBJECTS =
@@ -219,9 +269,11 @@ PROG_PART_2: CMakeFiles/PROG_PART_2.dir/Driver.cpp.o
 PROG_PART_2: CMakeFiles/PROG_PART_2.dir/Line.cpp.o
 PROG_PART_2: CMakeFiles/PROG_PART_2.dir/main.cpp.o
 PROG_PART_2: CMakeFiles/PROG_PART_2.dir/Shift.cpp.o
+PROG_PART_2: CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o
+PROG_PART_2: CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o
 PROG_PART_2: CMakeFiles/PROG_PART_2.dir/build.make
 PROG_PART_2: CMakeFiles/PROG_PART_2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable PROG_PART_2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/beamendes/OneDrive - Universidade do Porto/MIEIC mine/1º ano/2º semestre/PROG/PROG-PART-2/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable PROG_PART_2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PROG_PART_2.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -235,6 +287,8 @@ CMakeFiles/PROG_PART_2.dir/requires: CMakeFiles/PROG_PART_2.dir/Driver.cpp.o.req
 CMakeFiles/PROG_PART_2.dir/requires: CMakeFiles/PROG_PART_2.dir/Line.cpp.o.requires
 CMakeFiles/PROG_PART_2.dir/requires: CMakeFiles/PROG_PART_2.dir/main.cpp.o.requires
 CMakeFiles/PROG_PART_2.dir/requires: CMakeFiles/PROG_PART_2.dir/Shift.cpp.o.requires
+CMakeFiles/PROG_PART_2.dir/requires: CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o.requires
+CMakeFiles/PROG_PART_2.dir/requires: CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o.requires
 
 .PHONY : CMakeFiles/PROG_PART_2.dir/requires
 

@@ -11,12 +11,14 @@ using namespace std;
 class Line{
  private:
   unsigned int id;
+  unsigned int frequency;
   vector<string> busStopList;
   vector<int> timesList;
  public:
   Line(string textLine);
   // metodos get
   unsigned int getId() const;
+  unsigned int getFrequency() const;
   vector<string> getBusStops() const;
   vector<int> getTimings() const;
   // set methods

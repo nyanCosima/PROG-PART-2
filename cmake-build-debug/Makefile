@@ -231,6 +231,33 @@ Line.cpp.s:
 	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/Line.cpp.s
 .PHONY : Line.cpp.s
 
+SavingFiles.o: SavingFiles.cpp.o
+
+.PHONY : SavingFiles.o
+
+# target to build an object file
+SavingFiles.cpp.o:
+	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.o
+.PHONY : SavingFiles.cpp.o
+
+SavingFiles.i: SavingFiles.cpp.i
+
+.PHONY : SavingFiles.i
+
+# target to preprocess a source file
+SavingFiles.cpp.i:
+	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.i
+.PHONY : SavingFiles.cpp.i
+
+SavingFiles.s: SavingFiles.cpp.s
+
+.PHONY : SavingFiles.s
+
+# target to generate assembly for a file
+SavingFiles.cpp.s:
+	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/SavingFiles.cpp.s
+.PHONY : SavingFiles.cpp.s
+
 Shift.o: Shift.cpp.o
 
 .PHONY : Shift.o
@@ -285,6 +312,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+readingFiles.o: readingFiles.cpp.o
+
+.PHONY : readingFiles.o
+
+# target to build an object file
+readingFiles.cpp.o:
+	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.o
+.PHONY : readingFiles.cpp.o
+
+readingFiles.i: readingFiles.cpp.i
+
+.PHONY : readingFiles.i
+
+# target to preprocess a source file
+readingFiles.cpp.i:
+	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.i
+.PHONY : readingFiles.cpp.i
+
+readingFiles.s: readingFiles.cpp.s
+
+.PHONY : readingFiles.s
+
+# target to generate assembly for a file
+readingFiles.cpp.s:
+	$(MAKE) -f CMakeFiles/PROG_PART_2.dir/build.make CMakeFiles/PROG_PART_2.dir/readingFiles.cpp.s
+.PHONY : readingFiles.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -306,12 +360,18 @@ help:
 	@echo "... Line.o"
 	@echo "... Line.i"
 	@echo "... Line.s"
+	@echo "... SavingFiles.o"
+	@echo "... SavingFiles.i"
+	@echo "... SavingFiles.s"
 	@echo "... Shift.o"
 	@echo "... Shift.i"
 	@echo "... Shift.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... readingFiles.o"
+	@echo "... readingFiles.i"
+	@echo "... readingFiles.s"
 .PHONY : help
 
 

@@ -1,15 +1,15 @@
-#include "Empresa.h"
+#include "Company.h"
 
 
-Empresa::Empresa(string nome, string fichCondutores, string fichLinhas){
-  
+Company::Company(string name, string driversFile, string linesFile){
+
 }
 
 ////////////////////////////////
 // metodos get
 ///////////////////////////////
-string Empresa::getNome() const{
-  return nome;
+string Company::getName() const{
+  return name;
 }
 
 //////////////////////////////
@@ -19,5 +19,5 @@ string Empresa::getNome() const{
 ////////////////////////////
 // outros metodos
 ///////////////////////////
-void Empresa::distribuiServico(){
+void Company::allocateService(){
 }
