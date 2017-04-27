@@ -9,7 +9,7 @@ Driver::Driver(string textLine){
   int semicolonPos = textLine.find(";", firstPos);
 
   string ids = textLine.substr(firstPos, semicolonPos - firstPos);
-  int idN = stoi(ids);
+  unsigned int idN = stoi(ids);
 
   id = idN;
 
@@ -29,7 +29,7 @@ Driver::Driver(string textLine){
   semicolonPos = textLine.find(";", firstPos);
 
   string shiftS = textLine.substr(firstPos, semicolonPos - firstPos);
-  int shiftN = stoi(shiftS);
+  unsigned int shiftN = stoi(shiftS);
 
   maxHours = shiftN;
 
@@ -40,7 +40,7 @@ Driver::Driver(string textLine){
   semicolonPos = textLine.find(";", firstPos);
 
   string maxHoursW = textLine.substr(firstPos, semicolonPos - firstPos);
-  int maxHoursN = stoi(maxHoursW);
+  unsigned int maxHoursN = stoi(maxHoursW);
 
   maxWeekWorkingTime = maxHoursN;
 
@@ -48,13 +48,18 @@ Driver::Driver(string textLine){
   firstPos = semicolonPos + 2;
 
   string restHours = textLine.substr(firstPos);
-  int restHoursN = stoi(restHours);
+  unsigned int restHoursN = stoi(restHours);
 
   minRestTime = restHoursN;
+}
 
-
-
-
+Driver::Driver(unsigned int id, string name, unsigned int maxHours, unsigned int maxWeekWorkingTime, unsigned int minRestTime)
+{
+	this->id = id;
+	this->name = name;
+	this->maxHours = maxHours;
+	this->maxWeekWorkingTime = maxWeekWorkingTime;
+	this->minRestTime = minRestTime;
 }
 
 //////////////
@@ -83,4 +88,22 @@ unsigned int Driver::getMinRestTime() const{
 
 vector<Shift> Driver::getShifts() const{
   return shifts;
+}
+
+
+void Driver::setName(string newName)
+{
+	name = newName;
+}
+void Driver::setShiftMaxDuration(unsigned int newShiftMaxDuration)
+{
+	maxHours = newShiftMaxDuration;
+}
+void Driver::setMaxWeekWorkingTime(unsigned int newMaxWeekWorkingTime)
+{
+	maxWeekWorkingTime = newMaxWeekWorkingTime;
+}
+void Driver::setMinRestTime(unsigned int newMinRestTime)
+{
+	minRestTime = newMinRestTime;
 }

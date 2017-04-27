@@ -53,14 +53,14 @@ Pergunta ao utilizador se pretende guardar as alteraÁıes e age de acordo com a
 */
 void savingChanges()
 {
-	char userChoice;
+	string userChoice;
 	bool validInput = false;
 
 	while (!validInput)
 	{
 		cout <<  "Deseja guardar as alterações? (S/N) : ";
 
-		if (cin >> userChoice && (userChoice == 'S' || userChoice == 'N' || userChoice == 's' || userChoice == 'n'))
+		if (cin >> userChoice && (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n"))
 		{
 			validInput = true;
 			cin.ignore(1000, '\n');
@@ -73,7 +73,7 @@ void savingChanges()
 		}
 	}
 
-	if (userChoice == 'S' || userChoice == 's')
+	if (userChoice == "S" || userChoice == "s")
 	{
 		savingDriversData();
 		savingLinesData();
