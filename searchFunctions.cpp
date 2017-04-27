@@ -39,6 +39,31 @@ void searchStop()
 	}
 }
 
+/*
+Semelhante à função acima, mas com uma pequena diferença. Devolve true se a paragem existir nos registos, e false
+se não for encontrada.
+*/
+bool searchStop2(string stop)
+{
+	vector<int> lines;
+
+	//Guarda num vetor os identificadores das linhas que contiverem a paragem indicada
+	for (int i = 0; i < linesData.size(); i++)
+	{
+		for (int j = 0; j < linesData[i].getBusStops().size(); j++)
+		{
+			if (linesData[i].getBusStops()[j] == stop)
+				lines.push_back(linesData[i].getId());
+		}
+	}
+
+	if (lines.size() == 0)
+		return false; //Se o vetor for vazio, quer dizer que a paragem não se encontra em qualquer linha.
+	else
+		return true; //Caso contrário, quer dizer que existe em pelo menos uma linha.
+}
+
+
 
 /*
 Semelhante às outras funções, mas devolve true se a paragem existir na linha especificada, e false no caso contrário.

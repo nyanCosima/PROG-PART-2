@@ -30,6 +30,16 @@ vector<Shift> Bus::getSchedule() const{
 //////////////////////////////
 // metodos set
 /////////////////////////////
+void Bus::setDriverId(unsigned int newDriverID)
+{
+	driverId = newDriverID;
+}
+
+void Bus::setLineId(unsigned int newLineID)
+{
+	lineId = newLineID;
+}
+
 
 ////////////////////////////
 // outher methods

@@ -1,7 +1,7 @@
 #include "myTypes.h"
 
 /*
-LÍ o ficheiro das linhas e guarda cada fila de informaÁ„o numa string, adicionando-a num vetor de strings.
+Lê o ficheiro das linhas e guarda cada fila de informação numa string, adicionando-a num vetor de strings.
 */
 vector<string> readLines()
 {
@@ -30,7 +30,7 @@ vector<string> readLines()
         fileContent.push_back(line);
     }
 
-    cout << "Conteúdos lidos!" << endl << endl;
+    cout << "Conteudos lidos!" << endl << endl;
 
     in_stream.close();
 
@@ -38,7 +38,7 @@ vector<string> readLines()
 }
 
 /*
-LÍ o ficheiro dos condutores e guarda cada fila de informaÁ„o numa string, adicionando-a num vetor de strings.
+Lê o ficheiro dos condutores e guarda cada fila de informação numa string, adicionando-a num vetor de strings.
 */
 vector<string> readDrivers()
 {
@@ -67,7 +67,7 @@ vector<string> readDrivers()
         fileContent.push_back(line);
     }
 
-    cout << "Conteúdos lidos!" << endl << endl;
+    cout << "Conteudos lidos!" << endl << endl;
 
     in_stream.close();
 
@@ -75,7 +75,7 @@ vector<string> readDrivers()
 }
 
 /*
-Faz o construtor, mete no vetor
+Lê o vetor de strings e guarda a informação num vetor de Lines, sendo que cada Line representa uma linha.
 */
 vector<Line> storingLinesData(const vector<string> &data)
 {
@@ -91,9 +91,8 @@ vector<Line> storingLinesData(const vector<string> &data)
 }
 
 
-
 /*
-Lê o vetor de strings e guarda a informaÁao num vetor de Drivers, sendo que cada classe representa um condutor.
+Lê o vetor de strings e guarda a informação num vetor de Drivers, sendo que cada Driver representa um condutor.
 */
 vector<Driver> storingDriversData(const vector<string> &data)
 {
