@@ -93,7 +93,7 @@ vector<Line> storingLinesData(const vector<string> &data)
 
 
 /*
-LÍ o vetor de strings e guarda a informaÁao num vetor de structs, sendo que cada classe representa um condutor.
+Lê o vetor de strings e guarda a informaÁao num vetor de Drivers, sendo que cada classe representa um condutor.
 */
 vector<Driver> storingDriversData(const vector<string> &data)
 {

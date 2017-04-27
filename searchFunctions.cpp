@@ -38,3 +38,54 @@ void searchStop()
 		}
 	}
 }
+
+
+/*
+Semelhante às outras funções, mas devolve true se a paragem existir na linha especificada, e false no caso contrário.
+*/
+bool searchStop3(int lineIndex, string stop)
+{
+	for (int i = 0; i < linesData[lineIndex].getBusStops().size(); i++)
+	{
+		if (linesData[lineIndex].getBusStops()[i] == stop)
+			return true;
+	}
+
+	return false;
+}
+
+/*
+Procura a existência de uma linha no vetor de structs, dado o ID. Caso exista, devolve o índice da linha.
+Caso contrário, devolve -1.
+*/
+int searchLineIdentifier(unsigned int id)
+{
+	int found = -1;
+
+	for (int i = 0; i < linesData.size(); i++)
+		if (linesData[i].getId() == id)
+		{
+			found = i;
+			break;
+		}
+
+	return found;
+}
+
+/*
+Procura a existência de um condutor no vetor de structs, dado o ID. Caso exista, devolve o índice do condutor.
+Caso contrário, devolve -1.
+*/
+int searchDriverIdentifier(unsigned int id)
+{
+	int found = -1;
+
+	for (int i = 0; i < driversData.size(); i++)
+		if (driversData[i].getId() == id)
+		{
+			found = i;
+			break;
+		}
+
+	return found;
+}

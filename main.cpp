@@ -7,6 +7,9 @@ string driversFileName, linesFileName;
 vector<Line> linesData;
 vector<Driver> driversData;
 
+//Declaração das constantes de início e fim de serviço
+int serviceStartingTime = 8 * 60, serviceEndingTime = 20 * 60;
+
 int main(){
 
   vector<string> rawLinesData;

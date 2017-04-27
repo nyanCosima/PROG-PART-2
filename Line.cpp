@@ -11,7 +11,7 @@ Line::Line(string textLine){
   int semicolonPos = textLine.find(";", firstPos);
 
   string ids = textLine.substr(firstPos, semicolonPos - firstPos);
-  int idN = stoi(ids);
+  unsigned int idN = stoi(ids);
 
   id = idN;
 
@@ -21,7 +21,7 @@ Line::Line(string textLine){
   semicolonPos = textLine.find(";", firstPos);
 
   string frequencyS = textLine.substr(firstPos, semicolonPos - firstPos);
-  int freq = stoi(frequencyS);
+  unsigned int freq = stoi(frequencyS);
 
   frequency = freq;
 
@@ -66,6 +66,13 @@ Line::Line(string textLine){
 
 }
 
+Line::Line(unsigned int id, unsigned int frequency, vector<string> busStopsList, vector<int> timesList)
+{
+	this->id = id;
+	this->frequency = frequency;
+	this->busStopList = busStopsList;
+	this->timesList = timesList;
+}
 ////////////////
 // get methods
 ////////////////
@@ -84,4 +91,19 @@ vector<string> Line::getBusStops() const{
 
 vector<int> Line::getTimings() const{
   return timesList;
+}
+
+void Line::setFrequency(unsigned int newFrequency)
+{
+	frequency = newFrequency;
+}
+
+void Line::setBusStops(vector<string> newStopsList)
+{
+	busStopList = newStopsList;
+}
+
+void Line::setTimings(vector<int> newTimings)
+{
+	timesList = newTimings;
 }

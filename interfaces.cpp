@@ -57,13 +57,13 @@ void linesInterface()
 
 	switch (userChoice)
 	{
-	case 1:// createLine(linesData);
+	case 1: createLine();
 		quitOrContinue();
 		break;
-	case 2: //editLine(linesData);
+	case 2: editLine();
 		quitOrContinue();
 		break;
-	case 3: //removeLine(linesData);
+	case 3: removeLine();
 		quitOrContinue();
 		break;
 	case 4: mainUserInterface();
@@ -93,16 +93,16 @@ void driversInterface()
 
 	switch (userChoice)
 	{
-	case 1:// createDriver(driversData);
+	case 1: createDriver();
 		quitOrContinue();
 		break;
-	case 2: //editDriver(driversData);
+	case 2: editDriver();
 		quitOrContinue();
 		break;
-	case 3: //removeDriver(driversData);
+	case 3: removeDriver();
 		quitOrContinue();
 		break;
-	case 4:// showShifts(driversData);
+	case 4: cout << "calmex" << endl;
 		quitOrContinue();
 		break;
 	case 5: mainUserInterface();
@@ -182,13 +182,13 @@ Também assegura que este insere um valor válido.
 */
 void quitOrContinue()
 {
-	char userChoice;
+	string userChoice;
 	bool validInput = false;
 
 	while (!validInput)
 	{
 		cout << "Deseja efetuar outra operação? (S/N) : ";
-		if (cin >> userChoice && (userChoice == 'S' || userChoice == 'N' || userChoice == 's' || userChoice == 'n'))
+		if (cin >> userChoice && (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n"))
 			validInput = true;
 		else
 		{
@@ -198,7 +198,7 @@ void quitOrContinue()
 		}
 	}
 
-	if (userChoice == 'S' || userChoice == 's')
+	if (userChoice == "S" || userChoice == "s")
 	{
 		clearScreen();
 		mainUserInterface();
