@@ -165,10 +165,10 @@ void searchInterface()
 	case 1: searchStop();
 		quitOrContinue();
 		break;
-	case 2:// availableDrivers(driversData);
+	case 2: //availableDrivers();
 		quitOrContinue();
 		break;
-	case 3:// routeCalculator(linesData);
+	case 3:routeCalculator();
 		quitOrContinue();
 		break;
 	case 4: mainUserInterface();

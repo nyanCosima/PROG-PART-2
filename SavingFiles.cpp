@@ -59,18 +59,12 @@ void savingChanges()
 	while (!validInput)
 	{
 		cout <<  "Deseja guardar as alterações? (S/N) : ";
+		getline(cin, userChoice);
 
-		if (cin >> userChoice && (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n"))
-		{
+		if (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n")
 			validInput = true;
-			cin.ignore(1000, '\n');
-		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
 			cout << "Opção inválida, tente novamente..." << endl << endl;
-		}
 	}
 
 	if (userChoice == "S" || userChoice == "s")
