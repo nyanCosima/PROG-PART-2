@@ -188,14 +188,11 @@ void quitOrContinue()
 	while (!validInput)
 	{
 		cout << "Deseja efetuar outra operação? (S/N) : ";
-		if (cin >> userChoice && (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n"))
+		getline(cin, userChoice);
+
+		if (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n")
 			validInput = true;
-		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Opção inválida, tente novamente..." << endl << endl;
-		}
+		cout << "Opção inválida, tente novamente..." << endl << endl;
 	}
 
 	if (userChoice == "S" || userChoice == "s")

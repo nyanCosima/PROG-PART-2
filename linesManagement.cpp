@@ -7,11 +7,11 @@ Line, que é adicionada ao vetor criado anteriormente.
 void createLine()
 {
 	unsigned int id, frequency;
-	int idN,frequencyN;
 	int verify = -1;
 	int i = 1;
 	int j = 0;
 	bool validInput = false;
+	string input;
 	string stop;
 	vector<string> stops;
 	vector<int> times;
@@ -23,39 +23,28 @@ void createLine()
 	while (!validInput)
 	{
 		cout << "Identificador da linha: ";
+		getline(cin, input);
 
-
-		if (cin >> idN && idN>0)
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
 		{
-			verify = searchLineIdentifier(idN);
 
-			if (idN > 1000)
+			if(isNumber(input)) //Se o input for um número positivo
 			{
-				cin.ignore(1000, '\n');
-				cout << "Insira um ID com, no máximo, 3 dígitos." << endl;
-			}
+				verify = searchLineIdentifier(stoi(input)); //Verifica a existência do ID
 
-			else if (verify == -1)
-			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				if (verify == -1)
+					validInput = true;
+				else
+					cout << "Esse ID já existe! Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.ignore(1000, '\n');
-				cout << "Esse identificador já existe! Tente novamente..." << endl;
-			}
-
+				cout << "Input inválido! Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
-	id = idN;
+	id = stoi(input);
 
 	//Recebe a frequência do utilizador
 
@@ -63,6 +52,7 @@ void createLine()
 	while (!validInput)
 	{
 		cout << "Frequência: ";
+		/*
 		if (cin >> frequencyN && frequencyN>0)
 		{
 			validInput = true;
@@ -74,9 +64,23 @@ void createLine()
 			cin.ignore(1000, '\n');
 			cout << "Input inválido! Tente novamente..." << endl << endl;
 		}
+		*/
+
+		getline(cin,input);
+
+		if (isNumber(input))
+		{
+			if (stoi(input) > 0 && stoi(input) < 5 * 60)
+				validInput = true;
+			else
+				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
-	frequency = frequencyN;
+	frequency = stoi(input);
+
 
 	/*
 	Recebe as paragens do utilizador. Deteta o fim do input e também assegura que o input é válido, na medida
@@ -128,22 +132,24 @@ void createLine()
 		while (!validInput)
 		{
 			cout << "Duração " << (j + 1) << ": ";
-			if (cin >> d && d>0)
+
+			getline(cin, input);
+
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				if (stoi(input) > 0 && stoi(input) <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
-				cout << "Input inválido! Tente novamente..." << endl << endl;
-			}
+				cout << "Input inválido! Tente novamente..." << endl;
 		}
 
-		j++;
-
+		d = stoi(input);
 		times.push_back(d);
+
+		j++;
 	}
 
 	Line newLine(id, frequency, stops, times); //Invoca o construtor para criar a linha
@@ -160,7 +166,7 @@ void editLine()
 {
 	int userChoice;
 	unsigned int id;
-	int idN;
+	string input;
 	int verify = -1;
 	bool validInput = false;
 
@@ -169,31 +175,28 @@ void editLine()
 	while (!validInput)
 	{
 		cout << "Identificador da linha: ";
-		if (cin >> idN && idN>0)
-		{
-			verify = searchLineIdentifier(idN);
+		getline(cin, input);
 
-			if (verify != -1)
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+
+			if (isNumber(input)) //Se o input for um número positivo
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				verify = searchLineIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (verify != -1)
+					validInput = true;
+				else
+					cout << "Esse ID não existe! Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.ignore(1000, '\n');
-				cout << "Esse identificador não existe! Tente novamente..." << endl << endl;
-			}
-
+				cout << "Input inválido! Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
-	id = idN;
+	id = stoi(input);
 
 	//Apresenta uma interface com as funções disponíveis para alterar uma linha
 
@@ -229,39 +232,35 @@ Recebe do utilizador um identificador para uma linha, e caso ela exista remove-a
 */
 void removeLine()
 {
-	int idN;
 	int verify = -1;
 	bool validInput = false;
+	string input;
 
 	cout << "Remover linha" << endl << endl;
 
 	while (!validInput)
 	{
 		cout << "Identificador da linha: ";
-		if (cin >> idN && idN>0)
-		{
-			verify = searchLineIdentifier(idN);
+		getline(cin, input);
 
-			if (verify != -1)
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+
+			if (isNumber(input)) //Se o input for um número positivo
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				verify = searchLineIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (verify == -1)
+					validInput = true;
+				else
+					cout << "Esse ID já existe! Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.ignore(1000, '\n');
-				cout << "Esse identificador não existe! Tente novamente..." << endl << endl;
-			}
-
+				cout << "Input inválido! Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
-
 
 	linesData.erase(linesData.begin() + verify);
 
@@ -275,7 +274,7 @@ void changeFrequency(unsigned int id)
 {
 	int index;
 	unsigned int newfreq;
-	int newfreqN;
+	string input;
 	index = searchLineIdentifier(id);
 	bool validInput = false;
 
@@ -284,24 +283,24 @@ void changeFrequency(unsigned int id)
 	cout << endl << "A frequência atual é: " << linesData[index].getFrequency() << endl;
 
 
-
 	while (!validInput)
 	{
 		cout << "Nova frequência: ";
-		if (cin >> newfreqN && newfreqN>0)
+		getline(cin, input);
+
+		if (isNumber(input))
 		{
-			validInput = true;
-			cin.ignore(1000, '\n');
+			if (stoi(input) > 0 && stoi(input) < 5 * 60)
+				validInput = true;
+			else
+				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
+
 	}
 
-	newfreq = newfreqN;
+	newfreq = stoi(input);
 
 	linesData[index].setFrequency(newfreq);
 
@@ -371,6 +370,7 @@ void removeStop(unsigned int id)
 	else
 	{
 		int indexStop1, indexStop2, newDuration;
+		string input;
 
 		indexStop1 = stopIndex - 1;
 		indexStop2 = stopIndex;
@@ -380,18 +380,18 @@ void removeStop(unsigned int id)
 		{
 			cout << "Duração entre " << newBusList[indexStop1] << " e " << newBusList[indexStop2] << ": ";
 
-			if (cin >> newDuration && newDuration > 0)
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				if (stoi(input) > 0 && stoi(input) <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
+
+		newDuration = stoi(input);
 
 		newTimings.erase(newTimings.begin() + indexStop1);
 		newTimings[indexStop1] = newDuration;
@@ -408,7 +408,7 @@ Adiciona uma paragem a uma linha indicada pelo utilizador, assegurando que as du
 void addStop(unsigned int id)
 {
 	int index, stopIndex;
-	string stop;
+	string stop, input;
 	bool validInput = false;
 
 	index = searchLineIdentifier(id);
@@ -444,26 +444,19 @@ void addStop(unsigned int id)
 	while (!validInput)
 	{
 		cout << "Índice (a começar em 0): ";
+		getline(cin, input);
 
-		if (cin >> stopIndex)
+		if (isNumber(input))
 		{
+			stopIndex = stoi(input);
+
 			if (stopIndex >= 0 && stopIndex <= linesData[index].getBusStops().size())
-			{
 				validInput = true;
-				cin.ignore(1000, '\n');
-			}
 			else
-			{
-				cin.ignore(1000, '\n');
 				cout << "Esse índice não existe! Tente novamente..." << endl;
-			}
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
 			cout << "Input inválido! Tente novamente..." << endl;
-		}
 	}
 
 	newBusList.insert(newBusList.begin() + stopIndex, stop);
@@ -480,20 +473,20 @@ void addStop(unsigned int id)
 		while (!validInput)
 		{
 			cout << "Duração entre " << stop << " e " << newBusList[stopIndex + 1] << ": ";
+			getline(cin, input);
 
-			if (cin >> duration && duration > 0)
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				duration = stoi(input);
+
+				if (duration > 0 && duration <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
-
 
 		newTimings.insert(newTimings.begin(), duration);
 		linesData[index].setTimings(newTimings);
@@ -506,18 +499,19 @@ void addStop(unsigned int id)
 		while (!validInput)
 		{
 			cout << "Duração entre " << newBusList[stopIndex - 1] << " e " << stop << ": ";
+			getline(cin, input);
 
-			if (cin >> duration && duration > 0)
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				duration = stoi(input);
+
+				if (duration > 0 && duration <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
 
 		newTimings.insert(newTimings.begin() + stopIndex - 1, duration);
@@ -531,36 +525,38 @@ void addStop(unsigned int id)
 		while (!validInput)
 		{
 			cout << "Duração entre " << newBusList[stopIndex - 1] << " e " << stop << ": ";
+			getline(cin, input);
 
-			if (cin >> duration1 && duration1 > 0)
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				duration1 = stoi(input);
+
+				if (duration1 > 0 && duration1 <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
 
 		validInput = false;
 		while (!validInput)
 		{
 			cout << "Duração entre " << stop << " e " << newBusList[stopIndex + 1] << ": ";
+			getline(cin, input);
 
-			if (cin >> duration2 && duration2 > 0)
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				duration2 = stoi(input);
+
+				if (duration2 > 0 && duration2 <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
 
 		newTimings[stopIndex - 1] = duration1;
@@ -579,7 +575,7 @@ Altera uma paragem numa linha dada pelo utilizador, assegurando que as durações 
 */
 void changeStop(unsigned int id)
 {
-	string stop, newStop;
+	string stop, newStop, input;
 	int index, stopIndex = -1;
 	bool validInput = false;
 
@@ -639,18 +635,19 @@ void changeStop(unsigned int id)
 		while (!validInput)
 		{
 			cout << "Duração entre " << newStop << " e " << newBusList[stopIndex + 1] << ": ";
+			getline(cin, input);
 
-			if (cin >> duration && duration > 0)
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				duration = stoi(input);
+
+				if (duration > 0 && duration <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
 
 		newTimings[stopIndex] = duration;
@@ -664,18 +661,19 @@ void changeStop(unsigned int id)
 		while (!validInput)
 		{
 			cout << "Duração entre " << newBusList[stopIndex - 1] << " e " << newStop << ": ";
+			getline(cin, input);
 
-			if (cin >> duration && duration > 0)
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				duration = stoi(input);
+
+				if (duration > 0 && duration <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
 
 		newTimings[stopIndex - 1] = duration;
@@ -690,17 +688,19 @@ void changeStop(unsigned int id)
 		{
 			cout << "Duração entre " << newBusList[stopIndex - 1] << " e " << newStop << ": ";
 
-			if (cin >> duration1 && duration1 > 0)
+			getline(cin, input);
+
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				duration1 = stoi(input);
+
+				if (duration1 > 0 && duration1 <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
 
 		validInput = false;
@@ -708,17 +708,19 @@ void changeStop(unsigned int id)
 		{
 			cout << "Duração entre " << newStop << " e " << newBusList[stopIndex + 1] << ": ";
 
-			if (cin >> duration2 && duration2 > 0)
+			getline(cin, input);
+
+			if (isNumber(input))
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				duration2 = stoi(input);
+
+				if (duration2 > 0 && duration2 <= 5 * 60)
+					validInput = true;
+				else
+					cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.clear();
-				cin.ignore(1000, '\n');
 				cout << "Input inválido! Tente novamente..." << endl;
-			}
 		}
 
 		newTimings[stopIndex - 1] = duration1;
@@ -739,6 +741,7 @@ void changeDuration(unsigned int id)
 	bool validInput = false;
 	int index, index1 = -1, index2 = -1, oldDuration, newDuration;
 	string stop1, stop2;
+	string input;
 
 	index = searchLineIdentifier(id);
 
@@ -782,34 +785,28 @@ void changeDuration(unsigned int id)
 	cout << oldDuration << endl;
 
 	validInput = false;
+
 	while (!validInput)
 	{
 		cout << "Nova duração: ";
 
-		if (cin >> newDuration)
+		getline(cin, input);
+
+		if (isNumber(input))
 		{
-			if (newDuration > 0)
-				if (newDuration != oldDuration)
-					validInput = true;
-				else
-				{
-					cout << "A duração é a mesma! Tente novamente...";
-					cin.ignore(1000, '\n');
-				}
+			if(stoi(input)==oldDuration)
+				cout << "A duração é a mesma! Tente novamente...";
+			else if (stoi(input) > 0 && stoi(input) <= 5 * 60)
+				validInput = true;
 			else
-			{
-				cout << "Introduza um valor maior. Tente novamente...";
-				cin.ignore(1000, '\n');
-			}
+				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
 			cout << "Input inválido! Tente novamente...";
-		}
 
 	}
+
+	newDuration = stoi(input);
 
 	newTimings[min(index1, index2)] = newDuration;
 	linesData[index].setTimings(newTimings);

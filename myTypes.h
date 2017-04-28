@@ -51,6 +51,7 @@ void savingChanges();
 
 //Gestão de input
 int verifyInput(int low, int high);
+bool isNumber(string input);
 
 //Interfaces
 void mainUserInterface();

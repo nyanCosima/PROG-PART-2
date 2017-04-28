@@ -11,7 +11,7 @@ void createDriver()
 	unsigned int id, shift, numMaxHours, nminRestHours;
 	int verify = -1;
 	bool validInput = false;
-	string name;
+	string name, input;
 
 	cout << "Criar condutor" << endl << endl;
 
@@ -20,36 +20,28 @@ void createDriver()
 	while (!validInput)
 	{
 		cout << "Identificador do condutor: ";
+		getline(cin, input);
 
-		if (cin >> id && id>0)
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
 		{
-			verify = searchDriverIdentifier(id);
 
-			if (id > 1000)
+			if (isNumber(input)) //Se o input for um número positivo
 			{
-				cin.ignore(1000, '\n');
-				cout << "Insira um ID com, no máximo, 3 dígitos." << endl;
-			}
+				verify = searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
 
-			else if (verify == -1)
-			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				if (verify == -1)
+					validInput = true;
+				else
+					cout << "Esse ID já existe! Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.ignore(1000, '\n');
-				cout << "Esse identificador já existe! Tente novamente..." << endl;
-			}
+				cout << "Input inválido! Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
+	id = stoi(input);
 
 	//Recebe o nome do motorista do utilizador
 
@@ -71,30 +63,19 @@ void createDriver()
 	while (!validInput)
 	{
 		cout << "Número de horas de um turno: ";
-		if (cin >> shift)
+		getline(cin, input);
+
+		if (isNumber(input))
 		{
-			if (shift > 0)
-			{
+			shift = stoi(input);
+
+			if (shift > 0 && shift <= 7)
 				validInput = true;
-				cin.ignore(1000, '\n');
-			}
-			else if (shift == 0)
-			{
-				cin.ignore(1000, '\n');
-				cout << "Deve inserir mais horas. Ninguém trabalha tão pouco!" << endl;
-			}
 			else
-			{
-				cin.ignore(1000, '\n');
-				cout << "Input inválido! Tente novamente..." << endl << endl;
-			}
+				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
 	// Recebe o número máximo de horas por semana
@@ -103,31 +84,19 @@ void createDriver()
 	while (!validInput)
 	{
 		cout << "Número máximo de horas de condução por semana: ";
-		if (cin >> numMaxHours)
-		{
-			if (numMaxHours<0)
-			{
-				cin.ignore(1000, '\n');
-				cout << "Input inválido! Tente novamente..." << endl << endl;
-			}
-			else if (numMaxHours <= shift)
-			{
-				cin.ignore(1000, '\n');
-				cout << "Não é possível atribuir esse número! Deve inserir mais horas." << endl;
-			}
-			else
-			{
-				validInput = true;
-				cin.ignore(1000, '\n');
-			}
+		getline(cin, input);
 
+		if (isNumber(input))
+		{
+			numMaxHours = stoi(input);
+
+			if (numMaxHours > shift && numMaxHours <= 40)
+				validInput = true;
+			else
+				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
 	//Recebe o número de horas de descanso
@@ -136,31 +105,19 @@ void createDriver()
 	while (!validInput)
 	{
 		cout << "Número mínimo de horas de descanso: ";
-		if (cin >> nminRestHours)
+		getline(cin, input);
+
+		if (isNumber(input))
 		{
-			if (nminRestHours > 0)
-			{
+			nminRestHours = stoi(input);
+
+			if (nminRestHours > 0 && nminRestHours <= 7)
 				validInput = true;
-				cin.ignore(1000, '\n');
-			}
-			else if (nminRestHours == 0)
-			{
-				cin.ignore(1000, '\n');
-				cout << "Seja mais generoso! Insira mais horas." << endl;
-			}
 			else
-			{
-				cin.ignore(1000, '\n');
-				cout << "Input inválido! Tente novamente..." << endl << endl;
-			}
+				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
-
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
 	Driver newDriver(id, name, shift, numMaxHours, nminRestHours);
@@ -177,7 +134,7 @@ void editDriver()
 {
 	int userChoice;
 	unsigned int id;
-	int idN;
+	string input;
 	int verify = -1;
 	bool validInput = false;
 
@@ -186,31 +143,28 @@ void editDriver()
 	while (!validInput)
 	{
 		cout << "Identificador do condutor: ";
-		if (cin >> idN && idN>0)
-		{
-			verify = searchDriverIdentifier(idN);
+		getline(cin, input);
 
-			if (verify != -1)
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+
+			if (isNumber(input)) //Se o input for um número positivo
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				verify = searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (verify != -1)
+					validInput = true;
+				else
+					cout << "Esse ID não existe! Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.ignore(1000, '\n');
-				cout << "Esse identificador não existe! Tente novamente..." << endl << endl;
-			}
-
+				cout << "Input inválido! Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
-	id = idN;
+	id = stoi(input);
 
 	//Apresenta uma interface com as funções que permitem alterar um condutor
 
@@ -242,7 +196,7 @@ Recebe do utilizador um identificador para um condutor, e caso exista apaga-o do
 */
 void removeDriver()
 {
-	int idN;
+	string input;
 	int verify = -1;
 	bool validInput = false;
 
@@ -251,28 +205,24 @@ void removeDriver()
 	while (!validInput)
 	{
 		cout << "Identificador do condutor: ";
-		if (cin >> idN && idN>0)
-		{
-			verify = searchDriverIdentifier(idN);
+		getline(cin, input);
 
-			if (verify != -1)
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+			if (isNumber(input)) //Se o input for um número positivo
 			{
-				validInput = true;
-				cin.ignore(1000, '\n');
+				verify = searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (verify != -1)
+					validInput = true;
+				else
+					cout << "Esse ID não existe! Tente novamente..." << endl;
 			}
 			else
-			{
-				cin.ignore(1000, '\n');
-				cout << "Esse identificador não existe! Tente novamente..." << endl << endl;
-			}
-
+				cout << "Input inválido! Tente novamente..." << endl;
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "Input inválido! Tente novamente..." << endl << endl;
-		}
+			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
 	driversData.erase(driversData.begin() + verify);
@@ -287,7 +237,7 @@ void changeShift(unsigned int id)
 {
 	int index;
 	unsigned int newShift;
-	int newShiftN;
+	string input;
 	bool validInput = false;
 
 	index = searchDriverIdentifier(id);
@@ -299,39 +249,22 @@ void changeShift(unsigned int id)
 	while (!validInput)
 	{
 		cout << "Novo número de horas: ";
+		getline(cin, input);
 
-		if (cin >> newShiftN)
+		if (isNumber(input))
 		{
-			if (newShiftN < 0)
-			{
-				cin.ignore(1000, '\n');
-				cout << "Input inválido! Tente novamente..." << endl;
-			}
-			else if (newShiftN == 0)
-			{
-				cin.ignore(1000, '\n');
+			newShift = stoi(input);
+
+			if (newShift == 0)
 				cout << "Deve inserir mais horas!" << endl;
-			}
-			else if (newShiftN >= 24)
-			{
-				cin.ignore(1000, '\n');
+			else if (newShift >= 24)
 				cout << "Deve inserir um valor mais baixo!" << endl;	
-			}
 			else
-			{
-				cin.ignore(1000, '\n');
 				validInput = true;
-			}
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
 			cout << "Input inválido! Tente novamente..." << endl;
-		}
 	}
-
-	newShift = newShiftN;
 
 	driversData[index].setShiftMaxDuration(newShift);
 
@@ -344,8 +277,8 @@ Altera o número máximo de horas de trabalho por semana de um condutor.
 void changeMaxHours(unsigned int id)
 {
 	int index;
+	string input;
 	unsigned int newMaxHours;
-	int newMaxHoursN;
 	bool validInput = false;
 
 	index = searchDriverIdentifier(id);
@@ -357,34 +290,20 @@ void changeMaxHours(unsigned int id)
 	while (!validInput)
 	{
 		cout << "Novo número de horas: ";
+		getline(cin, input);
 
-		if (cin >> newMaxHoursN)
+		if (isNumber(input))
 		{
-			if (newMaxHoursN<0)
-			{
-				cin.ignore(1000, '\n');
-				cout << "Input inválido! Tente novamente..." << endl << endl;
-			}
-			else if (newMaxHoursN <= driversData[index].getShiftMaxDuration())
-			{
-				cin.ignore(1000, '\n');
+			newMaxHours = stoi(input);
+
+			if (newMaxHours <= driversData[index].getShiftMaxDuration())
 				cout << "Não é possível atribuir esse número! Deve inserir mais horas." << endl;
-			}
 			else
-			{
 				validInput = true;
-				cin.ignore(1000, '\n');
-			}
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
 			cout << "Input inválido! Tente novamente..." << endl;
 		}
-	}
-
-	newMaxHours = newMaxHoursN;
 
 	driversData[index].setMaxWeekWorkingTime(newMaxHours);
 
@@ -398,7 +317,7 @@ void changeMinRest(unsigned int id)
 {
 	int index;
 	unsigned int newMinRest;
-	int newMinRestN;
+	string input;
 	bool validInput = false;
 
 	index = searchDriverIdentifier(id);
@@ -410,34 +329,20 @@ void changeMinRest(unsigned int id)
 	while (!validInput)
 	{
 		cout << "Novo número de horas: ";
+		getline(cin, input);
 
-		if (cin >> newMinRestN)
+		if (isNumber(input))
 		{
-			if (newMinRestN < 0)
-			{
-				cin.ignore(1000, '\n');
-				cout << "Input inválido! Tente novamente..." << endl;
-			}
-			else if (newMinRestN == 0)
-			{
-				cin.ignore(1000, '\n');
+			newMinRest = stoi(input);
+
+			if (newMinRest == 0)
 				cout << "Deve inserir mais horas!" << endl;
-			}
 			else
-			{
-				cin.ignore(1000, '\n');
 				validInput = true;
-			}
 		}
 		else
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
 			cout << "Input inválido! Tente novamente..." << endl;
-		}
 	}
-
-	newMinRest = newMinRestN;
 
 	driversData[index].setMinRestTime(newMinRest);
 
