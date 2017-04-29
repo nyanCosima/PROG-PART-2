@@ -227,19 +227,19 @@ void routeCalculator()
 
 		//Imprimir no ecrã o percurso e a sua duração
 
-		cout << "O percurso entre as paragens " << stop1 << " e " << stop2 << " poderá ser:" << endl;
-		cout << "Linha: " << linesData[lineIdentifier].getId() << endl;
+		cout << endl << "O percurso entre as paragens " << stop1 << " e " << stop2 << " poderá ser:" << endl << endl;
+		cout << "|"  <<  setw(12) << " LINHA | " <<  linesData[lineIdentifier].getId() << endl;
 
-		cout << "Paragens: ";
+		cout << "|" << setw(12)<< " PARAGENS | ";
 
 		for (int i = 0; i < route[fasterRoute].size(); i++)
 		{
 			if (i > 0)
-				cout << " - ";
+				cout << " -> ";
 			cout << route[fasterRoute][i];
 		}
 
-		cout << endl << "Duração: " << durations[fasterRoute] << " minutos" << endl;
+		cout << endl << "|" << setw(12)<<  " DURAÇAO | " << durations[fasterRoute] << " minutos" << endl<< endl;
 	}
 }
 
