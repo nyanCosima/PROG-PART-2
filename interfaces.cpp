@@ -16,7 +16,7 @@ void mainUserInterface()
 	cout << "4 - Pesquisa" << endl;
 	cout << "0 - Sair" << endl << endl;
 
-	userChoice = verifyInput(0, 5);
+	userChoice = verifyInput(0, 4);
 
 	clearScreen(); //Limpa a consola para melhorar o aspeto e simplicidade do programa
 
@@ -51,7 +51,7 @@ void linesInterface()
 	cout << "3 - Remover linha" << endl;
 	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(0, 4);
+	userChoice = verifyInput(0, 3);
 
 	clearScreen();
 
@@ -87,7 +87,7 @@ void driversInterface()
 	cout << "4 - Estado do condutor" << endl;
 	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(0, 5);
+	userChoice = verifyInput(0, 4);
 
 	clearScreen();
 
@@ -124,7 +124,7 @@ void schedulesInterface()
 	cout << "2 - Horário de uma linha " << endl;
 	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(0, 3);
+	userChoice = verifyInput(0, 2);
 
 	clearScreen();
 
@@ -156,7 +156,7 @@ void searchInterface()
 	cout << "3 - Percurso entre paragens" << endl;
 	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(0, 4);
+	userChoice = verifyInput(0, 3);
 
 	clearScreen();
 
