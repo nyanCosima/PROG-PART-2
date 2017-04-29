@@ -80,7 +80,7 @@ bool searchStop3(int lineIndex, string stop)
 }
 
 /*
-Procura a existência de uma linha no vetor de structs, dado o ID. Caso exista, devolve o índice da linha.
+Procura a existência de uma linha no vetor de classes, dado o ID. Caso exista, devolve o índice da linha.
 Caso contrário, devolve -1.
 */
 int searchLineIdentifier(unsigned int id)
@@ -98,7 +98,7 @@ int searchLineIdentifier(unsigned int id)
 }
 
 /*
-Procura a existência de um condutor no vetor de structs, dado o ID. Caso exista, devolve o índice do condutor.
+Procura a existência de um condutor no vetor de classes, dado o ID. Caso exista, devolve o índice do condutor.
 Caso contrário, devolve -1.
 */
 int searchDriverIdentifier(unsigned int id)
