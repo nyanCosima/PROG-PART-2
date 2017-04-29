@@ -89,6 +89,11 @@ int searchLineIdentifier(unsigned int id);
 int searchDriverIdentifier(unsigned int id);
 void routeCalculator();
 
-
+//horarios
+void stopSchedule(string stop);
+void lineSchedule();
+void showMIN(int time);
+void dealWITHtime(int &horas, int &minutos);
+int verificarLENGTHparagemMAIOR(vector<string> busStops);
 
 #endif //PROG_PART_2_MYTYPES_H

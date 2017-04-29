@@ -133,7 +133,7 @@ void schedulesInterface()
 	case 1:// stopSchedule(linesData);
 		quitOrContinue();
 		break;
-	case 2:// lineSchedule(linesData);
+	case 2: lineSchedule();
 		quitOrContinue();
 		break;
 	case 0: mainUserInterface();
