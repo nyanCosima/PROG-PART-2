@@ -14,9 +14,9 @@ void mainUserInterface()
 	cout << "2 - Gestão de condutores" << endl;
 	cout << "3 - Visualização de horários" << endl;
 	cout << "4 - Pesquisa" << endl;
-	cout << "5 - Sair" << endl << endl;
+	cout << "0 - Sair" << endl << endl;
 
-	userChoice = verifyInput(1, 5);
+	userChoice = verifyInput(0, 5);
 
 	clearScreen(); //Limpa a consola para melhorar o aspeto e simplicidade do programa
 
@@ -28,7 +28,7 @@ void mainUserInterface()
 		schedulesInterface();
 	else if (userChoice == 4)
 		searchInterface();
-	else if (userChoice == 5)
+	else if (userChoice == 0)
 	{
 		savingChanges();
 		cout << "Programa terminado! Pressione ENTER para fechar." << endl;
@@ -49,9 +49,9 @@ void linesInterface()
 	cout << "1 - Criar linha" << endl;
 	cout << "2 - Alterar linha" << endl;
 	cout << "3 - Remover linha" << endl;
-	cout << "4 - Voltar" << endl << endl;
+	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(1, 4);
+	userChoice = verifyInput(0, 4);
 
 	clearScreen();
 
@@ -66,7 +66,7 @@ void linesInterface()
 	case 3: removeLine();
 		quitOrContinue();
 		break;
-	case 4: mainUserInterface();
+	case 0: mainUserInterface();
 		break;
 	}
 }
@@ -85,9 +85,9 @@ void driversInterface()
 	cout << "2 - Alterar condutor" << endl;
 	cout << "3 - Remover condutor" << endl;
 	cout << "4 - Estado do condutor" << endl;
-	cout << "5 - Voltar" << endl << endl;
+	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(1, 5);
+	userChoice = verifyInput(0, 5);
 
 	clearScreen();
 
@@ -105,7 +105,7 @@ void driversInterface()
 	case 4: cout << "calmex" << endl;
 		quitOrContinue();
 		break;
-	case 5: mainUserInterface();
+	case 0: mainUserInterface();
 		break;
 	}
 }
@@ -122,9 +122,9 @@ void schedulesInterface()
 	cout << "Funcionalidades disponíveis" << endl << endl;
 	cout << "1 - Horário de uma paragem" << endl;
 	cout << "2 - Horário de uma linha " << endl;
-	cout << "3 - Voltar" << endl << endl;
+	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(1, 3);
+	userChoice = verifyInput(0, 3);
 
 	clearScreen();
 
@@ -136,7 +136,7 @@ void schedulesInterface()
 	case 2:// lineSchedule(linesData);
 		quitOrContinue();
 		break;
-	case 3: mainUserInterface();
+	case 0: mainUserInterface();
 		break;
 	}
 }
@@ -154,9 +154,9 @@ void searchInterface()
 	cout << "1 - Procurar paragem" << endl;
 	cout << "2 - Condutores disponíveis" << endl;
 	cout << "3 - Percurso entre paragens" << endl;
-	cout << "4 - Voltar" << endl << endl;
+	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(1, 4);
+	userChoice = verifyInput(0, 4);
 
 	clearScreen();
 
@@ -171,7 +171,7 @@ void searchInterface()
 	case 3:routeCalculator();
 		quitOrContinue();
 		break;
-	case 4: mainUserInterface();
+	case 0: mainUserInterface();
 		break;
 	}
 }
