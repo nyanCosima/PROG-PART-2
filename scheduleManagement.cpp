@@ -3,11 +3,35 @@
 void lineSchedule(){
 
     int linha;
+	int indice;
+	string input;
+	bool validInput = false;
 
     //receber input do user
-    cout << "Indique o id da linha: ";
-    cin >>linha;
-    int indice = searchLineIdentifier(linha);
+	while (!validInput)
+	{
+		cout << "Indique o id da linha: ";
+		getline(cin, input);
+
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+			if (isNumber(input)) //Se o input for um número positivo
+			{
+				indice = searchLineIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (indice != -1)
+					validInput = true;
+				else
+					cout << "Esse ID não existe! Tente novamente..." << endl;
+			}
+			else
+				cout << "Input inválido! Tente novamente..." << endl;
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
+	}
+
+	linha = stoi(input);
 
     int s=verificarLENGTHparagemMAIOR(linesData.at(indice).getBusStops());
     int horas = 6, minutos = 0, minutosin = 0, horasin =6;
