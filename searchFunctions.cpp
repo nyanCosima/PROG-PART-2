@@ -243,4 +243,11 @@ void routeCalculator()
 	}
 }
 
+int searchStopIndex(vector<string> busStops, string STOP){
 
+    for (int i = 0; i < busStops.size(); ++i) {
+        if (busStops.at(i)==STOP)
+            return i;
+    }
+    return -1;
+}

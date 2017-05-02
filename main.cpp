@@ -8,7 +8,7 @@ vector<Line> linesData;
 vector<Driver> driversData;
 
 //Definição das constantes de início e fim de serviço
-int serviceStartingTime = 8 * 60, serviceEndingTime = 20 * 60;
+int serviceStartingTime = 6 * 60, serviceEndingTime = 19 * 60;
 
 int main(){
 

@@ -44,3 +44,10 @@ void Bus::setLineId(unsigned int newLineID)
 ////////////////////////////
 // outher methods
 ///////////////////////////
+void Bus:: showInfo(){
+    cout << "Número de ordem: " << orderInLine << endl;
+    cout << "ID do condutor; " << driverId << endl;
+    cout << "ID da linha: " << lineId << endl;
+    for(int i=0;i<schedule.size();i++)
+        schedule.at(i).showInfo();
+}

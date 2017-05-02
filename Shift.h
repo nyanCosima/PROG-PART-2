@@ -31,4 +31,5 @@ class Shift{
   void setEndTime(unsigned int newEndTime);
 
   // other methods
+    void showInfo();
 };

@@ -10,23 +10,21 @@ void mainUserInterface()
 
 	cout << "Sistema de gestão de informação - SEMPRARROLAR" << endl;
 	cout << "Funcionalidades disponíveis" << endl << endl;
-	cout << "1 - Gestão de linhas" << endl;
-	cout << "2 - Gestão de condutores" << endl;
-	cout << "3 - Visualização de horários" << endl;
-	cout << "4 - Pesquisa" << endl;
+	cout << "1 - Gestão de condutores" << endl;
+	cout << "2 - Visualizar informação" << endl;
+	cout << "3 - Pesquisa" << endl;
 	cout << "0 - Sair" << endl << endl;
 
-	userChoice = verifyInput(0, 4);
+	userChoice = verifyInput(0, 3);
 
 	clearScreen(); //Limpa a consola para melhorar o aspeto e simplicidade do programa
 
+
 	if (userChoice == 1)
-		linesInterface();
-	else if (userChoice == 2)
 		driversInterface();
-	else if (userChoice == 3)
+	else if (userChoice == 2)
 		schedulesInterface();
-	else if (userChoice == 4)
+	else if (userChoice == 3)
 		searchInterface();
 	else if (userChoice == 0)
 	{
@@ -36,40 +34,6 @@ void mainUserInterface()
 	}
 }
 
-/*
-Sub-interface dedicada à gestão de linhas. Apresenta as funcionalidades disponíveis, recebe a escolha
-do utilizador e inicializa a função pedida
-*/
-void linesInterface()
-{
-	int userChoice;
-
-	cout << "Gestão de linhas" << endl;
-	cout << "Funcionalidades disponíveis" << endl << endl;
-	cout << "1 - Criar linha" << endl;
-	cout << "2 - Alterar linha" << endl;
-	cout << "3 - Remover linha" << endl;
-	cout << "0 - Voltar" << endl << endl;
-
-	userChoice = verifyInput(0, 3);
-
-	clearScreen();
-
-	switch (userChoice)
-	{
-	case 1: createLine();
-		quitOrContinue();
-		break;
-	case 2: editLine();
-		quitOrContinue();
-		break;
-	case 3: removeLine();
-		quitOrContinue();
-		break;
-	case 0: mainUserInterface();
-		break;
-	}
-}
 
 /*
 Sub-interface dedicada à gestão de condutores. Apresenta as funcionalidades disponíveis, recebe a escolha
@@ -111,20 +75,21 @@ void driversInterface()
 }
 
 /*
-Sub-interface dedicada à gestão de horários. Apresenta as funcionalidades disponíveis, recebe a escolha
+Sub-interface dedicada à visualizacao de informacao. Apresenta as funcionalidades disponíveis, recebe a escolha
 do utilizador e inicializa a função pedida
 */
-void schedulesInterface()
+void infoInterface()
 {
 	int userChoice;
 
-	cout << "Gestão de horarios" << endl;
+	cout << "Visualizaçao de informacao" << endl;
 	cout << "Funcionalidades disponíveis" << endl << endl;
 	cout << "1 - Horário de uma paragem" << endl;
 	cout << "2 - Horário de uma linha " << endl;
+	cout << "3 - Informação de um autocarro" << endl;
 	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(0, 2);
+	userChoice = verifyInput(0, 3);
 
 	clearScreen();
 
@@ -136,6 +101,9 @@ void schedulesInterface()
 	case 2: lineSchedule();
 		quitOrContinue();
 		break;
+		case 3: //busInfo();
+			quitOrContinue;
+			break;
 	case 0: mainUserInterface();
 		break;
 	}

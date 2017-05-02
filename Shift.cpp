@@ -1,4 +1,5 @@
 #include "Shift.h"
+#include "myTypes.h"
 
 Shift::Shift(  unsigned int linha, unsigned int condutor, unsigned int autocarro, unsigned int inicio, unsigned int fim){
   
@@ -50,3 +51,15 @@ void Shift::setStartTime(unsigned int startTime){
 void Shift::setEndTime(unsigned int endTime){
   this->endTime = endTime;
 }
+
+// other methods
+
+void Shift::showInfo(){
+  cout << "ID da linha: " << busLineId << endl;
+  cout << "ID do condutor: " << driverId << endl;
+  cout << "Número de ordem do autocarro: " << busOrderNumber << endl;
+  cout << "Hora de início: ";
+  showTime(convertMinHours(startTime));
+  cout << "Hora de fim: ";
+  showTime(convertMinHours(endTime));
+ }

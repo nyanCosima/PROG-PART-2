@@ -28,6 +28,13 @@ extern vector<Driver> driversData;
 //Declaração das constantes de início e fim do serviço
 extern int serviceStartingTime, serviceEndingTime;
 
+
+typedef struct{
+    int hours;
+    double minutes;
+    string dayOfWeek;
+} Time;
+
 //Função para possibilitar o uso de carateres portugueses caso o sistema operativo seja o windows
 #ifdef _WIN32
 #include <windows.h>
@@ -62,16 +69,6 @@ void searchInterface();
 void quitOrContinue();
 void clearScreen();
 
-//Gestão de linhas
-void createLine();
-void editLine();
-void removeLine();
-void changeFrequency(unsigned int id);
-void removeStop(unsigned int id);
-void addStop(unsigned int id);
-void changeStop(unsigned int id);
-void changeDuration(unsigned int id);
-
 //Gestão de condutores
 void createDriver();
 void editDriver();
@@ -88,6 +85,7 @@ bool searchStop3(int lineIndex, string stop);
 int searchLineIdentifier(unsigned int id);
 int searchDriverIdentifier(unsigned int id);
 void routeCalculator();
+int searchStopIndex(vector<string> busStops, string STOP);
 
 //horarios
 void stopSchedule(string stop);
@@ -95,5 +93,7 @@ void lineSchedule();
 void showMIN(int time);
 void dealWITHtime(int &horas, int &minutos);
 int verificarLENGTHparagemMAIOR(vector<string> busStops);
+Time convertMinHours(int minutes);
+void showTime(Time t);
 
 #endif //PROG_PART_2_MYTYPES_H
