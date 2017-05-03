@@ -1,4 +1,4 @@
-#include "Line.h"
+#include "myTypes.h"
 
 
 Line::Line(string textLine){
@@ -93,6 +93,9 @@ vector<int> Line::getTimings() const{
   return timesList;
 }
 
+
+//set methods
+
 void Line::setFrequency(unsigned int newFrequency)
 {
 	frequency = newFrequency;
@@ -106,4 +109,39 @@ void Line::setBusStops(vector<string> newStopsList)
 void Line::setTimings(vector<int> newTimings)
 {
 	timesList = newTimings;
+}
+
+
+//other methods
+
+/*
+Calcula o número de autocarros necessários para cobrir o serviço de uma dada linha.
+*/
+int Line::numberOfBuses() const
+{
+	int number = 0;
+	int busTime = serviceStartingTime;
+
+	while (busTime<serviceStartingTime + 2 * totalDuration())
+	{
+		number++;
+
+		busTime += frequency;
+	}
+
+	return number;
+}
+
+/*
+Calcula a duração total de um percurso de uma linha(apenas um sentido, para saber quanto demora até voltar ao início
+basta calcular o dobro)
+*/
+int Line::totalDuration() const
+{
+	int duration = 0;
+
+	for (int i = 0; i < timesList.size(); i++)
+		duration += timesList[i];
+
+	return duration;
 }

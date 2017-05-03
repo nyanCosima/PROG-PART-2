@@ -380,3 +380,50 @@ void changeName(unsigned int id)
 
 	cout << "As alterações foram efetuadas com sucesso!" << endl;
 }
+
+/*
+Apresenta informação relativa ao trabalho atribuído a um condutor especificado pelo utilizador, que é traduzida nos
+turnos que tem que realizar.
+*/
+void showShifts()
+{
+	bool validInput = false;
+	string input;
+	int verify = -1;
+
+	cout << "Visualizar trabalho do condutor" << endl << endl;
+
+	while (!validInput)
+	{
+		cout << "Identificador do condutor: ";
+		getline(cin, input);
+
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+
+			if (isNumber(input)) //Se o input for um número positivo
+			{
+				verify = searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (verify != -1)
+					validInput = true;
+				else
+					cout << "Esse ID não existe! Tente novamente..." << endl;
+			}
+			else
+				cout << "Input inválido! Tente novamente..." << endl;
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
+	}
+
+	if (driversData[verify].getShifts().size() == 0)
+		cout << "De momento, o condutor não tem qualquer trabalho atribuído." << endl;
+	else
+		for (int i = 0; i < driversData[verify].getShifts().size(); i++)
+		{
+			cout << "Turno " << i + 1 << endl;
+			driversData[verify].getShifts()[i].showInfo();
+			cout << endl;
+		}
+}

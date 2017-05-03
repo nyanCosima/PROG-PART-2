@@ -90,7 +90,9 @@ vector<Shift> Driver::getShifts() const{
   return shifts;
 }
 
-
+/////////////////
+// set methods //
+/////////////////
 void Driver::setName(string newName)
 {
 	name = newName;

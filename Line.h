@@ -27,5 +27,7 @@ class Line{
   void setBusStops(vector<string> newStopsList);
   void setTimings(vector<int> newTimings);
   // other methods
+  int numberOfBuses() const;
+  int totalDuration() const;
 
 };

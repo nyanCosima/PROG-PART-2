@@ -23,7 +23,7 @@ void mainUserInterface()
 	if (userChoice == 1)
 		driversInterface();
 	else if (userChoice == 2)
-		schedulesInterface();
+		infoInterface();
 	else if (userChoice == 3)
 		searchInterface();
 	else if (userChoice == 0)
@@ -87,9 +87,10 @@ void infoInterface()
 	cout << "1 - Horário de uma paragem" << endl;
 	cout << "2 - Horário de uma linha " << endl;
 	cout << "3 - Informação de um autocarro" << endl;
+	cout << "4 - Trabalho de um condutor" << endl;
 	cout << "0 - Voltar" << endl << endl;
 
-	userChoice = verifyInput(0, 3);
+	userChoice = verifyInput(0, 4);
 
 	clearScreen();
 
@@ -102,6 +103,9 @@ void infoInterface()
 		quitOrContinue();
 		break;
 		case 3: //busInfo();
+			quitOrContinue;
+			break;
+		case 4: showShifts();
 			quitOrContinue;
 			break;
 	case 0: mainUserInterface();

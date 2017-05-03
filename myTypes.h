@@ -62,9 +62,8 @@ bool isNumber(string input);
 
 //Interfaces
 void mainUserInterface();
-void linesInterface();
 void driversInterface();
-void schedulesInterface();
+void infoInterface();
 void searchInterface();
 void quitOrContinue();
 void clearScreen();
@@ -87,7 +86,7 @@ int searchDriverIdentifier(unsigned int id);
 void routeCalculator();
 int searchStopIndex(vector<string> busStops, string STOP);
 
-//horarios
+//Visualizar informação
 void stopSchedule(string stop);
 void lineSchedule();
 void showMIN(int time);
@@ -95,5 +94,6 @@ void dealWITHtime(int &horas, int &minutos);
 int verificarLENGTHparagemMAIOR(vector<string> busStops);
 Time convertMinHours(int minutes);
 void showTime(Time t);
+void showShifts();
 
 #endif //PROG_PART_2_MYTYPES_H
