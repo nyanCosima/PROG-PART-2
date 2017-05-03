@@ -145,3 +145,15 @@ int Line::totalDuration() const
 
 	return duration;
 }
+
+/*
+Devolve true se a paragem existir na linha, e false no caso contrário.
+*/
+bool Line::searchStop(string stop) const
+{
+	for (int i = 0; i < busStopList.size(); i++)
+		if (busStopList[i] == stop)
+			return true;
+
+	return false;
+}

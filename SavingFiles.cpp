@@ -14,16 +14,21 @@ void savingLinesData()
 		out_stream << linesData[i].getId() << " ; ";
 		out_stream << linesData[i].getFrequency() << " ; ";
 
-		for (int j = 0; j < (linesData[i].getBusStops().size() - 1); j++)
-			out_stream << linesData[i].getBusStops()[j] << ", ";
+		for (int j = 0; j < linesData[i].getBusStops().size(); j++)
+		{
+			if (i > 0)
+				cout << "; ";
+			out_stream << linesData[i].getBusStops()[j];
+		}
 
-		out_stream << linesData[i].getBusStops()[linesData[i].getBusStops().size() - 1] << "; ";
-
-		for (int t = 0; t < (linesData[i].getTimings().size() - 1); t++)
-			out_stream << linesData[i].getTimings()[t] << ", ";
-
-		out_stream << linesData[i].getTimings()[(linesData[i].getTimings().size() - 1)] << endl;
+		for (int t = 0; t < linesData[i].getTimings().size(); t++)
+		{
+			if (i > 0)
+				cout << "; ";
+			out_stream << linesData[i].getTimings()[t];
+		}
 	}
+
 	out_stream.close();
 }
 

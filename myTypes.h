@@ -79,8 +79,7 @@ void changeName(unsigned int id);
 
 //Pesquisa
 void searchStop();
-bool searchStop2(string stop);
-bool searchStop3(int lineIndex, string stop);
+bool stopExists(string stop);
 int searchLineIdentifier(unsigned int id);
 int searchDriverIdentifier(unsigned int id);
 void routeCalculator();
