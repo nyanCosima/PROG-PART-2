@@ -1,4 +1,3 @@
-#include "Shift.h"
 #include "myTypes.h"
 
 Shift::Shift(  unsigned int linha, unsigned int condutor, unsigned int autocarro, unsigned int inicio, unsigned int fim){

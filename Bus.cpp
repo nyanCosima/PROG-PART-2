@@ -1,4 +1,4 @@
-#include "Bus.h"
+#include "myTypes.h"
 
 
 Bus::  Bus(unsigned int id, unsigned int driver, unsigned int line){

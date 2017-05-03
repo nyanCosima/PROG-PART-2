@@ -1,4 +1,5 @@
-#include "Company.h"
+#include "myTypes.h"
+
 
 
 Company::Company(string name, string driversFile, string linesFile){
