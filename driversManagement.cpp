@@ -6,7 +6,7 @@ Recebe os parâmetros do utilizador (ID, nome do condutor, número de horas de um 
 por semana e número mínimo de horas de descanso entre turnos) e guarda-os num novo Driver, que é adicionado
 ao vetor criado anteriormente.
 */
-void createDriver()
+void createDriver(Company &company)
 {
 	unsigned int id, shift, numMaxHours, nminRestHours;
 	int verify = -1;
@@ -27,7 +27,7 @@ void createDriver()
 
 			if (isNumber(input)) //Se o input for um número positivo
 			{
-				verify = searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
 
 				if (verify == -1)
 					validInput = true;
@@ -121,7 +121,7 @@ void createDriver()
 	}
 
 	Driver newDriver(id, name, shift, numMaxHours, nminRestHours);
-	driversData.push_back(newDriver);
+	company.addDriver(newDriver);
 
 	cout << "Condutor criado com sucesso!" << endl;
 }
@@ -130,7 +130,7 @@ void createDriver()
 Edita os condutores já criados. Fornece meios para: alterar o número de horas de um turno, o número máximo
 de horas de trabalho por semana, e o número mínimo de horas de descanso.
 */
-void editDriver()
+void editDriver(Company &company)
 {
 	int userChoice;
 	unsigned int id;
@@ -150,7 +150,7 @@ void editDriver()
 
 			if (isNumber(input)) //Se o input for um número positivo
 			{
-				verify = searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
 
 				if (verify != -1)
 					validInput = true;
@@ -180,21 +180,21 @@ void editDriver()
 	clearScreen();
 
 	if (userChoice == 1)
-		changeName(id);
+		changeName(company, id);
 	else if (userChoice == 2)
-		changeShift(id);
+		changeShift(company, id);
 	else if (userChoice == 3)
-		changeMaxHours(id);
+		changeMaxHours(company, id);
 	else if (userChoice == 4)
-		changeMinRest(id);
+		changeMinRest(company, id);
 	else if (userChoice == 5)
-		driversInterface();
+		driversInterface(company);
 }
 
 /*
 Recebe do utilizador um identificador para um condutor, e caso exista apaga-o do vetor de Drivers.
 */
-void removeDriver()
+void removeDriver(Company &company)
 {
 	string input;
 	int verify = -1;
@@ -211,7 +211,7 @@ void removeDriver()
 		{
 			if (isNumber(input)) //Se o input for um número positivo
 			{
-				verify = searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
 
 				if (verify != -1)
 					validInput = true;
@@ -225,7 +225,7 @@ void removeDriver()
 			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
-	driversData.erase(driversData.begin() + verify);
+	company.removeDriver(verify);
 
 	cout << "Condutor apagado com sucesso!" << endl;
 }
@@ -233,18 +233,18 @@ void removeDriver()
 /*
 Altera o número de horas de um turno de um condutor.
 */
-void changeShift(unsigned int id)
+void changeShift(Company &company, unsigned int id)
 {
 	int index;
 	unsigned int newShift;
 	string input;
 	bool validInput = false;
 
-	index = searchDriverIdentifier(id);
+	index = company.searchDriverIdentifier(id);
 
 	cout << "Alterar turno" << endl;
 
-	cout << endl << "O número atual de horas de um turno é: " << driversData[index].getShiftMaxDuration() << endl;
+	cout << endl << "O número atual de horas de um turno é: " << company.getDrivers()[index].getShiftMaxDuration() << endl;
 
 	while (!validInput)
 	{
@@ -266,7 +266,9 @@ void changeShift(unsigned int id)
 			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
-	driversData[index].setShiftMaxDuration(newShift);
+	vector<Driver> newDrivers = company.getDrivers();
+	newDrivers[index].setShiftMaxDuration(newShift);
+	company.setDrivers(newDrivers);
 
 	cout << "Alteração efetuada com sucesso!" << endl;
 }
@@ -274,18 +276,18 @@ void changeShift(unsigned int id)
 /*
 Altera o número máximo de horas de trabalho por semana de um condutor.
 */
-void changeMaxHours(unsigned int id)
+void changeMaxHours(Company &company, unsigned int id)
 {
 	int index;
 	string input;
 	unsigned int newMaxHours;
 	bool validInput = false;
 
-	index = searchDriverIdentifier(id);
+	index = company.searchDriverIdentifier(id);
 
 	cout << "Alterar número máximo de horas de trabalho" << endl;
 
-	cout << endl << "O número máximo atual de horas de trabalho é: " << driversData[index].getMaxWeekWorkingTime() << " por semana" << endl;
+	cout << endl << "O número máximo atual de horas de trabalho é: " << company.getDrivers()[index].getMaxWeekWorkingTime() << " por semana" << endl;
 
 	while (!validInput)
 	{
@@ -296,7 +298,7 @@ void changeMaxHours(unsigned int id)
 		{
 			newMaxHours = stoi(input);
 
-			if (newMaxHours <= driversData[index].getShiftMaxDuration())
+			if (newMaxHours <= company.getDrivers()[index].getShiftMaxDuration())
 				cout << "Não é possível atribuir esse número! Deve inserir mais horas." << endl;
 			else
 				validInput = true;
@@ -305,7 +307,10 @@ void changeMaxHours(unsigned int id)
 			cout << "Input inválido! Tente novamente..." << endl;
 		}
 
-	driversData[index].setMaxWeekWorkingTime(newMaxHours);
+
+	vector<Driver> newDrivers = company.getDrivers();
+	newDrivers[index].setMaxWeekWorkingTime(newMaxHours);
+	company.setDrivers(newDrivers);
 
 	cout << "Alteração efetuada com sucesso!" << endl;
 }
@@ -313,18 +318,18 @@ void changeMaxHours(unsigned int id)
 /*
 Altera o número mínimo de horas de descanso entre turnos de um condutor.
 */
-void changeMinRest(unsigned int id)
+void changeMinRest(Company &company, unsigned int id)
 {
 	int index;
 	unsigned int newMinRest;
 	string input;
 	bool validInput = false;
 
-	index = searchDriverIdentifier(id);
+	index = company.searchDriverIdentifier(id);
 
 	cout << "Alterar horas de descanso entre turnos" << endl;
 
-	cout << endl << "O número mínimo atual de horas de descanso entre turnos é: " << driversData[index].getMinRestTime() << endl;
+	cout << endl << "O número mínimo atual de horas de descanso entre turnos é: " << company.getDrivers()[index].getMinRestTime() << endl;
 
 	while (!validInput)
 	{
@@ -344,7 +349,9 @@ void changeMinRest(unsigned int id)
 			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
-	driversData[index].setMinRestTime(newMinRest);
+	vector<Driver> newDrivers=company.getDrivers();
+	newDrivers[index].setMinRestTime(newMinRest);
+	company.setDrivers(newDrivers);
 
 	cout << "Alteração efetuada com sucesso!" << endl;
 }
@@ -353,17 +360,17 @@ void changeMinRest(unsigned int id)
 Altera o nome de um condutor. Pode ser útil, por exemplo, na eventualidade de um condutor ser substituído
 e o número identificador de manter.
 */
-void changeName(unsigned int id)
+void changeName(Company &company, unsigned int id)
 {
 	int index;
 	string newName;
 	bool validInput = false;
 
-	index = searchDriverIdentifier(id);
+	index = company.searchDriverIdentifier(id);
 
 	cout << "Alterar nome" << endl;
 
-	cout << endl << "O nome do condutor atual é: " << driversData[index].getName() << endl;
+	cout << endl << "O nome do condutor atual é: " << company.getDrivers()[index].getName() << endl;
 
 	while (!validInput)
 	{
@@ -376,7 +383,9 @@ void changeName(unsigned int id)
 			validInput = true;
 	}
 
-	driversData[index].setName(newName);
+	vector<Driver> newDrivers=company.getDrivers();
+	newDrivers[index].setName(newName);
+	company.setDrivers(newDrivers);
 
 	cout << "As alterações foram efetuadas com sucesso!" << endl;
 }
@@ -385,7 +394,7 @@ void changeName(unsigned int id)
 Apresenta informação relativa ao trabalho atribuído a um condutor especificado pelo utilizador, que é traduzida nos
 turnos que tem que realizar.
 */
-void showShifts()
+void showShifts(Company company)
 {
 	bool validInput = false;
 	string input;
@@ -403,7 +412,7 @@ void showShifts()
 
 			if (isNumber(input)) //Se o input for um número positivo
 			{
-				verify = searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
 
 				if (verify != -1)
 					validInput = true;
@@ -417,13 +426,13 @@ void showShifts()
 			cout << "Input inválido! Tente novamente..." << endl;
 	}
 
-	if (driversData[verify].getShifts().size() == 0)
+	if (company.getDrivers()[verify].getShifts().size() == 0)
 		cout << "De momento, o condutor não tem qualquer trabalho atribuído." << endl;
 	else
-		for (int i = 0; i < driversData[verify].getShifts().size(); i++)
+		for (int i = 0; i < company.getDrivers()[verify].getShifts().size(); i++)
 		{
 			cout << "Turno " << i + 1 << endl;
-			driversData[verify].getShifts()[i].showInfo();
+			company.getDrivers()[verify].getShifts()[i].showInfo();
 			cout << endl;
 		}
 }

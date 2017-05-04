@@ -1,5 +1,7 @@
 #include "myTypes.h"
 
+
+
 /*
 Lê o ficheiro das linhas e guarda cada fila de informação numa string, adicionando-a num vetor de strings.
 */
@@ -106,5 +108,6 @@ vector<Driver> storingDriversData(const vector<string> &data)
 
     return driversVector;
 }
+
 
 

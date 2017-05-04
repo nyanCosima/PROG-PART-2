@@ -1,10 +1,12 @@
 #include "myTypes.h"
 
-Shift::Shift(  unsigned int linha, unsigned int condutor, unsigned int autocarro, unsigned int inicio, unsigned int fim){
+Shift::Shift(  unsigned int line, unsigned int driver, unsigned int bus, unsigned int start, unsigned int end){
   
-  // INITIALISATION CODE GOES IN HERE
-  
-
+	busLineId = line;
+	driverId = driver;
+	busOrderNumber = bus;
+	startTime = start;
+	endTime = end;
 }
 
 // metodos get

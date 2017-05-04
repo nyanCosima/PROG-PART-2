@@ -1,10 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <string>
 #include <vector>
-
-
+#include <string>
 
 using namespace std;
 
@@ -30,5 +27,6 @@ class Line{
   int numberOfBuses() const;
   int totalDuration() const;
   bool searchStop(string stop) const; 
+  void schedule() const;
 
 };

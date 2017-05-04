@@ -1,29 +1,26 @@
 #include "myTypes.h"
 
-//Declaração dos nomes dos ficheiros
-string driversFileName, linesFileName;
-
-//Declaração dos vetores de informação
-vector<Line> linesData;
-vector<Driver> driversData;
-
 //Definição das constantes de início e fim de serviço
 int serviceStartingTime = 6 * 60, serviceEndingTime = 19 * 60;
 
+string linesFileName, driversFileName;
+
 int main(){
 
-  vector<string> rawLinesData;
-  vector<string> rawDriversData;
+	setPTChar(); //Permite o uso de carateres portugueses no input/output
 
-  setPTChar(); //Permite o uso de carateres portugueses no input/output
+	//cout << "Ficheiro das linhas: ";
+	//getline(cin, linesFileName);
 
-  rawLinesData = readLines();
-  rawDriversData = readDrivers();
+	//cout << "Ficheiro dos condutores: ";
+	//getline(cin, driversFileName);
 
-  linesData = storingLinesData(rawLinesData);
-  driversData = storingDriversData(rawDriversData);
+	linesFileName = "linhas.txt";
+	driversFileName = "condutores.txt";
 
-  mainUserInterface(); //Invoca a interface principal
+	Company SRL("SEMPRAROLAR");
 
-  return 0;
+	mainUserInterface(SRL); //Invoca a interface principal
+
+	return 0;
 }

@@ -4,7 +4,7 @@
 Interface principal entre o programa e o utilizador. Apresenta no ecrã as funcionalidades principais, recebe
 a escolha do utilizador e devolve-a ao programa.
 */
-void mainUserInterface()
+void mainUserInterface(Company &company)
 {
 	int userChoice;
 
@@ -19,27 +19,25 @@ void mainUserInterface()
 
 	clearScreen(); //Limpa a consola para melhorar o aspeto e simplicidade do programa
 
-
 	if (userChoice == 1)
-		driversInterface();
+		driversInterface(company);
 	else if (userChoice == 2)
-		infoInterface();
+		infoInterface(company);
 	else if (userChoice == 3)
-		searchInterface();
+		searchInterface(company);
 	else if (userChoice == 0)
 	{
-		savingChanges();
+		savingChanges(company);
 		cout << "Programa terminado! Pressione ENTER para fechar." << endl;
 		exit(1);
 	}
 }
 
-
 /*
 Sub-interface dedicada à gestão de condutores. Apresenta as funcionalidades disponíveis, recebe a escolha
 do utilizador e inicializa a função pedida
 */
-void driversInterface()
+void driversInterface(Company &company)
 {
 	int userChoice;
 
@@ -57,19 +55,19 @@ void driversInterface()
 
 	switch (userChoice)
 	{
-	case 1: createDriver();
-		quitOrContinue();
+	case 1: createDriver(company);
+		quitOrContinue(company);
 		break;
-	case 2: editDriver();
-		quitOrContinue();
+	case 2: editDriver(company);
+		quitOrContinue(company);
 		break;
-	case 3: removeDriver();
-		quitOrContinue();
+	case 3: removeDriver(company);
+		quitOrContinue(company);
 		break;
 	case 4: cout << "calmex" << endl;
-		quitOrContinue();
+		quitOrContinue(company);
 		break;
-	case 0: mainUserInterface();
+	case 0: mainUserInterface(company);
 		break;
 	}
 }
@@ -78,7 +76,7 @@ void driversInterface()
 Sub-interface dedicada à visualizacao de informacao. Apresenta as funcionalidades disponíveis, recebe a escolha
 do utilizador e inicializa a função pedida
 */
-void infoInterface()
+void infoInterface(Company &company)
 {
 	int userChoice;
 
@@ -97,18 +95,18 @@ void infoInterface()
 	switch (userChoice)
 	{
 	case 1:// stopSchedule(linesData);
-		quitOrContinue();
+		quitOrContinue(company);
 		break;
-	case 2: lineSchedule();
-		quitOrContinue();
+	case 2: lineSchedule(company);
+		quitOrContinue(company);
 		break;
 		case 3: //busInfo();
 			quitOrContinue;
 			break;
-		case 4: showShifts();
+		case 4: showShifts(company);
 			quitOrContinue;
 			break;
-	case 0: mainUserInterface();
+	case 0: mainUserInterface(company);
 		break;
 	}
 }
@@ -117,7 +115,7 @@ void infoInterface()
 Sub-interface dedicada à pesquisa de informação. Apresenta as funcionalidades disponíveis, recebe a escolha
 do utilizador e inicializa a função pedida
 */
-void searchInterface()
+void searchInterface(Company &company)
 {
 	int userChoice;
 
@@ -134,16 +132,16 @@ void searchInterface()
 
 	switch (userChoice)
 	{
-	case 1: searchStop();
-		quitOrContinue();
+	case 1: searchStop(company);
+		quitOrContinue(company);
 		break;
 	case 2: //availableDrivers();
-		quitOrContinue();
+		quitOrContinue(company);
 		break;
-	case 3:routeCalculator();
-		quitOrContinue();
+	case 3: routeCalculator(company);
+		quitOrContinue(company);
 		break;
-	case 0: mainUserInterface();
+	case 0: mainUserInterface(company);
 		break;
 	}
 }
@@ -152,7 +150,7 @@ void searchInterface()
 Pergunta ao utilizador se pretente efetuar outra operação ou terminar o programa.
 Também assegura que este insere um valor válido.
 */
-void quitOrContinue()
+void quitOrContinue(Company &company)
 {
 	string userChoice;
 	bool validInput = false;
@@ -164,17 +162,17 @@ void quitOrContinue()
 
 		if (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n")
 			validInput = true;
-		cout << "Opção inválida, tente novamente..." << endl << endl;
+		else cout << "Opção inválida, tente novamente..." << endl << endl;
 	}
 
 	if (userChoice == "S" || userChoice == "s")
 	{
 		clearScreen();
-		mainUserInterface();
+		mainUserInterface(company);
 	}
 	else
 	{
-		savingChanges();
+		savingChanges(company);
 		cout << endl << "Programa terminado! Pressione ENTER para fechar." << endl << endl;
 		exit(1);
 	}
