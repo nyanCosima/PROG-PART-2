@@ -1,9 +1,10 @@
 #include "myTypes.h"
+#include <string>
+#include "Company.h"
 
-//Definição das constantes de início e fim de serviço
-int serviceStartingTime = 6 * 60, serviceEndingTime = 19 * 60;
+using namespace std;
 
-string linesFileName, driversFileName;
+void mainUserInterface(Company &company);
 
 int main(){
 
@@ -15,10 +16,10 @@ int main(){
 	//cout << "Ficheiro dos condutores: ";
 	//getline(cin, driversFileName);
 
-	linesFileName = "linhas.txt";
-	driversFileName = "condutores.txt";
+	string lines = "linhas.txt";
+	string drivers = "condutores.txt";
 
-	Company SRL("SEMPRAROLAR");
+	Company SRL("SEMPRAROLAR", lines, drivers);
 
 	mainUserInterface(SRL); //Invoca a interface principal
 

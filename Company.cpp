@@ -1,9 +1,16 @@
-﻿#include "myTypes.h"
+﻿#include "Company.h"
+#include <fstream>
+#include <iostream>
+#include <iomanip>
 
 
-
-Company::Company(string name){
+Company::Company(string name, string linesFile, string driversFile){
 	
+	linesFileName = linesFile;
+	driversFileName = driversFile;
+	serviceStartingTime = 6 * 60;
+	serviceEndingTime = 19 * 60;
+
 	//LER DOS FICHEIROS PARA STRINGS
 	ifstream in_stream;
 	string line;
@@ -89,6 +96,16 @@ vector<Line> Company::getLines() const
 vector<Driver> Company::getDrivers() const
 {
 	return drivers;
+}
+
+unsigned int Company::getStartingTime() const
+{
+	return serviceStartingTime;
+}
+
+unsigned int Company::getEndingTime() const
+{
+	return serviceEndingTime;
 }
 
 //////////////////////////////

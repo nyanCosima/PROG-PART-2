@@ -1,4 +1,8 @@
+#include <iostream>
+#include <string>
 #include "myTypes.h"
+
+using namespace std;
 
 /*
 Função encarregada de verificar se o input do utilizador é válido. Em caso positivo, retorna o valor introduzido à função.

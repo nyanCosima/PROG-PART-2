@@ -1,4 +1,10 @@
-#include "myTypes.h"
+#include "Line.h"
+#include <iostream>
+#include <iomanip>
+
+int verificarLENGTHparagemMAIOR(vector<string> busStops);
+void dealWITHtime(int &horas, int &minutos);
+void showMIN(int time);
 
 Line::Line(string textLine){
 
@@ -118,17 +124,9 @@ Calcula o número de autocarros necessários para cobrir o serviço de uma dada lin
 */
 int Line::numberOfBuses() const
 {
-	int number = 0;
-	int busTime = serviceStartingTime;
+	int	n = (int)((double) 2*totalDuration()/frequency + 1.0);
 
-	while (busTime<serviceStartingTime + 2 * totalDuration())
-	{
-		number++;
-
-		busTime += frequency;
-	}
-
-	return number;
+	return n;
 }
 
 /*

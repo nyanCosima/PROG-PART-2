@@ -1,5 +1,5 @@
-#include "myTypes.h"
-
+#include "Bus.h"
+#include <iostream>
 
 Bus::  Bus(unsigned int id, unsigned int driver, unsigned int line){
 

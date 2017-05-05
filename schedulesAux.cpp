@@ -1,4 +1,10 @@
-#include "myTypes.h"
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include "Time.h"
+
+using namespace std;
+
 //associado aos horários
 void showMIN(int time) {
     if (time < 10)

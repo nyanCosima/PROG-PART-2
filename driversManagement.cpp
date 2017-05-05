@@ -1,5 +1,15 @@
+#include <iostream>
+#include "Company.h"
+#include <string>
 #include "myTypes.h"
 
+using namespace std;
+
+
+bool isNumber(string input);
+int verifyInput(int low, int high);
+void clearScreen();
+void driversInterface(Company &company);
 
 /*
 Recebe os parâmetros do utilizador (ID, nome do condutor, número de horas de um turno, número máximo de horas
@@ -126,70 +136,6 @@ void createDriver(Company &company)
 	cout << "Condutor criado com sucesso!" << endl;
 }
 
-/*
-Edita os condutores já criados. Fornece meios para: alterar o número de horas de um turno, o número máximo
-de horas de trabalho por semana, e o número mínimo de horas de descanso.
-*/
-void editDriver(Company &company)
-{
-	int userChoice;
-	unsigned int id;
-	string input;
-	int verify = -1;
-	bool validInput = false;
-
-	cout << "Alterar condutor" << endl << endl;
-
-	while (!validInput)
-	{
-		cout << "Identificador do condutor: ";
-		getline(cin, input);
-
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
-		{
-
-			if (isNumber(input)) //Se o input for um número positivo
-			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
-
-				if (verify != -1)
-					validInput = true;
-				else
-					cout << "Esse ID não existe! Tente novamente..." << endl;
-			}
-			else
-				cout << "Input inválido! Tente novamente..." << endl;
-		}
-		else
-			cout << "Input inválido! Tente novamente..." << endl;
-	}
-
-	id = stoi(input);
-
-	//Apresenta uma interface com as funções que permitem alterar um condutor
-
-	cout << endl << "Escolha o que pretende alterar" << endl << endl;
-	cout << "1 - Alterar nome" << endl;
-	cout << "2 - Alterar turno" << endl;
-	cout << "3 - Alterar número máximo de horas de trabalho" << endl;
-	cout << "4 - Alterar horas de descanso entre turnos" << endl;
-	cout << "5 - Voltar" << endl << endl;
-
-	userChoice = verifyInput(1, 5);
-
-	clearScreen();
-
-	if (userChoice == 1)
-		changeName(company, id);
-	else if (userChoice == 2)
-		changeShift(company, id);
-	else if (userChoice == 3)
-		changeMaxHours(company, id);
-	else if (userChoice == 4)
-		changeMinRest(company, id);
-	else if (userChoice == 5)
-		driversInterface(company);
-}
 
 /*
 Recebe do utilizador um identificador para um condutor, e caso exista apaga-o do vetor de Drivers.
@@ -435,4 +381,69 @@ void showShifts(Company company)
 			company.getDrivers()[verify].getShifts()[i].showInfo();
 			cout << endl;
 		}
+}
+
+/*
+Edita os condutores já criados. Fornece meios para: alterar o número de horas de um turno, o número máximo
+de horas de trabalho por semana, e o número mínimo de horas de descanso.
+*/
+void editDriver(Company &company)
+{
+	int userChoice;
+	unsigned int id;
+	string input;
+	int verify = -1;
+	bool validInput = false;
+
+	cout << "Alterar condutor" << endl << endl;
+
+	while (!validInput)
+	{
+		cout << "Identificador do condutor: ";
+		getline(cin, input);
+
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+
+			if (isNumber(input)) //Se o input for um número positivo
+			{
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (verify != -1)
+					validInput = true;
+				else
+					cout << "Esse ID não existe! Tente novamente..." << endl;
+			}
+			else
+				cout << "Input inválido! Tente novamente..." << endl;
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
+	}
+
+	id = stoi(input);
+
+	//Apresenta uma interface com as funções que permitem alterar um condutor
+
+	cout << endl << "Escolha o que pretende alterar" << endl << endl;
+	cout << "1 - Alterar nome" << endl;
+	cout << "2 - Alterar turno" << endl;
+	cout << "3 - Alterar número máximo de horas de trabalho" << endl;
+	cout << "4 - Alterar horas de descanso entre turnos" << endl;
+	cout << "5 - Voltar" << endl << endl;
+
+	userChoice = verifyInput(1, 5);
+
+	clearScreen();
+
+	if (userChoice == 1)
+		changeName(company, id);
+	else if (userChoice == 2)
+		changeShift(company, id);
+	else if (userChoice == 3)
+		changeMaxHours(company, id);
+	else if (userChoice == 4)
+		changeMinRest(company, id);
+	else if (userChoice == 5)
+		driversInterface(company);
 }

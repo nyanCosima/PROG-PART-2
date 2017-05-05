@@ -10,12 +10,18 @@ private:
     string name;
     vector<Driver> drivers;
     vector<Line> lines;
+	string linesFileName;
+	string driversFileName;
+	unsigned int serviceStartingTime;
+	unsigned int serviceEndingTime;
 public:
-    Company(string name);
+    Company(string name, string linesFile, string driversFile);
     // metodos get
     string getName() const;
 	vector<Driver> getDrivers() const;
 	vector<Line> getLines() const;
+	unsigned int getStartingTime() const;
+	unsigned int getEndingTime() const;
     // metodos set
 	void setDrivers(vector<Driver> newDrivers);
 	void addDriver(Driver newDriver);

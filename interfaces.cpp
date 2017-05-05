@@ -1,4 +1,22 @@
+#include "Company.h"
+#include <iostream>
 #include "myTypes.h"
+
+int verifyInput(int low, int high);
+void savingChanges(Company company);
+void createDriver(Company &company);
+void editDriver(Company &company);
+void removeDriver(Company &company);
+void showShifts(Company company);
+void lineSchedule(Company company);
+void searchStop(Company company);
+void routeCalculator(Company company);
+void clearScreen();
+void mainUserInterface(Company &company);
+void driversInterface(Company &company);
+void infoInterface(Company &company);
+void searchInterface(Company &company);
+void quitOrContinue(Company &company);
 
 /*
 Interface principal entre o programa e o utilizador. Apresenta no ecrã as funcionalidades principais, recebe

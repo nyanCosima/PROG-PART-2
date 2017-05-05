@@ -1,4 +1,11 @@
 #include "myTypes.h"
+#include "Company.h"
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+bool isNumber(string input);
 
 void lineSchedule(Company company){
 

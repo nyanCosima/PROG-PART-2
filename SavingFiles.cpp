@@ -1,4 +1,9 @@
+#include "Company.h"
+#include <string>
+#include <iostream>
 #include "myTypes.h"
+
+using namespace std;
 
 /*
 Pergunta ao utilizador se pretende guardar as alteraÁıes e age de acordo com a sua resposta.

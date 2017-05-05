@@ -1,6 +1,8 @@
-#include "myTypes.h"
+#include "Shift.h"
+#include <iostream>
+#include "Time.h"
 
-Shift::Shift(  unsigned int line, unsigned int driver, unsigned int bus, unsigned int start, unsigned int end){
+Shift::Shift(unsigned int line, unsigned int driver, unsigned int bus, unsigned int start, unsigned int end){
   
 	busLineId = line;
 	driverId = driver;

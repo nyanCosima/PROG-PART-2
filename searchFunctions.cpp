@@ -1,4 +1,9 @@
+#include <string>
+#include "Company.h"
+#include <iostream>
 #include "myTypes.h"
+
+using namespace std;
 
 /*
 Recebe uma paragem do utilizador, e devolve as linhas em que se encontra, funcionando também para o caso de não existir.
