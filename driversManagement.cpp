@@ -9,7 +9,7 @@ using namespace std;
 bool isNumber(string input);
 int verifyInput(int low, int high);
 void clearScreen();
-void driversInterface(Company &company);
+bool quitOrContinue(Company &company);
 
 /*
 Recebe os parâmetros do utilizador (ID, nome do condutor, número de horas de um turno, número máximo de horas
@@ -423,27 +423,39 @@ void editDriver(Company &company)
 
 	id = stoi(input);
 
-	//Apresenta uma interface com as funções que permitem alterar um condutor
+	bool anotherOp = true;
 
-	cout << endl << "Escolha o que pretende alterar" << endl << endl;
-	cout << "1 - Alterar nome" << endl;
-	cout << "2 - Alterar turno" << endl;
-	cout << "3 - Alterar número máximo de horas de trabalho" << endl;
-	cout << "4 - Alterar horas de descanso entre turnos" << endl;
-	cout << "5 - Voltar" << endl << endl;
+	while (anotherOp)
+	{
 
-	userChoice = verifyInput(1, 5);
+		//Apresenta uma interface com as funções que permitem alterar um condutor
 
-	clearScreen();
+		cout << endl << "Escolha o que pretende alterar" << endl << endl;
+		cout << "1 - Alterar nome" << endl;
+		cout << "2 - Alterar turno" << endl;
+		cout << "3 - Alterar número máximo de horas de trabalho" << endl;
+		cout << "4 - Alterar horas de descanso entre turnos" << endl;
+		cout << "0 - Voltar" << endl << endl;
 
-	if (userChoice == 1)
-		changeName(company, id);
-	else if (userChoice == 2)
-		changeShift(company, id);
-	else if (userChoice == 3)
-		changeMaxHours(company, id);
-	else if (userChoice == 4)
-		changeMinRest(company, id);
-	else if (userChoice == 5)
-		driversInterface(company);
+		userChoice = verifyInput(0, 4);
+
+		clearScreen();
+
+		switch (userChoice)
+		{
+		case 1:changeName(company, id);
+			anotherOp=quitOrContinue(company);
+			break;
+		case 2:changeShift(company, id);
+			anotherOp = quitOrContinue(company);
+			break;
+		case 3:changeMaxHours(company, id);
+			anotherOp = quitOrContinue(company);
+			break;
+		case 4:changeMinRest(company, id);
+			anotherOp = quitOrContinue(company);
+			break;
+		case 0: return;
+		}
+	}
 }
