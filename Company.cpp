@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
-
+#include <algorithm>
 
 Company::Company(string name, string linesFile, string driversFile){
 	
@@ -226,113 +226,258 @@ void Company::savingDriversData()
 	out_stream.close();
 }
 
+/*
+Esta struct e a função a seguir são úteis para, na função de calcular um percurso, se poder ordenar os vários percursos
+por duração.
+*/
+
+typedef struct {
+	int ID; //Identifica o percurso
+	int duration;
+}durationHelper;
+
+bool sortHelper(const durationHelper& x, const durationHelper& y)
+{
+	return x.duration < y.duration;
+}
 
 /*
-Recebe duas paragens do utilizador e procura-as nas linhas existentes. Caso exista alguma linha que as contenha,
-calcula o percurso a efetuar e a duração total. Caso exista mais do que uma linha, apenas devolve a que tiver
-menor duração. Também funciona para o caso de não existir.
+Recebe duas paragens do utilizador e procura-as nas linhas existentes. Devolve todos os percursos possíveis,
+sendo que se admite que há, no máximo, um transbordo. Também funciona para o caso de não existir.
 */
 void Company::routeCalculator(string stop1, string stop2)
 {
-	vector<int> foundLines;
+	typedef struct {
+		int lineIndex;
+		int stopIndex;
+	} stopInfo;
 
-	//Começar por procurar se existe alguma linha com ambas as paragens especificadas, ou se existem várias
+	typedef struct {
+		vector<string> stops;
+		int ID; //Identifica o percurso, útil para coordenar com a struct durationHelper
+		int lineID;
+		int duration;
+	}sameLineRoute;
 
+	typedef struct {
+		string commonStop;
+		int ID; //Identifica o percurso, útil para coordenar com a struct durationHelper
+		int line1ID;
+		vector<string> line1stops;
+		vector<string> line2stops;
+		int line2ID;
+		int duration;
+	}difLineRoute;
+
+	typedef struct {
+		int line1StopIndex;
+		int line2StopIndex;
+		string stop;
+	}commonStopInfo;
+
+	vector<durationHelper> durHelper;
+	vector<difLineRoute> difLineRoutes;
+	vector<sameLineRoute> sameLineRoutes;
+	vector<stopInfo> info; //Para guardar informações sobre a paragem inicial
+
+	//Procurar a paragem inicial
 	for (int i = 0; i < lines.size(); i++)
-	{
-		if (lines[i].searchStop(stop1) && lines[i].searchStop(stop2))
-			foundLines.push_back(i); //Se encontrar ambas as paragens na mesma linha, coloca o seu indíce num vetor
-	}
+		for (int j = 0; j < lines[i].getBusStops().size(); j++)
+			if (lines[i].getBusStops()[j] == stop1)
+			{
+				stopInfo stopI;
+				stopI.lineIndex = i;
+				stopI.stopIndex = j;
 
-	if (foundLines.size() == 0)
+				info.push_back(stopI);
+			}
+
+
+	//Procurar a paragem final
+	for (int i = 0; i < lines.size(); i++)
+		for (int j = 0; j < lines[i].getBusStops().size(); j++)
+			if (lines[i].getBusStops()[j] == stop2)
+				for (int c = 0; c < info.size(); c++)
+					if (info[c].lineIndex == i) //Paragens estão na mesma linha
+					{
+						sameLineRoute route;
+						durationHelper dH;
+						route.duration = 0;
+
+						if (j > info[c].stopIndex)
+						{
+							for (int c1 = 0; c1 <= (j - info[c].stopIndex); c1++)
+								route.stops.push_back(lines[i].getBusStops()[info[c].stopIndex + c1]);
+
+							for (int c2 = 0; c2 < (j - info[c].stopIndex); c2++)
+								route.duration += lines[i].getTimings()[info[c].stopIndex + c2];
+						}
+						else
+						{
+							for (int c1 = 0; c1 <= (info[c].stopIndex - j); c1++)
+								route.stops.push_back(lines[i].getBusStops()[info[c].stopIndex - c1]);
+
+							for (int c2 = 0; c2 < (info[c].stopIndex - j); c2++)
+								route.duration += lines[i].getTimings()[j + c2];
+						}
+
+						route.ID = c;
+						route.lineID = lines[i].getId();
+						sameLineRoutes.push_back(route);
+						dH.duration = route.duration;
+						dH.ID = c;
+						durHelper.push_back(dH);
+					}
+					else //Paragens estão em linhas diferentes
+					{
+						vector<commonStopInfo> commonStopsInfo;
+
+						//Procurar paragens comuns
+						for (int c1 = 0; c1 < lines[info[c].lineIndex].getBusStops().size(); c1++)
+							for (int c2 = 0; c2 < lines[i].getBusStops().size(); c2++)
+							{
+								if (lines[info[c].lineIndex].getBusStops()[c1] == lines[i].getBusStops()[c2])
+								{
+									commonStopInfo cSI;
+
+									string common = lines[info[c].lineIndex].getBusStops()[c1];
+
+									if (common != stop1 && common != stop2)
+									{
+										cSI.line1StopIndex = c1;
+										cSI.line2StopIndex = c2;
+										cSI.stop = common;
+
+										commonStopsInfo.push_back(cSI);
+									}
+								}
+
+							}
+
+						for (int c3 = 0; c3 < commonStopsInfo.size(); c3++)
+						{
+							difLineRoute dLR;
+							durationHelper dH;
+
+							dLR.commonStop = commonStopsInfo[c3].stop;
+							dLR.line1ID = lines[info[c].lineIndex].getId();
+							dLR.duration = 0;
+							dLR.line2ID = lines[i].getId();
+
+							if (commonStopsInfo[c3].line1StopIndex > info[c].stopIndex)
+							{
+								for (int c4 = 0; c4 <= (commonStopsInfo[c3].line1StopIndex - info[c].stopIndex); c4++)
+									dLR.line1stops.push_back(lines[info[c].lineIndex].getBusStops()[info[c].stopIndex + c4]);
+
+								for (int c5 = 0; c5 < (commonStopsInfo[c3].line1StopIndex - info[c].stopIndex); c5++)
+									dLR.duration += lines[info[c].lineIndex].getTimings()[info[c].stopIndex + c5];
+							}
+							else
+							{
+								for (int c4 = 0; c4 <= (info[c].stopIndex - commonStopsInfo[c3].line1StopIndex); c4++)
+									dLR.line1stops.push_back(lines[info[c].lineIndex].getBusStops()[info[c].stopIndex - c4]);
+
+								for (int c5 = 0; c5 < (info[c].stopIndex - commonStopsInfo[c3].line1StopIndex); c5++)
+									dLR.duration += lines[info[c].lineIndex].getTimings()[commonStopsInfo[c3].line1StopIndex + c5];
+							}
+
+							if (j > commonStopsInfo[c3].line2StopIndex)
+							{
+								for (int c4 = 0; c4 <= (j - commonStopsInfo[c3].line2StopIndex); c4++)
+									dLR.line2stops.push_back(lines[i].getBusStops()[commonStopsInfo[c3].line2StopIndex + c4]);
+
+								for (int c5 = 0; c5 < (j - commonStopsInfo[c3].line2StopIndex); c5++)
+									dLR.duration += lines[i].getTimings()[commonStopsInfo[c3].line2StopIndex + c5];
+							}
+							else
+							{
+								for (int c4 = 0; c4 <= (commonStopsInfo[c3].line2StopIndex - j); c4++)
+									dLR.line2stops.push_back(lines[i].getBusStops()[commonStopsInfo[c3].line2StopIndex - c4]);
+
+								for (int c5 = 0; c5 < (commonStopsInfo[c3].line2StopIndex - j); c5++)
+									dLR.duration += lines[i].getTimings()[j + c5];
+							}
+
+							dLR.ID = info.size() + 1 + c3;
+							dH.duration = dLR.duration;
+							dH.ID = dLR.ID;
+							durHelper.push_back(dH);
+							difLineRoutes.push_back(dLR);
+						}
+
+					}
+
+
+	sort(durHelper.begin(), durHelper.end(), sortHelper); //Ordenar o vetor por ordem de duração
+
+	//Mostrar os percursos
+
+	if (durHelper.size() == 0)
 		cout << "Não foi encontrado qualquer percurso!" << endl;
-
 	else
 	{
-		/*
-		Um ciclo semelhante, mas agora guarda os índices de ambas as paragens, e com base nisso calcula
-		a duração do percurso
-		*/
+		if (durHelper.size() > 1)
+			cout << endl << "Foram encontrados " << durHelper.size() << " percursos" << endl;
+		else
+			cout << endl << "Existe um único percurso" << endl;
 
-		vector<int> durations;
-		vector<vector<string>> route;
-
-		for (int i = 0; i < foundLines.size(); i++)
+		for (int i = 0; i < durHelper.size(); i++)
 		{
-			int index1, index2, totalDuration = 0;
+			if (durHelper.size() > 1)
+				cout << endl << "Percurso " << i + 1 << endl;
+			
+			//Procurar o tipo de percurso e mostrá-lo
 
-			for (int j = 0; j < lines[foundLines[i]].getBusStops().size(); j++)
+			for (int c = 0; c < sameLineRoutes.size(); c++)
 			{
-				if (lines[foundLines[i]].getBusStops()[j] == stop1)
-					index1 = j;
+				if (durHelper[i].ID == sameLineRoutes[c].ID)
+				{
+					cout << "Linha: " << sameLineRoutes[c].lineID << endl;
+					cout << "Paragens: ";
 
-				if (lines[foundLines[i]].getBusStops()[j] == stop2)
-					index2 = j;
+					for (int c1 = 0; c1 < sameLineRoutes[c].stops.size(); c1++)
+					{
+						if (c1 > 0)
+							cout << " - ";
+						cout << sameLineRoutes[c].stops[c1];
+					}
+
+					cout << endl << "Duração: " << sameLineRoutes[c].duration << " minutos" << endl;
+				}
 			}
 
-			//Colocar num vetor as paragens pertencentes ao percurso
-			//Como é necessário ter em conta o facto das linhas serem bidirecionais, é preciso verificar os índices.
-
-			if (index2 > index1)
+			for (int c = 0; c < difLineRoutes.size(); c++)
 			{
-				vector<string> route1;
-				for (int c = 0; c <= (index2 - index1); c++)
-					route1.push_back(lines[foundLines[i]].getBusStops()[index1 + c]);
+				if (durHelper[i].ID == difLineRoutes[c].ID)
+				{
+					cout << "Linha 1: " << difLineRoutes[c].line1ID << endl;
+					cout << "Paragens: ";
 
-				route.push_back(route1);
+					for (int c1 = 0; c1 < difLineRoutes[c].line1stops.size(); c1++)
+					{
+						if (c1 > 0)
+							cout << " - ";
+						cout << difLineRoutes[c].line1stops[c1];
+					}
 
-				for (int c1 = 0; c1 < (index2 - index1); c1++)
-					totalDuration += lines[foundLines[i]].getTimings()[index1 + c1];
+					cout << endl << "Transbordo em: " << difLineRoutes[c].commonStop << endl;
+					cout << "Linha 2: " << difLineRoutes[c].line2ID << endl; 
+					cout << "Paragens: ";
 
-				durations.push_back(totalDuration);
-			}
-			else
-			{
-				vector<string> route2;
-				for (int c = 0; c <= (index1 - index2); c++)
-					route2.push_back(lines[foundLines[i]].getBusStops()[index1 - c]);
 
-				route.push_back(route2);
+					for (int c1 = 0; c1 < difLineRoutes[c].line2stops.size(); c1++)
+					{
+						if (c1 > 0)
+							cout << " - ";
+						cout << difLineRoutes[c].line2stops[c1];
+					}
 
-				for (int c1 = 0; c1 < (index1 - index2); c1++)
-					totalDuration += lines[foundLines[i]].getTimings()[index2 + c1];
-
-				durations.push_back(totalDuration);
-			}
-
-		}
-
-		//Determinar o percurso mais rápido
-
-		int comp = durations[0];
-		int fasterRoute = 0;
-		int lineIdentifier = foundLines[0];
-
-		for (int i = 0; i < durations.size(); i++)
-		{
-			if (durations[i] < comp)
-			{
-				fasterRoute = i;
-				lineIdentifier = foundLines[i];
+					cout << endl << "Duração: " << difLineRoutes[c].duration << " minutos" << endl;
+				}
 			}
 		}
-
-		//Imprimir no ecrã o percurso e a sua duração
-
-		cout << endl << "O percurso entre as paragens " << stop1 << " e " << stop2 << " poderá ser:" << endl << endl;
-		cout << "|" << setw(12) << " LINHA | " << lines[lineIdentifier].getId() << endl;
-
-		cout << "|" << setw(12) << " PARAGENS | ";
-
-		for (int i = 0; i < route[fasterRoute].size(); i++)
-		{
-			if (i > 0)
-				cout << " -> ";
-			cout << route[fasterRoute][i];
-		}
-
-		cout << endl << "|" << setw(12) << " DURAÇAO | " << durations[fasterRoute] << " minutos" << endl << endl;
 	}
+
 }
 
 /*
