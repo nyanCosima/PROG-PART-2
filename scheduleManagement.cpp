@@ -41,8 +41,30 @@ void lineSchedule(Company company){
 }
 
 
-/*void verHORARIOparagem(string nome) {
-    int s;
+void stopSchedule(Company company) {
+
+	bool validInput = false;
+	string input;
+
+
+	while (!validInput)
+	{
+		cout << "Indique o nome da paragem: ";
+		getline(cin, input);
+
+		if(company.searchStop2(input).size()> 0)
+			validInput = true;
+		else
+			cout << "Essa paragem não existe! Tente novamente..." << endl;
+		}
+
+    for (int i = 0; i < company.searchStop2(input).size(); ++i) {
+
+        //company.searchStop2(input).at(i).stopsSchedule();
+        }}
+
+
+/*    int s;
     int horas = 6, minutos = 0, horasin = 6, minutosin = 0;
     int horas2 = 6, minutos2 = 0, horasin2 = 6, minutosin2 = 0;
     bool validInput=false;

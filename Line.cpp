@@ -120,7 +120,7 @@ void Line::setTimings(vector<int> newTimings)
 //other methods
 
 /*
-Calcula o número de autocarros necessários para cobrir o serviço de uma dada linha.
+Calcula o nï¿½mero de autocarros necessï¿½rios para cobrir o serviï¿½o de uma dada linha.
 */
 int Line::numberOfBuses() const
 {
@@ -130,7 +130,7 @@ int Line::numberOfBuses() const
 }
 
 /*
-Calcula a duração total de um percurso de uma linha(apenas um sentido, para saber quanto demora até voltar ao início
+Calcula a duraï¿½ï¿½o total de um percurso de uma linha(apenas um sentido, para saber quanto demora atï¿½ voltar ao inï¿½cio
 basta calcular o dobro)
 */
 int Line::totalDuration() const
@@ -144,7 +144,7 @@ int Line::totalDuration() const
 }
 
 /*
-Devolve true se a paragem existir na linha, e false no caso contrário.
+Devolve true se a paragem existir na linha, e false no caso contrï¿½rio.
 */
 bool Line::searchStop(string stop) const
 {
@@ -161,7 +161,7 @@ void Line::schedule() const
 	int horas = 6, minutos = 0, minutosin = 0, horasin = 6;
 	int add = frequency;
 	cout << string(1000, '\n');
-	cout << " HORÁRIO EM DIREÇÃO A: " << busStopList.at(busStopList.size() - 1) << endl;
+	cout << " HORï¿½RIO EM DIREï¿½ï¿½O A: " << busStopList.at(busStopList.size() - 1) << endl;
 
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
 	for (int i = 0; i < busStopList.size(); ++i) {
@@ -171,7 +171,7 @@ void Line::schedule() const
 	cout << "|" << string(busStopList.size()*(s + 3) + 3, '-') << '|' << endl;
 
 	while (horasin < 19) {
-		//hora incial de saída
+		//hora incial de saï¿½da
 		cout << "|";
 		if (horasin <10)
 			cout << setfill(' ') << setw(s - 1) << "0" << horasin << ":";
@@ -179,7 +179,7 @@ void Line::schedule() const
 			cout << setfill(' ') << setw(s) << horasin << ":";
 		showMIN(minutosin);
 		cout << minutosin << "|";
-		minutos = minutosin;                                                     //comeaçar da nova hora
+		minutos = minutosin;                                                     //comeaï¿½ar da nova hora
 		horas = horasin;
 
 		//calcular horas restantes
@@ -202,7 +202,7 @@ void Line::schedule() const
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
 
 
-	//de lá para cá
+	//de lï¿½ para cï¿½
 
 
 	int horas2 = 6, minutos2 = 0, horas2in = 6, minutos2in = 0;
@@ -216,7 +216,7 @@ void Line::schedule() const
 	minutos2 = minutos2in;
 
 	cout << string(3, '\n');
-	cout << " HORÁRIO EM DIREÇÃO A: " << busStopList.at(0) << endl;
+	cout << " HORï¿½RIO EM DIREï¿½ï¿½O A: " << busStopList.at(0) << endl;
 
 
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
@@ -231,7 +231,7 @@ void Line::schedule() const
 	while (horas2 < 19) {
 		//hora incial
 		cout << "|";
-		if (horas2 <10)
+		if (horas2in <10)
 			cout << setfill(' ') << setw(s - 1) << "0" << horas2in << ":";
 		else
 			cout << setfill(' ') << setw(s) << horas2in << ":";
@@ -258,3 +258,5 @@ void Line::schedule() const
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
 	cin.ignore(1000, '\n');
 }
+
+

@@ -30,6 +30,7 @@ public:
     void allocateService(); // funcao que implementa a afectacao de servico
 	void routeCalculator(string stop1, string stop2);
 	void searchStop(string stop);
+	vector<int> searchStop2(string stop);
 	int searchLineIdentifier(unsigned int id);
 	int searchDriverIdentifier(unsigned int id);
 	void savingLinesData();

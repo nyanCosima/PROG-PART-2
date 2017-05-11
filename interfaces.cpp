@@ -9,6 +9,7 @@ void editDriver(Company &company);
 void removeDriver(Company &company);
 void showShifts(Company company);
 void lineSchedule(Company company);
+void stopSchedule(Company company);
 void searchStop(Company company);
 void routeCalculator(Company company);
 void clearScreen();
@@ -17,6 +18,7 @@ void driversInterface(Company &company);
 void infoInterface(Company &company);
 void searchInterface(Company &company);
 bool quitOrContinue(Company &company);
+
 
 /*
 Interface principal entre o programa e o utilizador. Apresenta no ecrã as funcionalidades principais, recebe
@@ -129,7 +131,7 @@ void infoInterface(Company &company)
 
 		switch (userChoice)
 		{
-		case 1:// stopSchedule(linesData);
+		case 1: stopSchedule(company);
 			anotherOp = quitOrContinue(company);
 			break;
 		case 2: lineSchedule(company);
