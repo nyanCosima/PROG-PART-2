@@ -27,6 +27,7 @@ class Line{
   int numberOfBuses() const;
   int totalDuration() const;
   bool searchStop(string stop) const;
+  int searchStop2(string stop) const;
   void schedule() const;
-
+  void stopsSchedule(string stop) const;
 };

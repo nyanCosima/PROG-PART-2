@@ -67,7 +67,7 @@ Time convertMinHours(int minutes)
 
 	temp = (double)min / 60;
 	hours = min / 60;
-	min = round((temp - min / 60) * 60);
+	min = ((temp - min / 60) * 60);
 
     t.hours=hours;
     t.minutes=min;

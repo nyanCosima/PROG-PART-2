@@ -155,6 +155,14 @@ bool Line::searchStop(string stop) const
 	return false;
 }
 
+int Line::searchStop2(string stop) const {
+    for (int i = 0; i < busStopList.size(); i++)
+        if (busStopList[i] == stop)
+            return i;
+
+    return -1;
+}
+
 void Line::schedule() const
 {
 	int s = verificarLENGTHparagemMAIOR(busStopList);
@@ -260,3 +268,71 @@ void Line::schedule() const
 }
 
 
+void Line::stopsSchedule(string stop) const
+{
+    int s;
+    int horas = 6, minutos = 0, horasin = 6, minutosin = 0;
+    int horas2 = 6, minutos2 = 0, horasin2 = 6, minutosin2 = 0;
+    bool validInput=false;
+    string input;
+
+
+            int add = frequency;
+            s = verificarLENGTHparagemMAIOR(busStopList);
+
+
+                cout << "LINHA " << id << endl;
+
+
+                //se for a primeira ou ultima paragem
+
+                if (searchStop(stop) == 0 || searchStop(stop) == busStopList.size() - 1) {
+                    //horarioPARAGEMlilhelper(nome, i);
+                }
+
+                else {
+                    cout << string(-1 + (s + 5) * 2, '-') << endl;
+                    cout << "|-> " << setw(s) << busStopList.at(busStopList.size() - 1) << "|-> "
+                         << setw(s) << busStopList.at(0) << "|" << endl;
+                    cout << "|" << string(1 + (s + 3) * 2, '-') << "|" << endl;
+
+                    while (horasin < 19 && horasin2 < 19) {
+
+                        //HORA MAX
+                        // horas = horasin;
+                        // minutos = minutosin;
+
+                        // /obter a que horas passa sentido 1
+                        for (int j = 0; j < searchStop(stop); ++j) {
+                            minutos += timesList.at(j);
+                        }
+                        dealWITHtime(horas, minutos);
+                        if (horas < 10)
+                            cout << "|" << setfill(' ') << setw(s - 1) << "0" << horas << ":";
+                        else
+                            cout << "|" << setfill(' ') << setw(s) << horas << ":";
+                        showMIN(minutos);
+                        cout << minutos << "|";
+                        minutosin += add;
+                        dealWITHtime(horasin, minutosin);
+
+                        //de lá para cá
+                        horas2 = horasin2;
+                        minutos2 = minutosin2;
+
+                        for (int f = timesList.size() - 1; f >= searchStop(stop); f--) {
+                            minutos2 += timesList.at(f);
+                        }
+
+                        dealWITHtime(horas2, minutos2);
+                        if (horas2 < 10)
+                            cout << setfill(' ') << setw(s - 1) << "0" << horas2 << ":";
+                        else
+                            cout << setfill(' ') << setw(s) << horas2 << ":";
+                        showMIN(minutos2);
+                        cout << minutos2 << "|" << endl;
+                        minutosin2 += add;
+                        dealWITHtime(horasin2, minutosin2);
+                    }
+                }
+            }

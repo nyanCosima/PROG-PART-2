@@ -481,7 +481,7 @@ void Company::routeCalculator(string stop1, string stop2)
 }
 
 /*
-Recebe uma paragem, e devolve as linhas em que se encontra, funcionando também para o caso de não existir.
+Recebe uma paragem, e "devolve" as linhas em que se encontra, funcionando também para o caso de não existir.
 */
 void Company::searchStop(string stop)
 {
@@ -507,3 +507,19 @@ void Company::searchStop(string stop)
 		cout << endl;
 	}
 }
+
+
+//Recebe uma paragem, e devolve on indices do em que se encontra num vetor
+vector<int> Company::searchStop2(string stop)
+{
+    vector<int> foundLines;
+
+    for (int i = 0; i < lines.size(); i++)
+        if (lines[i].searchStop(stop))
+            foundLines.push_back(i);
+
+    return foundLines;
+
+}
+
+
