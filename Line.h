@@ -30,4 +30,5 @@ class Line{
   int searchStop2(string stop) const;
   void schedule() const;
   void stopsSchedule(string stop) const;
+  void horarioPARAGEMlilhelper(string stop, int i) const;
 };
