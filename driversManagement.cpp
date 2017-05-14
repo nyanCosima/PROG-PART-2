@@ -633,9 +633,7 @@ void allocateService(Company &company)
 	}
 
 	start = convertHoursMin(t1);
-	cout << start << endl;
 	end = convertHoursMin(t2);
-	cout << end << endl;
 
 	verify = company.searchShift(busNumber, lineID, start, end);
 
