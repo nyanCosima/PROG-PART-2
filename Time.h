@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 typedef struct {
 	int hours;
 	double minutes;
@@ -11,4 +12,5 @@ typedef struct {
 } Time;
 
 Time convertMinHours(int minutes);
+int convertHoursMin(Time t);
 void showTime(Time t);

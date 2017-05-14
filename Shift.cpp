@@ -2,10 +2,17 @@
 #include <iostream>
 #include "Time.h"
 
-Shift::Shift(unsigned int line, unsigned int driver, unsigned int bus, unsigned int start, unsigned int end){
-  
+Shift::Shift(unsigned int busLineId, unsigned int driverId, unsigned int busNumber, unsigned int startTime, unsigned int endTime) {
+
+	this->busLineId = busLineId;
+	this->driverId = driverId;
+	busOrderNumber = busNumber;
+	this->startTime = startTime;
+	this->endTime = endTime;
+}
+
+Shift::Shift(unsigned int line, unsigned int bus, unsigned int start, unsigned int end) {
 	busLineId = line;
-	driverId = driver;
 	busOrderNumber = bus;
 	startTime = start;
 	endTime = end;
@@ -66,3 +73,12 @@ void Shift::showInfo(){
   cout << "Hora de fim: ";
   showTime(convertMinHours(endTime));
  }
+
+void Shift::showInitialInfo() {
+	cout << "ID da linha: " << busLineId << endl;
+	cout << "Número de ordem do autocarro: " << busOrderNumber << endl;
+	cout << "Hora de início: ";
+	showTime(convertMinHours(startTime));
+	cout << "Hora de fim: ";
+	showTime(convertMinHours(endTime));
+}

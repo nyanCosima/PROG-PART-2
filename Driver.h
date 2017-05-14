@@ -31,6 +31,7 @@ class Driver{
   void setShiftMaxDuration(unsigned int newShiftMaxDuration);
   void setMaxWeekWorkingTime(unsigned int newMaxWeekWorkingTime);
   void setMinRestTime(unsigned int newMinRestTime);
+  void addShift(Shift s);
 
   // outher methods
 

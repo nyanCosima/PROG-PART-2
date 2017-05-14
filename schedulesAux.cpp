@@ -85,3 +85,24 @@ void showTime(Time t){
     cout << " - ";
     cout << t.dayOfWeek << endl;
 }
+
+int convertHoursMin(Time t) {
+	int min;
+
+	if (t.dayOfWeek == "Segunda")
+		min = (t.hours * 60 + t.minutes) * 1;
+	else if (t.dayOfWeek == "Terça")
+		min = (t.hours * 60 + t.minutes) * 2;
+	else if (t.dayOfWeek == "Quarta")
+		min = (t.hours * 60 + t.minutes) * 3;
+	else if (t.dayOfWeek == "Quinta")
+		min = (t.hours * 60 + t.minutes) * 4;
+	else if (t.dayOfWeek == "Sexta")
+		min = (t.hours * 60 + t.minutes) * 5;
+	else if (t.dayOfWeek == "Sábado")
+		min = (t.hours * 60 + t.minutes) * 6;
+	else if (t.dayOfWeek == "Sábado")
+		min = (t.hours * 60 + t.minutes) * 7;
+
+	return min;
+}

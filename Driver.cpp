@@ -1,5 +1,5 @@
 #include "Driver.h"
-
+#include <algorithm>
 
 Driver::Driver(string textLine){
 
@@ -109,4 +109,16 @@ void Driver::setMaxWeekWorkingTime(unsigned int newMaxWeekWorkingTime)
 void Driver::setMinRestTime(unsigned int newMinRestTime)
 {
 	minRestTime = newMinRestTime;
+}
+
+bool shiftSortHelper(const Shift &x, const Shift &y)
+{
+	return x.getStartTime() < y.getStartTime();
+}
+
+void Driver::addShift(Shift s)
+{
+	shifts.push_back(s);
+
+	sort(shifts.begin(), shifts.end(),shiftSortHelper);
 }

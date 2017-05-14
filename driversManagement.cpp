@@ -459,3 +459,137 @@ void editDriver(Company &company)
 		}
 	}
 }
+
+
+/*
+Atribuir interativamente o serviço aos condutores. Mostra ao utilizador uma "lista" com os turnos a atribuir aos autocarros,
+recebe o ID do turno a atribuir e o ID do condutor e invoca o método da classe.
+*/
+void allocateService(Company &company)
+{
+	string input;
+	bool validInput = false;
+	unsigned int driverID;
+	int verify = -1;
+	unsigned int lineID;
+	unsigned int busNumber;
+	string dayOfWeek;
+	unsigned int start;
+	unsigned int end;
+
+
+	cout << "Atribuir serviço" << endl << endl;
+
+	cout << "Turnos por atribuir" << endl;
+
+	for (int i = 0; i < company.getBusShifts().size(); i++)
+	{
+		company.getBusShifts()[i].showInitialInfo();
+	}
+
+	while (!validInput)
+	{
+		cout << "Identificador do condutor: ";
+		getline(cin, input);
+
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+
+			if (isNumber(input)) //Se o input for um número positivo
+			{
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (verify != -1)
+					validInput = true;
+				else
+					cout << "Esse ID não existe! Tente novamente..." << endl;
+			}
+			else
+				cout << "Input inválido! Tente novamente..." << endl;
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
+	}
+
+	driverID = stoi(input);
+
+	validInput = false;
+	verify = -1;
+
+	while (!validInput)
+	{
+		cout << "Identificador da linha: ";
+		getline(cin, input);
+
+		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		{
+
+			if (isNumber(input)) //Se o input for um número positivo
+			{
+				verify = company.searchLineIdentifier(stoi(input)); //Verifica a existência do ID
+
+				if (verify != -1)
+					validInput = true;
+				else
+					cout << "Esse ID não existe! Tente novamente..." << endl;
+			}
+			else
+				cout << "Input inválido! Tente novamente..." << endl;
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
+	}
+
+	lineID = stoi(input);
+
+	validInput = false;
+	while (!validInput)
+	{
+		cout << "Número do autocarro: ";
+		getline(cin, input);
+
+			if (isNumber(input)) //Se o input for um número positivo
+			{
+				validInput = true;
+			}
+			else
+				cout << "Input inválido! Tente novamente..." << endl;
+	}
+
+	busNumber = stoi(input);
+
+	validInput = false;
+	while (!validInput)
+	{
+		cout << "Dia da semana: ";
+		getline(cin, input);
+
+		if (input == "Segunda" || input == "Terça" || input == "Quarta" || input == "Quinta" || input == "Sexta" || input == "Sábado" || input == "Domingo")
+		{
+			validInput = true;
+			dayOfWeek = input;
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
+	}
+
+
+	validInput = false;
+	while (!validInput)
+	{
+		cout << "Hora de início (HH:MM): ";
+		getline(cin, input);
+
+		if ()
+		{
+
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
+	}
+
+
+	company.allocateService()
+
+
+}

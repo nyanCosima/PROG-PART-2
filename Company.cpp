@@ -79,6 +79,46 @@ Company::Company(string name, string linesFile, string driversFile){
 	this->name = name;
 	lines = linesVector;
 	drivers = driversVector;
+
+	//Construir o vetor com os turnos a atribuir aos autocarros 
+
+	for (int days = 0; days < 6; days++)
+	{
+		for (int i = 0; i < lines.size(); i++)
+		{
+			unsigned int bus = 1;
+			unsigned int start = serviceStartingTime*(days+1);
+			unsigned int end = start + 2 * lines[i].totalDuration();
+			int busCounter = 1;
+			vector<Shift> temp;
+
+			while (busCounter < lines[i].numberOfBuses())
+			{
+				Shift s(lines[i].getId(), bus, start, end);
+				temp.push_back(s);
+
+				bus++;
+				start += lines[i].getFrequency();
+				end = start + 2 * lines[i].totalDuration();
+				busCounter++;
+			}
+
+			for (int c = 0; c < temp.size(); c++)
+			{
+				start = temp[c].getStartTime();
+				end = temp[c].getEndTime();
+
+				while (start < serviceEndingTime*(days + 1))
+				{
+					Shift s(temp[c].getBusLineId(), temp[c].getBusOrderNumber(), start, end);
+					busShifts.push_back(s);
+
+					start += lines[i].numberOfBuses()*lines[i].getFrequency();
+					end = start + 2 * lines[i].totalDuration();
+				}
+			}
+		}
+	}
 }
 
 ////////////////////////////////
@@ -108,6 +148,11 @@ unsigned int Company::getEndingTime() const
 	return serviceEndingTime;
 }
 
+vector<Shift> Company::getBusShifts() const
+{
+	return busShifts;
+}
+
 //////////////////////////////
 // metodos set
 /////////////////////////////
@@ -127,11 +172,62 @@ void Company::removeDriver(int index)
 	drivers.erase(drivers.begin() + index);
 }
 
+void Company::removeShift(int index)
+{
+	busShifts.erase(busShifts.begin() + index);
+}
 
 ////////////////////////////
 // outros metodos
 ///////////////////////////
-void Company::allocateService(){
+void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime){
+
+	int totalTime=0;
+	int consecutiveTime = 0;
+
+	for (int i = 0; i < drivers[searchDriverIdentifier(driverId)].getShifts().size(); i++)
+		totalTime += drivers[searchDriverIdentifier(driverId)].getShifts()[i].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime();
+
+
+	for (int i = drivers[searchDriverIdentifier(driverId)].getShifts().size()-1; i>0; i--)
+	{
+		if (drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getEndTime() < drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime() - 30)
+			consecutiveTime += (drivers[searchDriverIdentifier(driverId)].getShifts()[i].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime()) + (drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getStartTime());
+		else
+			break;
+	}
+
+	if (totalTime < drivers[searchDriverIdentifier(driverId)].getMaxWeekWorkingTime() * 60)
+	{
+
+		if (startTime - 30 < drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
+		{
+			consecutiveTime += startTime;
+
+			if (consecutiveTime < drivers[searchDriverIdentifier(driverId)].getShiftMaxDuration())
+			{
+				Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
+				drivers[searchDriverIdentifier(driverId)].addShift(s);
+
+				removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
+			}
+			else
+				cout << "Número máximo de horas seguidas de trabalho atingido!" << endl;
+		}
+		else
+			if (startTime - drivers[searchDriverIdentifier(driverId)].getMinRestTime() * 60 > drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
+			{
+				Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
+				drivers[searchDriverIdentifier(driverId)].addShift(s);
+
+				removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
+			}
+			else
+				cout << "Número mínimo de horas de descanso entre turnos não está de acordo!" << endl;
+	}
+	else
+		cout << "Número total de horas de trabalho semanal atingido! Não é possível atribuir trabalho a este condutor." << endl;
+
 }
 
 /*
@@ -523,3 +619,13 @@ vector<int> Company::searchStop2(string stop)
 }
 
 
+int Company::searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime)
+{
+	for (int i = 0; i < busShifts.size(); i++)
+	{
+		if (busShifts[i].getBusLineId() == busLineId &&busShifts[i].getBusOrderNumber() == busOrderNumber && busShifts[i].getStartTime() == startTime && busShifts[i].getEndTime() == endTime)
+			return i;
+	}
+
+	return -1;
+}
