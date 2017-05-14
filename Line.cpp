@@ -294,7 +294,7 @@ void Line::stopsSchedule(string stop) const
                          << setw(s) << busStopList.at(0) << "|" << endl;
                     cout << "|" << string(1 + (s + 3) * 2, '-') << "|" << endl;
 
-                    while (horasin < 19 && horasin2 < 19) {
+                    while (horasin < 19) {
 
                         horas = horasin;
                         minutos = minutosin;
@@ -351,7 +351,7 @@ void Line::horarioPARAGEMlilhelper(string stop,int i) const
     cout << "|-> " << setw(s) << busStopList.at(i)  << "|" << endl;
     cout << "|" << string(s+3, '-') << "|" << endl;
 
-    while (horasin < 19 && horasin2 < 19) {
+    while (horasin < 19) {
 
         horas = horasin;
         minutos = minutosin;
