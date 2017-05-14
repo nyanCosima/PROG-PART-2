@@ -24,5 +24,6 @@ class Bus{
     void setLineId(unsigned int newLineID);
   // other methods
     void showInfo();
+	void addShift(Shift s);
 
 };

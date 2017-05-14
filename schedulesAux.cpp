@@ -42,7 +42,7 @@ Time convertMinHours(int minutes)
 		min = minutes;
     }
     else if(minutes<2*24*60) {
-        dayOfWeek = "Terça";
+        dayOfWeek = "Terca";
 		min = minutes - 24*60;
     }
     else if(minutes<3*24*60){
@@ -91,19 +91,19 @@ int convertHoursMin(Time t) {
 	int min;
 
 	if (t.dayOfWeek == "Segunda")
-		min = (t.hours * 60 + t.minutes) * 1;
-	else if (t.dayOfWeek == "Terça")
-		min = (t.hours * 60 + t.minutes) * 2;
+		min = (t.hours * 60 + t.minutes) + 0 * 24 * 60;
+	else if (t.dayOfWeek == "Terca")
+		min = (t.hours * 60 + t.minutes) + 1 * 24 * 60;
 	else if (t.dayOfWeek == "Quarta")
-		min = (t.hours * 60 + t.minutes) * 3;
+		min = (t.hours * 60 + t.minutes) + 2 * 24 * 60;
 	else if (t.dayOfWeek == "Quinta")
-		min = (t.hours * 60 + t.minutes) * 4;
+		min = (t.hours * 60 + t.minutes) + 3 * 24 * 60;
 	else if (t.dayOfWeek == "Sexta")
-		min = (t.hours * 60 + t.minutes) * 5;
+		min = (t.hours * 60 + t.minutes) + 4 * 24 * 60;
 	else if (t.dayOfWeek == "Sábado")
-		min = (t.hours * 60 + t.minutes) * 6;
+		min = (t.hours * 60 + t.minutes) + 5 * 24 * 60;
 	else if (t.dayOfWeek == "Sábado")
-		min = (t.hours * 60 + t.minutes) * 7;
+		min = (t.hours * 60 + t.minutes) + 6 * 24 * 60;
 
 	return min;
 }

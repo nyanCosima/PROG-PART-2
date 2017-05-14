@@ -487,7 +487,7 @@ void allocateService(Company &company)
 		cout << "Dia da semana: ";
 		getline(cin, input);
 
-		if (input == "Segunda" || input == "Terça" || input == "Quarta" || input == "Quinta" || input == "Sexta" || input == "Sábado" || input == "Domingo")
+		if (input == "Segunda" || input == "Terca" || input == "Quarta" || input == "Quinta" || input == "Sexta" || input == "Sábado" || input == "Domingo")
 		{
 			validInput = true;
 			dayOfWeek = input;
@@ -590,7 +590,7 @@ void allocateService(Company &company)
 
 		int h;
 		char symbol;
-		double min;
+		int min;
 
 		if (instr >> h >> symbol >> min)
 			if (h >= 6 && h <= 19 && min >= 0 && min < 60 && symbol == ':')
@@ -599,7 +599,8 @@ void allocateService(Company &company)
 
 				t1.dayOfWeek = dayOfWeek;
 				t1.hours = h;
-				t1.minutes = min;
+				t1.minutes = (double) min;
+
 			}
 			else
 				cout << "Input inválido! Tente novamente..." << endl;
@@ -616,7 +617,7 @@ void allocateService(Company &company)
 
 		int h;
 		char symbol;
-		double min;
+		int min;
 
 		if (instr >> h >> symbol >> min)
 			if (h >= 6 && h <= 19 && min >= 0 && min < 60 && symbol == ':')
@@ -625,14 +626,16 @@ void allocateService(Company &company)
 
 				t2.dayOfWeek = dayOfWeek;
 				t2.hours = h;
-				t2.minutes = min;
+				t2.minutes = (double) min;
 			}
 			else
 				cout << "Input inválido! Tente novamente..." << endl;
 	}
 
 	start = convertHoursMin(t1);
+	cout << start << endl;
 	end = convertHoursMin(t2);
+	cout << end << endl;
 
 	verify = company.searchShift(busNumber, lineID, start, end);
 

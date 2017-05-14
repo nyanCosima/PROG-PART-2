@@ -87,12 +87,11 @@ Company::Company(string name, string linesFile, string driversFile){
 		for (int i = 0; i < lines.size(); i++)
 		{
 			unsigned int bus = 1;
-			unsigned int start = serviceStartingTime*(days+1);
+			unsigned int start = serviceStartingTime+24*60*days;
 			unsigned int end = start + 2 * lines[i].totalDuration();
-			int busCounter = 1;
 			vector<Shift> temp;
 
-			while (busCounter < lines[i].numberOfBuses())
+			while (bus <= lines[i].numberOfBuses())
 			{
 				Shift s(lines[i].getId(), bus, start, end);
 				temp.push_back(s);
@@ -100,7 +99,6 @@ Company::Company(string name, string linesFile, string driversFile){
 				bus++;
 				start += lines[i].getFrequency();
 				end = start + 2 * lines[i].totalDuration();
-				busCounter++;
 			}
 
 			for (int c = 0; c < temp.size(); c++)
@@ -108,7 +106,7 @@ Company::Company(string name, string linesFile, string driversFile){
 				start = temp[c].getStartTime();
 				end = temp[c].getEndTime();
 
-				while (start < serviceEndingTime*(days + 1))
+				while (start < serviceEndingTime+24 * 60 * days)
 				{
 					Shift s(temp[c].getBusLineId(), temp[c].getBusOrderNumber(), start, end);
 					busShifts.push_back(s);
@@ -197,7 +195,17 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 			break;
 	}
 
-	if (totalTime < drivers[searchDriverIdentifier(driverId)].getMaxWeekWorkingTime() * 60)
+	if(drivers[searchDriverIdentifier(driverId)].getShifts().size() == 0)
+	{
+		Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
+		drivers[searchDriverIdentifier(driverId)].addShift(s);
+
+		cout << "Turno atribuído!" << endl;
+
+		removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
+	}
+
+	else if (totalTime < drivers[searchDriverIdentifier(driverId)].getMaxWeekWorkingTime() * 60)
 	{
 
 		if (startTime - 30 < drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
@@ -209,6 +217,8 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 				Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
 				drivers[searchDriverIdentifier(driverId)].addShift(s);
 
+				cout << "Turno atribuído!" << endl;
+
 				removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
 			}
 			else
@@ -219,6 +229,8 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 			{
 				Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
 				drivers[searchDriverIdentifier(driverId)].addShift(s);
+
+				cout << "Turno atribuído!" << endl;
 
 				removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
 			}
