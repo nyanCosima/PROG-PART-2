@@ -371,5 +371,5 @@ void Line::horarioPARAGEMlilhelper(string stop,int i) const
         dealWITHtime(horasin, minutosin);
     }
 
-    cout < << string(s+5, '-')  << endl;
+    cout  << string(s+5, '-')  << endl;
 }
