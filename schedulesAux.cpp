@@ -31,7 +31,8 @@ int verificarLENGTHparagemMAIOR(vector<string> busStops){
 Time convertMinHours(int minutes)
 {
     int hours;
-    double min;
+    int min;
+	double min2;
     string dayOfWeek;
     Time t;
     double temp;
@@ -67,10 +68,10 @@ Time convertMinHours(int minutes)
 
 	temp = (double)min / 60;
 	hours = min / 60;
-	min = ((temp - min / 60) * 60);
+	min2 = ((temp - min / 60) * 60);
 
     t.hours=hours;
-    t.minutes=min;
+    t.minutes=min2;
     t.dayOfWeek=dayOfWeek;
 
 	return t;

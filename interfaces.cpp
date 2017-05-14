@@ -17,6 +17,7 @@ void mainUserInterface(Company &company);
 void driversInterface(Company &company);
 void infoInterface(Company &company);
 void searchInterface(Company &company);
+void allocateService(Company &company);
 bool quitOrContinue(Company &company);
 
 
@@ -77,9 +78,10 @@ void driversInterface(Company &company)
 		cout << "1 - Criar condutor" << endl;
 		cout << "2 - Alterar condutor" << endl;
 		cout << "3 - Remover condutor" << endl;
+		cout << "4 - Atribuir serviço" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
-		userChoice = verifyInput(0, 3);
+		userChoice = verifyInput(0, 4);
 
 		clearScreen();
 
@@ -91,6 +93,9 @@ void driversInterface(Company &company)
 		case 2: editDriver(company);
 			break;
 		case 3: removeDriver(company);
+			anotherOp = quitOrContinue(company);
+			break;
+		case 4: allocateService(company);
 			anotherOp = quitOrContinue(company);
 			break;
 		case 0: return;

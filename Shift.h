@@ -32,5 +32,5 @@ class Shift{
 
   // other methods
     void showInfo();
-	void showInitialInfo()
+	void showInitialInfo();
 };

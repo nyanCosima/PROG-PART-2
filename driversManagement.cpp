@@ -2,6 +2,8 @@
 #include "Company.h"
 #include <string>
 #include "myTypes.h"
+#include <sstream>
+#include "Time.h"
 
 using namespace std;
 
@@ -476,17 +478,36 @@ void allocateService(Company &company)
 	string dayOfWeek;
 	unsigned int start;
 	unsigned int end;
-
+	Time t1, t2;
 
 	cout << "Atribuir serviço" << endl << endl;
+
+	while (!validInput)
+	{
+		cout << "Dia da semana: ";
+		getline(cin, input);
+
+		if (input == "Segunda" || input == "Terça" || input == "Quarta" || input == "Quinta" || input == "Sexta" || input == "Sábado" || input == "Domingo")
+		{
+			validInput = true;
+			dayOfWeek = input;
+		}
+		else
+			cout << "Input inválido! Tente novamente..." << endl;
+	}
 
 	cout << "Turnos por atribuir" << endl;
 
 	for (int i = 0; i < company.getBusShifts().size(); i++)
 	{
-		company.getBusShifts()[i].showInitialInfo();
+		if (convertMinHours(company.getBusShifts()[i].getStartTime()).dayOfWeek == dayOfWeek)
+		{
+			company.getBusShifts()[i].showInitialInfo();
+			cout << endl;
+		}
 	}
 
+	validInput = false;
 	while (!validInput)
 	{
 		cout << "Identificador do condutor: ";
@@ -561,35 +582,62 @@ void allocateService(Company &company)
 	validInput = false;
 	while (!validInput)
 	{
-		cout << "Dia da semana: ";
+		cout << "Hora de início (HH:MM): ";
 		getline(cin, input);
 
-		if (input == "Segunda" || input == "Terça" || input == "Quarta" || input == "Quinta" || input == "Sexta" || input == "Sábado" || input == "Domingo")
-		{
-			validInput = true;
-			dayOfWeek = input;
-		}
-		else
-			cout << "Input inválido! Tente novamente..." << endl;
-	}
+		istringstream instr;
+		instr.str(input);
 
+		int h;
+		char symbol;
+		double min;
+
+		if (instr >> h >> symbol >> min)
+			if (h >= 6 && h <= 19 && min >= 0 && min < 60 && symbol == ':')
+			{
+				validInput = true;
+
+				t1.dayOfWeek = dayOfWeek;
+				t1.hours = h;
+				t1.minutes = min;
+			}
+			else
+				cout << "Input inválido! Tente novamente..." << endl;
+	}
 
 	validInput = false;
 	while (!validInput)
 	{
-		cout << "Hora de início (HH:MM): ";
+		cout << "Hora de fim (HH:MM): ";
 		getline(cin, input);
 
-		if ()
-		{
+		istringstream instr;
+		instr.str(input);
 
-		}
-		else
-			cout << "Input inválido! Tente novamente..." << endl;
+		int h;
+		char symbol;
+		double min;
+
+		if (instr >> h >> symbol >> min)
+			if (h >= 6 && h <= 19 && min >= 0 && min < 60 && symbol == ':')
+			{
+				validInput = true;
+
+				t2.dayOfWeek = dayOfWeek;
+				t2.hours = h;
+				t2.minutes = min;
+			}
+			else
+				cout << "Input inválido! Tente novamente..." << endl;
 	}
 
+	start = convertHoursMin(t1);
+	end = convertHoursMin(t2);
 
-	company.allocateService()
+	verify = company.searchShift(busNumber, lineID, start, end);
 
-
+	if (verify != -1)
+		company.allocateService(driverID, busNumber, lineID, start, end);
+	else
+		cout << "Turno inexistente!" << endl;
 }
