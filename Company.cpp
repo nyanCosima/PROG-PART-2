@@ -419,7 +419,7 @@ void Company::routeCalculator(string stop1, string stop2)
 		if (durHelper.size() > 1)
 			cout << endl << "Foram encontrados " << durHelper.size() << " percursos" << endl;
 		else
-			cout << endl << "Existe um único percurso" << endl;
+			cout << endl << "Existe um único percurso" << endl << endl;
 
 		for (int i = 0; i < durHelper.size(); i++)
 		{
@@ -432,17 +432,17 @@ void Company::routeCalculator(string stop1, string stop2)
 			{
 				if (durHelper[i].ID == sameLineRoutes[c].ID)
 				{
-					cout << "Linha: " << sameLineRoutes[c].lineID << endl;
-					cout << "Paragens: ";
+					cout  << "|" << left << setw(10) << "Linha: " << "|" <<  sameLineRoutes[c].lineID << endl << right;
+					cout  << "|" << left << setw(10) << "Paragens: " <<"|" << right;
 
 					for (int c1 = 0; c1 < sameLineRoutes[c].stops.size(); c1++)
 					{
 						if (c1 > 0)
-							cout << " - ";
+							cout << " -> ";
 						cout << sameLineRoutes[c].stops[c1];
 					}
 
-					cout << endl << "Duração: " << sameLineRoutes[c].duration << " minutos" << endl;
+					cout << endl << "|" << left << setw(10) << "Duração:  "<< "|" << sameLineRoutes[c].duration << " minutos" << endl << right << endl;
 				}
 			}
 
@@ -450,19 +450,19 @@ void Company::routeCalculator(string stop1, string stop2)
 			{
 				if (durHelper[i].ID == difLineRoutes[c].ID)
 				{
-					cout << "Linha 1: " << difLineRoutes[c].line1ID << endl;
-					cout << "Paragens: ";
+					cout <<"|" << left << setw(10) <<  "Linha 1: " << "|" << difLineRoutes[c].line1ID << endl<<right;
+					cout <<"|" << left << setw(10) << "Paragens: " << right;
 
 					for (int c1 = 0; c1 < difLineRoutes[c].line1stops.size(); c1++)
 					{
 						if (c1 > 0)
-							cout << " - ";
+							cout << " -> ";
 						cout << difLineRoutes[c].line1stops[c1];
 					}
 
 					cout << endl << "Transbordo em: " << difLineRoutes[c].commonStop << endl;
-					cout << "Linha 2: " << difLineRoutes[c].line2ID << endl; 
-					cout << "Paragens: ";
+					cout <<"|" << left << setw(10) <<  "Linha 2: " << difLineRoutes[c].line2ID << endl << right;
+					cout <<"|" << left << setw(10) <<  "Paragens: "<< right;
 
 
 					for (int c1 = 0; c1 < difLineRoutes[c].line2stops.size(); c1++)
@@ -472,7 +472,7 @@ void Company::routeCalculator(string stop1, string stop2)
 						cout << difLineRoutes[c].line2stops[c1];
 					}
 
-					cout << endl << "Duração: " << difLineRoutes[c].duration << " minutos" << endl;
+					cout << endl <<"|" << left << setw(10) <<  "Duração:  " << difLineRoutes[c].duration << " minutos" << endl<< right;
 				}
 			}
 		}
