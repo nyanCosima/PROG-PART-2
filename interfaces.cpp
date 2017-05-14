@@ -77,10 +77,9 @@ void driversInterface(Company &company)
 		cout << "1 - Criar condutor" << endl;
 		cout << "2 - Alterar condutor" << endl;
 		cout << "3 - Remover condutor" << endl;
-		cout << "4 - Estado do condutor" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
-		userChoice = verifyInput(0, 4);
+		userChoice = verifyInput(0, 3);
 
 		clearScreen();
 
@@ -92,9 +91,6 @@ void driversInterface(Company &company)
 		case 2: editDriver(company);
 			break;
 		case 3: removeDriver(company);
-			anotherOp = quitOrContinue(company);
-			break;
-		case 4: cout << "calmex" << endl;
 			anotherOp = quitOrContinue(company);
 			break;
 		case 0: return;
@@ -123,9 +119,10 @@ void infoInterface(Company &company)
 		cout << "2 - Horário de uma linha " << endl;
 		cout << "3 - Informação de um autocarro" << endl;
 		cout << "4 - Trabalho de um condutor" << endl;
+        cout << "5 - Verificar períodos de condutores sem o serviço completo atribuído" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
-		userChoice = verifyInput(0, 4);
+		userChoice = verifyInput(0, 5);
 
 		clearScreen();
 
@@ -143,6 +140,10 @@ void infoInterface(Company &company)
 		case 4: showShifts(company);
 			anotherOp = quitOrContinue(company);
 			break;
+        case 5:
+            //do stuff
+            anotherOp = quitOrContinue(company);
+            break;
 		case 0: return;
 			break;
 		}
