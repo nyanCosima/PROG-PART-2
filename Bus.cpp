@@ -1,9 +1,14 @@
 #include "Bus.h"
 #include <iostream>
+#include <algorithm>
 
-Bus::  Bus(unsigned int id, unsigned int driver, unsigned int line){
+bool shiftSortHelper(const Shift &x, const Shift &y);
 
-  // INITIALISATION CODE GOES IN HERE
+Bus::Bus(unsigned int id, unsigned int driver, unsigned int line){
+
+	lineId = line;
+	driverId = driver;
+	orderInLine = id;
   
 }
 
@@ -52,3 +57,10 @@ void Bus:: showInfo(){
         schedule.at(i).showInfo();
 }
 
+
+void Bus::addShift(Shift s)
+{
+	schedule.push_back(s);
+
+	sort(schedule.begin(), schedule.end(), shiftSortHelper);
+}

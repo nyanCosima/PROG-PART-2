@@ -21,8 +21,6 @@ int main(){
 
 	Company SRL("SEMPRAROLAR", lines, drivers);
 
-	showTime(convertMinHours(1379));
-
 	mainUserInterface(SRL); //Invoca a interface principal
 
 	return 0;

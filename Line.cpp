@@ -171,7 +171,7 @@ void Line::schedule() const
 	int horas = 6, minutos = 0, minutosin = 0, horasin = 6;
 	int add = frequency;
 	cout << string(1000, '\n');
-	cout << " HOR�RIO EM DIRE��O A: " << busStopList.at(busStopList.size() - 1) << endl;
+	cout << " HORÁRIO EM DIREÇÃO A: " << busStopList.at(busStopList.size() - 1) << endl;
 
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
 	for (int i = 0; i < busStopList.size(); ++i) {
@@ -227,7 +227,7 @@ void Line::schedule() const
 	minutos2 = minutos2in;
 
 	cout << string(3, '\n');
-	cout << " HOR�RIO EM DIRE��O A: " << busStopList.at(0) << endl;
+	cout << " HORÁRIO EM DIREÇÃO A: " << busStopList.at(0) << endl;
 
 
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
