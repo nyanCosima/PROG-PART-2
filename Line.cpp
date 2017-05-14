@@ -165,6 +165,7 @@ int Line::searchStop2(string stop) const {
 
 void Line::schedule() const
 {
+    int count =0;
 	int s = verificarLENGTHparagemMAIOR(busStopList);
 	int horas = 6, minutos = 0, minutosin = 0, horasin = 6;
 	int add = frequency;
@@ -173,7 +174,7 @@ void Line::schedule() const
 
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
 	for (int i = 0; i < busStopList.size(); ++i) {
-		cout << '|' << setw(s) << left << busStopList.at(i) << "   " << right;
+		cout << '|' << setfill(' ') << setw(s) << left << busStopList.at(i) << "   " << right;
 	}
 	cout << "|" << endl;
 	cout << "|" << string(busStopList.size()*(s + 3) + 3, '-') << '|' << endl;
@@ -206,6 +207,7 @@ void Line::schedule() const
 		cout << endl;
 		minutosin += add;                                                       //nova hora incial
 		dealWITHtime(horasin, minutosin);
+        count++;
 	}
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
 
@@ -236,7 +238,7 @@ void Line::schedule() const
 
 
 
-	while (horas2 < 19) {
+	while (count>0) {
 		//hora incial
 		cout << "|";
 		if (horas2in <10)
@@ -262,6 +264,7 @@ void Line::schedule() const
 		cout << endl;
 		minutos2in += add;
 		dealWITHtime(horas2in, minutos2in);
+        count --;
 	}
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
 	cin.ignore(1000, '\n');
@@ -291,7 +294,7 @@ void Line::stopsSchedule(string stop) const
                 else {
                     cout << string(-1 + (s + 5) * 2, '-') << endl;
                     cout << "|-> " << setw(s) << busStopList.at(busStopList.size() - 1) << "|-> "
-                         << setw(s) << busStopList.at(0) << "|" << endl;
+                         <<setfill(' ') <<  setw(s) << busStopList.at(0) << "|" << endl;
                     cout << "|" << string(1 + (s + 3) * 2, '-') << "|" << endl;
 
                     while (horasin < 19) {
@@ -331,6 +334,7 @@ void Line::stopsSchedule(string stop) const
                         cout << minutos2 << "|" << endl;
                         minutosin2 += add;
                         dealWITHtime(horasin2, minutosin2);
+
                     }
                 }
             }
@@ -339,6 +343,7 @@ void Line::stopsSchedule(string stop) const
 
 void Line::horarioPARAGEMlilhelper(string stop,int i) const
 {
+
     int s;
     int horas = 6, minutos = 0, horasin = 6, minutosin = 0;
     int horas2 = 6, minutos2 = 0, horasin2 = 6, minutosin2 = 0;
@@ -351,7 +356,7 @@ void Line::horarioPARAGEMlilhelper(string stop,int i) const
     cout << "|-> " << setw(s) << busStopList.at(i)  << "|" << endl;
     cout << "|" << string(s+3, '-') << "|" << endl;
 
-    while (horasin < 19) {
+    do{
 
         horas = horasin;
         minutos = minutosin;
@@ -368,8 +373,28 @@ void Line::horarioPARAGEMlilhelper(string stop,int i) const
         showMIN(minutos);
         cout << minutos << "|" << endl;
         minutosin += add;
-        dealWITHtime(horasin, minutosin);
+        dealWITHtime(horasin, minutosin);}while (horasin < 19);
+
+    if(i!=0){
+        horas = horasin;
+    minutos = minutosin;
+
+    for (int j = 0; j < searchStop(stop); ++j) {
+        minutos += timesList.at(j);
     }
+
+    dealWITHtime(horas, minutos);
+    if (horas < 10)
+        cout << "|" << setfill(' ') << setw(s - 1) << "0" << horas << ":";
+    else
+        cout << "|" << setfill(' ') << setw(s) << horas << ":";
+    showMIN(minutos);
+    cout << minutos << "|" << endl;
+    minutosin += add;
+    dealWITHtime(horasin, minutosin);}
+
+
+
 
     cout  << string(s+5, '-')  << endl;
 }
