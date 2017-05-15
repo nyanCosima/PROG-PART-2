@@ -8,7 +8,7 @@ using namespace std;
 /*
 Pergunta ao utilizador se pretende guardar as alteracoes e age de acordo com a sua resposta.
 */
-void savingChanges(Company company)
+void savingChanges(const Company &company)
 {
 	string userChoice;
 	bool validInput = false;

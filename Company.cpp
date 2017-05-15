@@ -200,7 +200,6 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 	for (int i = 0; i < drivers[searchDriverIdentifier(driverId)].getShifts().size(); i++)
 		totalTime += drivers[searchDriverIdentifier(driverId)].getShifts()[i].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime();
 
-
 	for (int i = drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1; i > 0; i--)
 	{
 		//Verifica se os turnos sao consecutivos, para isso arbitra-se que o sao se come�arem 30 minutos depois do turno anterior terminar e guarda o tempo consecutivo 
@@ -341,7 +340,7 @@ int Company::searchDriverIdentifier(unsigned int id) const
 /*
 Guarda a informacao contida no vetor de Lines no ficheiro de linhas.
 */
-void Company::savingLinesData()
+void Company::savingLinesData() const
 {
 	ofstream out_stream;
 
@@ -377,7 +376,7 @@ void Company::savingLinesData()
 /*
 Guarda a informacao contida no vetor de Drivers no ficheiro de condutores.
 */
-void Company::savingDriversData()
+void Company::savingDriversData() const
 {
 	ofstream out_stream;
 
@@ -704,7 +703,9 @@ int Company::searchShift(unsigned int busOrderNumber, unsigned int busLineId, un
 	return -1;
 }
 
-
+/*
+Mostra uma lista com todos os periodos de todos os autocarros sem condutor atribuido.
+*/
 void Company::checkBuses() const
 {
 	for (int i = 0; i < lines.size(); i++)

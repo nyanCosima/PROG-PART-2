@@ -36,8 +36,8 @@ public:
 	vector<int> searchStop2(string stop) const;
 	int searchLineIdentifier(unsigned int id) const;
 	int searchDriverIdentifier(unsigned int id) const;
-	void savingLinesData();
-	void savingDriversData();
+	void savingLinesData() const;
+	void savingDriversData() const;
 	int searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime) const;
 	void checkAvailableDrivers();
 	void checkBuses() const;

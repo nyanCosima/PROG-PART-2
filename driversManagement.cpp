@@ -11,7 +11,7 @@ using namespace std;
 bool isNumber(string input);
 int verifyInput(int low, int high);
 void clearScreen();
-bool quitOrContinue(Company &company);
+bool quitOrContinue(const Company &company);
 
 /*
 Recebe os parametros do utilizador (ID, nome do condutor, numero de horas de um turno, numero maximo de horas
@@ -342,7 +342,7 @@ void changeName(Company &company, unsigned int id)
 Apresenta informacao relativa ao trabalho atribuido a um condutor especificado pelo utilizador, que e traduzida nos
 turnos que tem que realizar.
 */
-void showShifts(Company company)
+void showShifts(const Company &company)
 {
 	bool validInput = false;
 	string input;

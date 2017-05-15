@@ -88,9 +88,10 @@ void Bus::checkBus() const
 {
 	int const startingTime = 6 * 60;
 	int const endingTime = 19 * 60;
+	int const numDays = 5;
 
 	if (schedule.size() == 0) //Ainda nao tem turnos atribuidos
-		for (int i = 0; i < 5; i++) //Mostra todos os dias da semana, sendo que o horario comeca as 6 e acaba as 19
+		for (int i = 0; i < numDays; i++) //Mostra todos os dias da semana, sendo que o horario comeca as 6 e acaba as 19
 		{
 			cout << "Periodo " << (i + 1) << endl;
 
@@ -338,7 +339,7 @@ void Bus::checkBus() const
 		int min6 = schedule.at(schedule.size() - 1).getEndTime();
 
 		if (convertMinHours(min5).hours == convertMinHours(startingTime).hours && convertMinHours(min5).minutes == convertMinHours(startingTime).minutes)
-			for (int i = convertMinHours(min5).numberOfDay; i <= 4; i++)
+			for (int i = convertMinHours(min5).numberOfDay; i <= (numDays-1); i++)
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{
@@ -364,7 +365,7 @@ void Bus::checkBus() const
 				}
 			}
 		else if (convertMinHours(min6).hours == convertMinHours(endingTime).hours && convertMinHours(min6).minutes == convertMinHours(endingTime).minutes)
-			for (int i = convertMinHours(min5).numberOfDay; i < 4; i++)
+			for (int i = convertMinHours(min5).numberOfDay; i < (numDays-1); i++)
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{
@@ -390,7 +391,7 @@ void Bus::checkBus() const
 				}
 			}
 		else
-			for (int i = convertMinHours(min5).numberOfDay; i <= 4; i++)
+			for (int i = convertMinHours(min5).numberOfDay; i <= (numDays-1); i++)
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{

@@ -3,24 +3,24 @@
 #include "myTypes.h"
 
 int verifyInput(int low, int high);
-void savingChanges(Company company);
+void savingChanges(const Company &company);
 void createDriver(Company &company);
 void editDriver(Company &company);
 void removeDriver(Company &company);
-void showShifts(Company company);
-void lineSchedule(Company company);
-void stopSchedule(Company company);
-void searchStop(Company company);
-void routeCalculator(Company company);
+void showShifts(const Company &company);
+void lineSchedule(const Company &company);
+void stopSchedule(const Company &company);
+void searchStop(const Company &company);
+void routeCalculator(const Company &company);
 void clearScreen();
 void mainUserInterface(Company &company);
 void driversInterface(Company &company);
 void infoInterface(Company &company);
 void searchInterface(Company &company);
 void allocateService(Company &company);
-bool quitOrContinue(Company &company);
-void busInfo(Company company);
-void viewDriversFreePeriod(Company company);
+bool quitOrContinue(const Company &company);
+void busInfo(const Company &company);
+void viewDriversFreePeriod(const Company &company);
 
 /*
 Interface principal entre o programa e o utilizador. Apresenta no ecra as funcionalidades principais, recebe
@@ -204,7 +204,7 @@ void searchInterface(Company &company)
 Pergunta ao utilizador se pretente efetuar outra operacao ou terminar o programa.
 Tambem assegura que este insere um valor valido.
 */
-bool quitOrContinue(Company &company)
+bool quitOrContinue(const Company &company)
 {
 	string userChoice;
 	bool validInput = false;

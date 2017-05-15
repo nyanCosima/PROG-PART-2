@@ -10,7 +10,7 @@ bool isNumber(string input);
 /*
 Recebe um ID de uma linha do utilizador e invoca o metodo da classe que mostra o horario dessa linha.
 */
-void lineSchedule(Company company){
+void lineSchedule(const Company &company){
 
 	int indice;
 	string input;
@@ -46,7 +46,7 @@ void lineSchedule(Company company){
 /*
 Recebe uma paragem do utilizador e invoca o metodo da classe que mostra o horario dessa paragem.
 */
-void stopSchedule(Company company) {
+void stopSchedule(const Company &company) {
 
 	bool validInput = false;
 	string input;
@@ -72,7 +72,7 @@ void stopSchedule(Company company) {
 /*
 Recebe do utilizador um ID de uma linha e o numero de ordem de um autocarro e mostra informacao sobre ele.
 */
-void busInfo(Company company) {
+void busInfo(const Company &company) {
 
 	unsigned int id, busOrder;
 	int indice;
@@ -123,7 +123,7 @@ void busInfo(Company company) {
 }
 
 
-void viewDriversFreePeriod(Company company){
+void viewDriversFreePeriod(const Company &company){
     for (int i = 0; i < company.getDrivers().size(); ++i) {
         cout << "Condutor " << company.getDrivers().at(i).getName() << " || ID: " << company.getDrivers().at(i).getId()<< endl;
         company.getDrivers().at(i).checkCompleteService() ;

@@ -8,7 +8,7 @@ using namespace std;
 /*
 Recebe uma paragem do utilizador, e devolve as linhas em que se encontra, funcionando tambem para o caso de não existir.
 */
-void searchStop(Company company)
+void searchStop(const Company &company)
 {
 	string stop;
 	vector<int> lines;
@@ -21,14 +21,12 @@ void searchStop(Company company)
 	company.searchStop(stop);
 }
 
-
-
 /*
 Recebe duas paragens do utilizador e procura-as nas linhas existentes. Caso exista alguma linha que as contenha,
 calcula o percurso a efetuar e a duracao total. Caso exista mais do que uma linha, apenas devolve a que tiver
 menor duracao. Também funciona para o caso de não existir.
 */
-void routeCalculator(Company company)
+void routeCalculator(const Company &company)
 {
 	string stop1, stop2;
 

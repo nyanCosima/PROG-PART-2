@@ -454,6 +454,9 @@ int Line::searchBusOrderNumber(unsigned int order) const {
 	return -1;
 }
 
+/*
+Mostra uma lista com todos os periodos de todos os autocarros da linha sem condutor atribuido.
+*/
 void Line::busesChecker() const
 {
 	for (int i = 0; i < buses.size(); i++)
