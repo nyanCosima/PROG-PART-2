@@ -57,10 +57,3 @@ void Bus:: showInfo(){
         schedule.at(i).showInfo();
 }
 
-
-void Bus::addShift(Shift s)
-{
-	schedule.push_back(s);
-
-	sort(schedule.begin(), schedule.end(), shiftSortHelper);
-}

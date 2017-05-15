@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include "bus.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ class Line{
   unsigned int frequency;
   vector<string> busStopList;
   vector<int> timesList;
+  vector<Bus> buses;
  public:
   Line(string textLine);
   Line(unsigned int id, unsigned int frequency, vector<string> busStopsList, vector<int> timesList);
@@ -31,4 +33,5 @@ class Line{
   void schedule() const;
   void stopsSchedule(string stop) const;
   void horarioPARAGEMlilhelper(string stop, int i) const;
+  void busesInf();
 };

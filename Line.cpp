@@ -1,6 +1,7 @@
 #include "Line.h"
 #include <iostream>
 #include <iomanip>
+#include "Time.h"
 
 int verificarLENGTHparagemMAIOR(vector<string> busStops);
 void dealWITHtime(int &horas, int &minutos);
@@ -397,4 +398,36 @@ void Line::horarioPARAGEMlilhelper(string stop,int i) const
 
 
     cout  << string(s+5, '-')  << endl;
+}
+
+
+void Line::busesInf(){
+
+    unsigned int busOrder;
+    unsigned int j;
+    Time temp1, temp2;
+
+    cout << "Indique o número de ordem do autocarro: ";
+    cin >> busOrder;
+    cout << "Autocarro da linha " << id << endl;
+
+    for (int i = 0; i < buses.size(); ++i) {
+        if (busOrder == buses.at(i).getBusOrderInLine())
+            j = buses.at(i).getBusOrderInLine();
+    }
+
+    cout << "Número de ordem: " << busOrder << endl;
+    cout << "ID do condutor do autocarro: " << buses.at(j).getDriverId() << endl << endl;
+    cout << "Turnos:" << endl;
+
+    for (int k = 0; k < buses.at(j).getSchedule().size(); ++k) {
+        cout << "Turno nº " << k+1 << endl;
+
+        temp1=convertMinHours(buses.at(j).getSchedule().at(k).getStartTime());
+        temp2 = convertMinHours(buses.at(j).getSchedule().at(k).getEndTime());
+
+        cout << "Hora de início: " << temp1.hours << ":" << temp1.minutes << endl;
+        cout << "Hora de fim: " << temp2.hours << ":" << temp2.minutes << endl << endl;
+    }
+
 }

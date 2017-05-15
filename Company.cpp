@@ -641,3 +641,15 @@ int Company::searchShift(unsigned int busOrderNumber, unsigned int busLineId, un
 
 	return -1;
 }
+
+
+void Company::viewBusesInf()
+{
+	int id, busOrder;
+
+	cout << "Insira o id da linha que o autocarro percorre: ";
+	cin >> id;
+
+	getLines().at(searchLineIdentifier(id)).busesInf();
+
+}
