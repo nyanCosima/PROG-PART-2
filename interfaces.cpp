@@ -20,7 +20,6 @@ void searchInterface(Company &company);
 void allocateService(Company &company);
 bool quitOrContinue(const Company &company);
 void busInfo(const Company &company);
-void viewDriversFreePeriod(const Company &company);
 
 /*
 Interface principal entre o programa e o utilizador. Apresenta no ecra as funcionalidades principais, recebe
@@ -148,7 +147,7 @@ void infoInterface(Company &company)
 			anotherOp = quitOrContinue(company);
 			break;
         case 5:
-			viewDriversFreePeriod(company);
+			company.checkAvailableDrivers();
 			anotherOp = quitOrContinue(company);
 			break;
 		case 6:

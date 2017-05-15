@@ -121,12 +121,3 @@ void busInfo(const Company &company) {
 
 	company.getLines().at(company.searchLineIdentifier(id)).busesInf(busOrder);
 }
-
-
-void viewDriversFreePeriod(const Company &company){
-    for (int i = 0; i < company.getDrivers().size(); ++i) {
-        cout << "Condutor " << company.getDrivers().at(i).getName() << " || ID: " << company.getDrivers().at(i).getId()<< endl;
-        company.getDrivers().at(i).checkCompleteService() ;
-        cout  << endl;
-    }
-}

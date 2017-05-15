@@ -39,6 +39,6 @@ public:
 	void savingLinesData() const;
 	void savingDriversData() const;
 	int searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime) const;
-	void checkAvailableDrivers();
+	void checkAvailableDrivers() const;
 	void checkBuses() const;
 };

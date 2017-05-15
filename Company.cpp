@@ -715,3 +715,16 @@ void Company::checkBuses() const
 		lines.at(i).busesChecker();
 	}
 }
+
+/*
+Mostra uma lista com todos os periodos sem trabalho de todos os condutores que nao atingiram o limite maximo semanal
+*/
+void Company::checkAvailableDrivers() const
+{
+	for (int i = 0; i < drivers.size(); i++)
+	{
+		cout << "Condutor: " << drivers.at(i).getName() << " || ID: " << drivers.at(i).getId() << endl;
+
+		drivers.at(i).checkCompleteService();
+	}
+}

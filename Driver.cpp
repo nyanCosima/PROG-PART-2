@@ -126,7 +126,7 @@ void Driver::addShift(Shift s)
 /*
 Verifica se o condutor atingiu o servico maximo semanal, e caso contrario, lista os periodos sem trabalho atribuido.
 */
-void Driver::checkCompleteService()
+void Driver::checkCompleteService() const
 {
 	int totalTime=0;
 	Time inicialT, endT;
@@ -138,21 +138,23 @@ void Driver::checkCompleteService()
 		totalTime += shifts[i].getEndTime() - shifts[i].getStartTime(); }
 
 
-	if (convertMinHours(totalTime).hours < maxWeekWorkingTime)
+	if (totalTime < maxWeekWorkingTime*60)
 	{
-
-
 		if (totalTime == 0)
 		{
-			for (int i = 0; i < 5; ++i) {
-			cout << "Tempo inicial: ";
-			showTime(convertMinHours(6 * 60 + i*24*60));
-			cout << "Tempo final: ";
-			showTime(convertMinHours(19 * 60 + 24 * i * 60))  ;
-					cout << endl;}
-		}
-		else if(shifts.size()==1) {
+			for (int i = 0; i < 5; ++i) 
+			{
+				cout << "Periodo " << (i + 1) << endl;
 
+				cout << "Tempo inicial: ";
+				showTime(convertMinHours(startingTime + i*24*60));
+				cout << "Tempo final: ";
+				showTime(convertMinHours(endingTime +  i*24* 60)) ;
+				cout << endl;
+			}
+		}
+		else if(shifts.size()==1)
+		{
 			int min1 = shifts.at(0).getStartTime();
 			int min2 = shifts.at(0).getEndTime();
 			int numPeriods;
@@ -163,7 +165,8 @@ void Driver::checkCompleteService()
 			{
 				numPeriods = 5;
 
-				for (int i = 0; i < numPeriods; i++) {
+				for (int i = 0; i < numPeriods; i++) 
+				{
 					cout << "Periodo " << (i + 1) << endl;
 
 					if (convertMinHours(min1).numberOfDay == i) //O periodo a mostrar e o que segue o turno
@@ -173,7 +176,8 @@ void Driver::checkCompleteService()
 						cout << "Tempo final: ";
 						showTime(convertMinHours(endingTime + i * 24 * 60));
 						cout << endl;
-					} else //Senao, significa que o periodo corresponde a outro dia
+					}
+					else //Senao, significa que o periodo corresponde a outro dia
 					{
 						cout << "Tempo inicial: ";
 						showTime(convertMinHours(startingTime + i * 24 * 60));
@@ -188,7 +192,8 @@ void Driver::checkCompleteService()
 			{
 				numPeriods = 5;
 
-				for (int i = 0; i < numPeriods; i++) {
+				for (int i = 0; i < numPeriods; i++)
+				{
 					cout << "Periodo " << (i + 1) << endl;
 
 					if (convertMinHours(min1).numberOfDay == i) //O periodo a mostrar e o que antecede o turno
@@ -198,7 +203,8 @@ void Driver::checkCompleteService()
 						cout << "Tempo final: ";
 						showTime(convertMinHours(min2));
 						cout << endl;
-					} else //Senao, significa que o periodo corresponde a outro dia
+					}
+					else //Senao, significa que o periodo corresponde a outro dia
 					{
 						cout << "Tempo inicial: ";
 						showTime(convertMinHours(startingTime + i * 24 * 60));
@@ -286,34 +292,35 @@ void Driver::checkCompleteService()
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
 					cout << endl;
-				}}
-				else if (convertMinHours(min2).hours == convertMinHours(endingTime).hours && convertMinHours(min2).minutes == convertMinHours(endingTime).minutes)
-					for (int i = 0; i <= convertMinHours(min1).numberOfDay; i++)
-					{
+				}
+			}
+		else if (convertMinHours(min2).hours == convertMinHours(endingTime).hours && convertMinHours(min2).minutes == convertMinHours(endingTime).minutes)
+			for (int i = 0; i <= convertMinHours(min1).numberOfDay; i++)
+			{
 
-						if (i == convertMinHours(min1).numberOfDay)
-						{
-							cout << "Periodo: " << counter << endl;
-							counter++;
+				if (i == convertMinHours(min1).numberOfDay)
+				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
 
-							cout << "Tempo inicial: ";
-							showTime(convertMinHours(startingTime + i * 24 * 60));
-							cout << "Tempo final: ";
-							showTime(convertMinHours(min1));
-							cout << endl;
-						}
-						else
-						{
-							cout << "Periodo: " << counter << endl;
-							counter++;
+					cout << "Tempo inicial: ";
+					showTime(convertMinHours(startingTime + i * 24 * 60));
+					cout << "Tempo final: ";
+					showTime(convertMinHours(min1));
+					cout << endl;
+				}
+				else
+				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
 
-							cout << "Tempo inicial: ";
-							showTime(convertMinHours(startingTime + i * 24 * 60));
-							cout << "Tempo final: ";
-							showTime(convertMinHours(endingTime + i * 24 * 60));
-							cout << endl;
-						}
-					}
+					cout << "Tempo inicial: ";
+					showTime(convertMinHours(startingTime + i * 24 * 60));
+					cout << "Tempo final: ";
+					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
+				}
+			}
 		else
 			for (int i = 0; i <= convertMinHours(min1).numberOfDay; i++)
 			{
@@ -341,6 +348,8 @@ void Driver::checkCompleteService()
 				}
 
 			}
+
+
 		//Periodos entre os turnos
 		for (int i = 0; i < shifts.size() - 1; i++)
 		{
@@ -357,7 +366,7 @@ void Driver::checkCompleteService()
 				showTime(convertMinHours(min4));
 				cout << endl;
 			}
-			else //se forem em dias diferentes, ha dois periodos a mostrar
+			else //se forem em dias diferentes, ha varios periodos a mostrar
 			{	//Desde o fim do primeiro turno ate ao fim do dia
 				cout << "Periodo: " << counter << endl;
 				counter++;
@@ -366,6 +375,18 @@ void Driver::checkCompleteService()
 				cout << "Tempo final: ";
 				showTime(convertMinHours(endingTime + convertMinHours(min3).numberOfDay * 24 * 60));
 				cout << endl;
+
+				//dias que existam entretanto
+				for (int c = convertMinHours(min3).numberOfDay + 1; c<convertMinHours(min4).numberOfDay; c++)
+				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+					cout << "Tempo inicial: ";
+					showTime(convertMinHours(startingTime + c * 24 * 60));
+					cout << "Tempo final: ";
+					showTime(convertMinHours(endingTime + c * 24 * 60));
+					cout << endl;
+				}
 
 				//Desde o inicio do dia do segundo turno ate ao inicio deste
 				cout << "Periodo: " << counter << endl;
