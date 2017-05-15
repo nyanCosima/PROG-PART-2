@@ -70,8 +70,8 @@ Mostra informacao sobre um turno.
 void Shift::showInfo(){
   cout << "ID da linha: " << busLineId << endl;
   cout << "ID do condutor: " << driverId << endl;
-  cout << "Número de ordem do autocarro: " << busOrderNumber << endl;
-  cout << "Hora de início: ";
+  cout << "Numero de ordem do autocarro: " << busOrderNumber << endl;
+  cout << "Hora de inucio: ";
   showTime(convertMinHours(startTime));
   cout << "Hora de fim: ";
   showTime(convertMinHours(endTime));
@@ -82,8 +82,8 @@ Mostra informação sobre um turno, quando este nao tem condutor atribuido
 */
 void Shift::showInitialInfo() {
 	cout << "ID da linha: " << busLineId << endl;
-	cout << "Número de ordem do autocarro: " << busOrderNumber << endl;
-	cout << "Hora de início: ";
+	cout << "Numero de ordem do autocarro: " << busOrderNumber << endl;
+	cout << "Hora de inicio: ";
 	showTime(convertMinHours(startTime));
 	cout << "Hora de fim: ";
 	showTime(convertMinHours(endTime));

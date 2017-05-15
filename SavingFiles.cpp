@@ -15,13 +15,13 @@ void savingChanges(Company company)
 
 	while (!validInput)
 	{
-		cout <<  "Deseja guardar as alterações? (S/N) : ";
+		cout <<  "Deseja guardar as alteracoes? (S/N) : ";
 		getline(cin, userChoice);
 
 		if (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n")
 			validInput = true;
 		else
-			cout << "Opção inválida, tente novamente..." << endl << endl;
+			cout << "Opcao invalida, tente novamente..." << endl << endl;
 	}
 
 	if (userChoice == "S" || userChoice == "s")

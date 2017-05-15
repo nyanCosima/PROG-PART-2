@@ -21,29 +21,6 @@ void searchStop(Company company)
 	company.searchStop(stop);
 }
 
-/*
-Semelhante à função acima, mas com uma pequena diferença. Devolve true se a paragem existir nos registos, e false
-se não for encontrada.
-*/
-
-/*
-bool stopExists(string stop)
-{
-	vector<int> lines;
-
-	//Guarda num vetor os identificadores das linhas que contiverem a paragem indicada
-	for (int i = 0; i < linesData.size(); i++)
-		if(linesData[i].searchStop(stop))
-			lines.push_back(linesData[i].getId());
-
-	if (lines.size() == 0)
-		return false; //Se o vetor for vazio, quer dizer que a paragem não se encontra em qualquer linha.
-	else
-		return true; //Caso contrário, quer dizer que existe em pelo menos uma linha.
-}
-
-*/
-//PODE NAO SER NECESSARIO
 
 
 /*

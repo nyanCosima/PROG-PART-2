@@ -14,8 +14,8 @@ void clearScreen();
 bool quitOrContinue(Company &company);
 
 /*
-Recebe os parâmetros do utilizador (ID, nome do condutor, número de horas de um turno, número máximo de horas
-por semana e número mínimo de horas de descanso entre turnos) e guarda-os num novo Driver, que é adicionado
+Recebe os parï¿½metros do utilizador (ID, nome do condutor, nï¿½mero de horas de um turno, nï¿½mero mï¿½ximo de horas
+por semana e nï¿½mero mï¿½nimo de horas de descanso entre turnos) e guarda-os num novo Driver, que ï¿½ adicionado
 ao vetor criado anteriormente.
 */
 void createDriver(Company &company)
@@ -27,30 +27,30 @@ void createDriver(Company &company)
 
 	cout << "Criar condutor" << endl << endl;
 
-	//Recebe o ID do utilizador, tendo em conta o input válido/inválido.
+	//Recebe o ID do utilizador, tendo em conta o input vï¿½lido/invï¿½lido.
 
 	while (!validInput)
 	{
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		if (input.size() <= 3) //Sï¿½ sï¿½o aceites IDs com, no mï¿½ximo 3 dï¿½gitos
 		{
 
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um nï¿½mero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existï¿½ncia do ID
 
 				if (verify == -1)
 					validInput = true;
 				else
-					cout << "Esse ID já existe! Tente novamente..." << endl;
+					cout << "Esse ID ja existe! Tente novamente..." << endl;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	id = stoi(input);
@@ -64,17 +64,17 @@ void createDriver(Company &company)
 		getline(cin, name);
 
 		if (name == "")
-			cout << "Input inválido! Tente novamente..." << endl << endl;
+			cout << "Input invalido! Tente novamente..." << endl << endl;
 		else
 			validInput = true;
 	}
 
-	//Recebe o número de horas de um turno
+	//Recebe o nï¿½mero de horas de um turno
 
 	validInput = false;
 	while (!validInput)
 	{
-		cout << "Número de horas de um turno: ";
+		cout << "Numero de horas de um turno: ";
 		getline(cin, input);
 
 		if (isNumber(input))
@@ -87,15 +87,15 @@ void createDriver(Company &company)
 				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
-	// Recebe o número máximo de horas por semana
+	// Recebe o nï¿½mero mï¿½ximo de horas por semana
 
 	validInput = false;
 	while (!validInput)
 	{
-		cout << "Número máximo de horas de condução por semana: ";
+		cout << "Numero maximo de horas de conducao por semana: ";
 		getline(cin, input);
 
 		if (isNumber(input))
@@ -108,15 +108,15 @@ void createDriver(Company &company)
 				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
-	//Recebe o número de horas de descanso
+	//Recebe o nï¿½mero de horas de descanso
 
 	validInput = false;
 	while (!validInput)
 	{
-		cout << "Número mínimo de horas de descanso: ";
+		cout << "Numero minimo de horas de descanso: ";
 		getline(cin, input);
 
 		if (isNumber(input))
@@ -129,7 +129,7 @@ void createDriver(Company &company)
 				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	Driver newDriver(id, name, shift, numMaxHours, nminRestHours);
@@ -155,22 +155,22 @@ void removeDriver(Company &company)
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		if (input.size() <= 3) //Sï¿½ sï¿½o aceites IDs com, no mï¿½ximo 3 dï¿½gitos
 		{
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um nï¿½mero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existï¿½ncia do ID
 
 				if (verify != -1)
 					validInput = true;
 				else
-					cout << "Esse ID não existe! Tente novamente..." << endl;
+					cout << "Esse ID nao existe! Tente novamente..." << endl;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	company.removeDriver(verify);
@@ -179,7 +179,7 @@ void removeDriver(Company &company)
 }
 
 /*
-Altera o número de horas de um turno de um condutor.
+Altera o nï¿½mero de horas de um turno de um condutor.
 */
 void changeShift(Company &company, unsigned int id)
 {
@@ -192,11 +192,11 @@ void changeShift(Company &company, unsigned int id)
 
 	cout << "Alterar turno" << endl;
 
-	cout << endl << "O número atual de horas de um turno é: " << company.getDrivers()[index].getShiftMaxDuration() << endl;
+	cout << endl << "O numero atual de horas de um turno: " << company.getDrivers()[index].getShiftMaxDuration() << endl;
 
 	while (!validInput)
 	{
-		cout << "Novo número de horas: ";
+		cout << "Novo numero de horas: ";
 		getline(cin, input);
 
 		if (isNumber(input))
@@ -211,18 +211,18 @@ void changeShift(Company &company, unsigned int id)
 				validInput = true;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	vector<Driver> newDrivers = company.getDrivers();
 	newDrivers[index].setShiftMaxDuration(newShift);
 	company.setDrivers(newDrivers);
 
-	cout << "Alteração efetuada com sucesso!" << endl;
+	cout << "Alteracao efetuada com sucesso!" << endl;
 }
 
 /*
-Altera o número máximo de horas de trabalho por semana de um condutor.
+Altera o nï¿½mero mï¿½ximo de horas de trabalho por semana de um condutor.
 */
 void changeMaxHours(Company &company, unsigned int id)
 {
@@ -233,13 +233,13 @@ void changeMaxHours(Company &company, unsigned int id)
 
 	index = company.searchDriverIdentifier(id);
 
-	cout << "Alterar número máximo de horas de trabalho" << endl;
+	cout << "Alterar numero maximo de horas de trabalho" << endl;
 
-	cout << endl << "O número máximo atual de horas de trabalho é: " << company.getDrivers()[index].getMaxWeekWorkingTime() << " por semana" << endl;
+	cout << endl << "O numero maximo atual de horas de trabalho: " << company.getDrivers()[index].getMaxWeekWorkingTime() << " por semana" << endl;
 
 	while (!validInput)
 	{
-		cout << "Novo número de horas: ";
+		cout << "Novo numero de horas: ";
 		getline(cin, input);
 
 		if (isNumber(input))
@@ -247,12 +247,12 @@ void changeMaxHours(Company &company, unsigned int id)
 			newMaxHours = stoi(input);
 
 			if (newMaxHours <= company.getDrivers()[index].getShiftMaxDuration())
-				cout << "Não é possível atribuir esse número! Deve inserir mais horas." << endl;
+				cout << "Nao e possivel atribuir esse nuï¿½mero! Deve inserir mais horas." << endl;
 			else
 				validInput = true;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 		}
 
 
@@ -260,11 +260,11 @@ void changeMaxHours(Company &company, unsigned int id)
 	newDrivers[index].setMaxWeekWorkingTime(newMaxHours);
 	company.setDrivers(newDrivers);
 
-	cout << "Alteração efetuada com sucesso!" << endl;
+	cout << "Alteracao efetuada com sucesso!" << endl;
 }
 
 /*
-Altera o número mínimo de horas de descanso entre turnos de um condutor.
+Altera o nï¿½mero mï¿½nimo de horas de descanso entre turnos de um condutor.
 */
 void changeMinRest(Company &company, unsigned int id)
 {
@@ -277,11 +277,11 @@ void changeMinRest(Company &company, unsigned int id)
 
 	cout << "Alterar horas de descanso entre turnos" << endl;
 
-	cout << endl << "O número mínimo atual de horas de descanso entre turnos é: " << company.getDrivers()[index].getMinRestTime() << endl;
+	cout << endl << "O numero minimo atual de horas de descanso entre turnos: " << company.getDrivers()[index].getMinRestTime() << endl;
 
 	while (!validInput)
 	{
-		cout << "Novo número de horas: ";
+		cout << "Novo numero de horas: ";
 		getline(cin, input);
 
 		if (isNumber(input))
@@ -294,19 +294,19 @@ void changeMinRest(Company &company, unsigned int id)
 				validInput = true;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	vector<Driver> newDrivers=company.getDrivers();
 	newDrivers[index].setMinRestTime(newMinRest);
 	company.setDrivers(newDrivers);
 
-	cout << "Alteração efetuada com sucesso!" << endl;
+	cout << "Alteracao efetuada com sucesso!" << endl;
 }
 
 /*
-Altera o nome de um condutor. Pode ser útil, por exemplo, na eventualidade de um condutor ser substituído
-e o número identificador de manter.
+Altera o nome de um condutor. Pode ser ï¿½til, por exemplo, na eventualidade de um condutor ser substituï¿½do
+e o nï¿½mero identificador de manter.
 */
 void changeName(Company &company, unsigned int id)
 {
@@ -318,7 +318,7 @@ void changeName(Company &company, unsigned int id)
 
 	cout << "Alterar nome" << endl;
 
-	cout << endl << "O nome do condutor atual é: " << company.getDrivers()[index].getName() << endl;
+	cout << endl << "O nome do condutor atual: " << company.getDrivers()[index].getName() << endl;
 
 	while (!validInput)
 	{
@@ -326,7 +326,7 @@ void changeName(Company &company, unsigned int id)
 		getline(cin, newName);
 
 		if (newName == "")
-			cout << "Input inválido! Tente novamente..." << endl << endl;
+			cout << "Input invalido! Tente novamente..." << endl << endl;
 		else
 			validInput = true;
 	}
@@ -335,11 +335,11 @@ void changeName(Company &company, unsigned int id)
 	newDrivers[index].setName(newName);
 	company.setDrivers(newDrivers);
 
-	cout << "As alterações foram efetuadas com sucesso!" << endl;
+	cout << "As alteracoes foram efetuadas com sucesso!" << endl;
 }
 
 /*
-Apresenta informação relativa ao trabalho atribuído a um condutor especificado pelo utilizador, que é traduzida nos
+Apresenta informaï¿½ï¿½o relativa ao trabalho atribuï¿½do a um condutor especificado pelo utilizador, que ï¿½ traduzida nos
 turnos que tem que realizar.
 */
 void showShifts(Company company)
@@ -355,27 +355,27 @@ void showShifts(Company company)
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		if (input.size() <= 3) //Sï¿½ sï¿½o aceites IDs com, no mï¿½ximo 3 dï¿½gitos
 		{
 
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um nï¿½mero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existï¿½ncia do ID
 
 				if (verify != -1)
 					validInput = true;
 				else
-					cout << "Esse ID não existe! Tente novamente..." << endl;
+					cout << "Esse ID nao existe! Tente novamente..." << endl;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	if (company.getDrivers()[verify].getShifts().size() == 0)
-		cout << "De momento, o condutor não tem qualquer trabalho atribuído." << endl;
+		cout << "De momento, o condutor nao tem qualquer trabalho atribuido." << endl;
 	else
 		for (int i = 0; i < company.getDrivers()[verify].getShifts().size(); i++)
 		{
@@ -386,8 +386,8 @@ void showShifts(Company company)
 }
 
 /*
-Edita os condutores já criados. Fornece meios para: alterar o número de horas de um turno, o número máximo
-de horas de trabalho por semana, e o número mínimo de horas de descanso.
+Edita os condutores jï¿½ criados. Fornece meios para: alterar o nï¿½mero de horas de um turno, o nï¿½mero mï¿½ximo
+de horas de trabalho por semana, e o nï¿½mero mï¿½nimo de horas de descanso.
 */
 void editDriver(Company &company)
 {
@@ -404,23 +404,23 @@ void editDriver(Company &company)
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		if (input.size() <= 3) //Sï¿½ sï¿½o aceites IDs com, no mï¿½ximo 3 dï¿½gitos
 		{
 
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um nï¿½mero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existï¿½ncia do ID
 
 				if (verify != -1)
 					validInput = true;
 				else
-					cout << "Esse ID não existe! Tente novamente..." << endl;
+					cout << "Esse ID nao existe! Tente novamente..." << endl;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	id = stoi(input);
@@ -430,12 +430,12 @@ void editDriver(Company &company)
 	while (anotherOp)
 	{
 
-		//Apresenta uma interface com as funções que permitem alterar um condutor
+		//Apresenta uma interface com as funï¿½ï¿½es que permitem alterar um condutor
 
 		cout << endl << "Escolha o que pretende alterar" << endl << endl;
 		cout << "1 - Alterar nome" << endl;
 		cout << "2 - Alterar turno" << endl;
-		cout << "3 - Alterar número máximo de horas de trabalho" << endl;
+		cout << "3 - Alterar numero maximo de horas de trabalho" << endl;
 		cout << "4 - Alterar horas de descanso entre turnos" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
@@ -464,8 +464,8 @@ void editDriver(Company &company)
 
 
 /*
-Atribuir interativamente o serviço aos condutores. Mostra ao utilizador uma "lista" com os turnos a atribuir aos autocarros,
-recebe o ID do turno a atribuir e o ID do condutor e invoca o método da classe.
+Atribuir interativamente o serviï¿½o aos condutores. Mostra ao utilizador uma "lista" com os turnos a atribuir aos autocarros,
+recebe o ID do turno a atribuir e o ID do condutor e invoca o metodo da classe.
 */
 void allocateService(Company &company)
 {
@@ -480,20 +480,20 @@ void allocateService(Company &company)
 	unsigned int end;
 	Time t1, t2;
 
-	cout << "Atribuir serviço" << endl << endl;
+	cout << "Atribuir servico" << endl << endl;
 
 	while (!validInput)
 	{
 		cout << "Dia da semana: ";
 		getline(cin, input);
 
-		if (input == "Segunda" || input == "Terca" || input == "Quarta" || input == "Quinta" || input == "Sexta" || input == "Sábado" || input == "Domingo")
+		if (input == "Segunda" || input == "Terca" || input == "Quarta" || input == "Quinta" || input == "Sexta" )
 		{
 			validInput = true;
 			dayOfWeek = input;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	cout << "Turnos por atribuir" << endl;
@@ -513,23 +513,23 @@ void allocateService(Company &company)
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		if (input.size() <= 3) //Sï¿½ sï¿½o aceites IDs com, no mï¿½ximo 3 dï¿½gitos
 		{
 
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um nï¿½mero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existï¿½ncia do ID
 
 				if (verify != -1)
 					validInput = true;
 				else
-					cout << "Esse ID não existe! Tente novamente..." << endl;
+					cout << "Esse ID nao existe! Tente novamente..." << endl;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	driverID = stoi(input);
@@ -542,23 +542,23 @@ void allocateService(Company &company)
 		cout << "Identificador da linha: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		if (input.size() <= 3) //Sï¿½ sï¿½o aceites IDs com, no mï¿½ximo 3 dï¿½gitos
 		{
 
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um nï¿½mero positivo
 			{
-				verify = company.searchLineIdentifier(stoi(input)); //Verifica a existência do ID
+				verify = company.searchLineIdentifier(stoi(input)); //Verifica a existï¿½ncia do ID
 
 				if (verify != -1)
 					validInput = true;
 				else
-					cout << "Esse ID não existe! Tente novamente..." << endl;
+					cout << "Esse ID nao existe! Tente novamente..." << endl;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	lineID = stoi(input);
@@ -566,15 +566,15 @@ void allocateService(Company &company)
 	validInput = false;
 	while (!validInput)
 	{
-		cout << "Número do autocarro: ";
+		cout << "Numero do autocarro: ";
 		getline(cin, input);
 
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um nï¿½mero positivo
 			{
 				validInput = true;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	busNumber = stoi(input);
@@ -582,7 +582,7 @@ void allocateService(Company &company)
 	validInput = false;
 	while (!validInput)
 	{
-		cout << "Hora de início (HH:MM): ";
+		cout << "Hora de inicio (HH:MM): ";
 		getline(cin, input);
 
 		istringstream instr;
@@ -603,7 +603,7 @@ void allocateService(Company &company)
 
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	validInput = false;
@@ -629,7 +629,7 @@ void allocateService(Company &company)
 				t2.minutes = (double) min;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	start = convertHoursMin(t1);

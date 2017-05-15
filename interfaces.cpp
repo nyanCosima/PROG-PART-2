@@ -34,10 +34,10 @@ void mainUserInterface(Company &company)
 	{
 		int userChoice;
 
-		cout << "Sistema de gestão de informação - SEMPRARROLAR" << endl;
-		cout << "Funcionalidades disponíveis" << endl << endl;
-		cout << "1 - Gestão de condutores" << endl;
-		cout << "2 - Visualizar informação" << endl;
+		cout << "Sistema de gestao de informacao - SEMPRARROLAR" << endl;
+		cout << "Funcionalidades disponiveis" << endl << endl;
+		cout << "1 - Gestao de condutores" << endl;
+		cout << "2 - Visualizar informacao" << endl;
 		cout << "3 - Pesquisa" << endl;
 		cout << "0 - Sair" << endl << endl;
 
@@ -74,12 +74,12 @@ void driversInterface(Company &company)
 
 		int userChoice;
 
-		cout << "Gestão de condutores" << endl;
-		cout << "Funcionalidades disponíveis" << endl << endl;
+		cout << "Gestao de condutores" << endl;
+		cout << "Funcionalidades disponiveis" << endl << endl;
 		cout << "1 - Criar condutor" << endl;
 		cout << "2 - Alterar condutor" << endl;
 		cout << "3 - Remover condutor" << endl;
-		cout << "4 - Atribuir serviço" << endl;
+		cout << "4 - Atribuir servico" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
 		userChoice = verifyInput(0, 4);
@@ -120,12 +120,12 @@ void infoInterface(Company &company)
 		int userChoice;
 
 		cout << "Visualizaçao de informacao" << endl;
-		cout << "Funcionalidades disponíveis" << endl << endl;
-		cout << "1 - Horário de uma paragem" << endl;
-		cout << "2 - Horário de uma linha " << endl;
-		cout << "3 - Informação de um autocarro" << endl;
+		cout << "Funcionalidades disponiveis" << endl << endl;
+		cout << "1 - Horario de uma paragem" << endl;
+		cout << "2 - Horario de uma linha " << endl;
+		cout << "3 - Informacao de um autocarro" << endl;
 		cout << "4 - Trabalho de um condutor" << endl;
-        cout << "5 - Verificar períodos de condutores sem o serviço completo atribuído" << endl;
+        cout << "5 - Verificar periodos de condutores sem o serviço completo atribuido" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
 		userChoice = verifyInput(0, 5);
@@ -171,9 +171,9 @@ void searchInterface(Company &company)
 		int userChoice;
 
 		cout << "Pesquisa" << endl;
-		cout << "Funcionalidades disponíveis" << endl << endl;
+		cout << "Funcionalidades disponiveis" << endl << endl;
 		cout << "1 - Procurar paragem" << endl;
-		cout << "2 - Condutores disponíveis" << endl;
+		cout << "2 - Condutores disponiveis" << endl;
 		cout << "3 - Percurso entre paragens" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
@@ -210,12 +210,12 @@ bool quitOrContinue(Company &company)
 
 	while (!validInput)
 	{
-		cout << "Deseja efetuar outra operação? (S/N) : ";
+		cout << "Deseja efetuar outra operacao? (S/N) : ";
 		getline(cin, userChoice);
 
 		if (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n")
 			validInput = true;
-		else cout << "Opção inválida, tente novamente..." << endl << endl;
+		else cout << "Opçao invalida, tente novamente..." << endl << endl;
 	}
 
 	if (userChoice == "S" || userChoice == "s")

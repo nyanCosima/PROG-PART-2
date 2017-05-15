@@ -31,13 +31,13 @@ void lineSchedule(Company company){
 				if (indice != -1)
 					validInput = true;
 				else
-					cout << "Esse ID não existe! Tente novamente..." << endl;
+					cout << "Esse ID nao existe! Tente novamente..." << endl;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	company.getLines()[indice].schedule();
@@ -59,7 +59,7 @@ void stopSchedule(Company company) {
 		if(company.searchStop2(input).size()> 0)
 			validInput = true;
 		else
-			cout << "Essa paragem não existe! Tente novamente..." << endl;
+			cout << "Essa paragem nao existe! Tente novamente..." << endl;
 		}
 
     for (int i = 0; i < company.searchStop2(input).size(); ++i) {
@@ -92,13 +92,13 @@ void busInfo(Company company) {
 				if (indice != -1)
 					validInput = true;
 				else
-					cout << "Esse ID não existe! Tente novamente..." << endl;
+					cout << "Esse ID nao existe! Tente novamente..." << endl;
 			}
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	id = stoi(input);
@@ -107,13 +107,13 @@ void busInfo(Company company) {
 
 	while (!validInput)
 	{
-		cout << "Indique o número de ordem do autocarro: ";
+		cout << "Indique o numero de ordem do autocarro: ";
 		getline(cin,input);
 
 		if (isNumber(input))
 			validInput = true;
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	busOrder = stoi(input);

@@ -20,7 +20,7 @@ Company::Company(string name, string linesFile, string driversFile){
 
 	if (in_stream.fail())
 	{
-		cerr << "Ficheiro das linhas não encontrado. Fechando o programa..." << endl;
+		cerr << "Ficheiro das linhas nao encontrado. Fechando o programa..." << endl;
 		exit(1);
 	}
 
@@ -43,7 +43,7 @@ Company::Company(string name, string linesFile, string driversFile){
 
 	if (in_stream.fail())
 	{
-		cerr << "Ficheiro dos condutores não encontrado. Fechando o programa..." << endl;
+		cerr << "Ficheiro dos condutores nao encontrado. Fechando o programa..." << endl;
 		exit(1);
 	}
 
@@ -82,7 +82,7 @@ Company::Company(string name, string linesFile, string driversFile){
 
 	//Construir o vetor com os turnos a atribuir aos autocarros para toda a semana (um turno equivale a uma viagem de ida e volta)
 
-	for (int days = 0; days < 6; days++)
+	for (int days = 0; days < 5; days++)
 	{
 		for (int i = 0; i < lines.size(); i++)
 		{
@@ -217,7 +217,7 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 
 		lines[searchLineIdentifier(busLineId)].setBus(newB);
 
-		cout << "Turno atribuído!" << endl;
+		cout << "Turno atribuido!" << endl;
 
 		//Remove o turno da lista dos turnos a atribuir
 		removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
@@ -241,12 +241,12 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 
 				lines[searchLineIdentifier(busLineId)].setBus(newB);
 
-				cout << "Turno atribuído!" << endl;
+				cout << "Turno atribuido!" << endl;
 
 				removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
 			}
 			else
-				cout << "Número máximo de horas seguidas de trabalho atingido!" << endl;
+				cout << "Numero maximo de horas seguidas de trabalho atingido!" << endl;
 		}
 		else //Se o turno a atribuir e o ultimo atribuido nao forem consecutivos, mas tiverem uma diferença maior ao período mínimo de descanso
 			if (startTime - drivers[searchDriverIdentifier(driverId)].getMinRestTime() * 60 > drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
@@ -260,15 +260,15 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 
 				lines[searchLineIdentifier(busLineId)].setBus(newB);
 
-				cout << "Turno atribuído!" << endl;
+				cout << "Turno atribuido!" << endl;
 
 				removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
 			}
 			else
-				cout << "Número mínimo de horas de descanso entre turnos não está de acordo!" << endl;
+				cout << "Numero minimo de horas de descanso entre turnos nao esta de acordo!" << endl;
 	}
 	else
-		cout << "Número total de horas de trabalho semanal atingido! Não é possível atribuir trabalho a este condutor." << endl;
+		cout << "Numero total de horas de trabalho semanal atingido! Nao e possivel atribuir trabalho a este condutor." << endl;
 
 }
 
@@ -551,13 +551,13 @@ void Company::routeCalculator(string stop1, string stop2)
 	//Mostrar os percursos
 
 	if (durHelper.size() == 0)
-		cout << "Não foi encontrado qualquer percurso!" << endl;
+		cout << "Nao foi encontrado qualquer percurso!" << endl;
 	else
 	{
 		if (durHelper.size() > 1)
 			cout << endl << "Foram encontrados " << durHelper.size() << " percursos" << endl;
 		else
-			cout << endl << "Existe um único percurso" << endl << endl;
+			cout << endl << "Existe um unico percurso" << endl << endl;
 
 		for (int i = 0; i < durHelper.size(); i++)
 		{
@@ -580,7 +580,7 @@ void Company::routeCalculator(string stop1, string stop2)
 						cout << sameLineRoutes[c].stops[c1];
 					}
 
-					cout << endl << "|" << left << setw(10) << "Duração:  "<< "|" << sameLineRoutes[c].duration << " minutos" << endl << right << endl;
+					cout << endl << "|" << left << setw(10) << "Duracao:  "<< "|" << sameLineRoutes[c].duration << " minutos" << endl << right << endl;
 				}
 			}
 
@@ -610,7 +610,7 @@ void Company::routeCalculator(string stop1, string stop2)
 						cout << difLineRoutes[c].line2stops[c1];
 					}
 
-					cout << endl <<"|" << left << setw(10) <<  "Duração:  " << difLineRoutes[c].duration << " minutos" << endl<< right;
+					cout << endl <<"|" << left << setw(10) <<  "Duracao:  " << difLineRoutes[c].duration << " minutos" << endl<< right;
 				}
 			}
 		}
@@ -631,7 +631,7 @@ void Company::searchStop(string stop)
 			foundLines.push_back(lines[i].getId());
 
 	if (foundLines.size() == 0)
-		cout << "A paragem não se encontra em nenhuma linha!" << endl;
+		cout << "A paragem nao se encontra em nenhuma linha!" << endl;
 	else
 	{
 		cout << "A paragem encontra-se na(s) linha(s): ";
@@ -674,5 +674,5 @@ int Company::searchShift(unsigned int busOrderNumber, unsigned int busLineId, un
 
 void Company::checkAvailableDrivers()
 {
-	for(int i=0;i<drivers.size();i++)
+	//for(int i=0;i<drivers.size();i++)
 }

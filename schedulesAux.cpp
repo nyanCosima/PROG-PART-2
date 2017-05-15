@@ -59,14 +59,7 @@ Time convertMinHours(int minutes)
         dayOfWeek="Sexta";
 		min = minutes - 4*24*60;
 	}
-    else if(minutes<6*24*60){
-        dayOfWeek="Sábado";
-		min = minutes - 5*24*60;
-	}
-    else if(minutes<7*24*60){
-        dayOfWeek="Domingo";
-		min=minutes-6*24*60;
-    }
+
 
 	temp = (double)min / 60;
 	hours = min / 60;
@@ -108,10 +101,7 @@ int convertHoursMin(Time t) {
 		min = (t.hours * 60 + t.minutes) + 3 * 24 * 60;
 	else if (t.dayOfWeek == "Sexta")
 		min = (t.hours * 60 + t.minutes) + 4 * 24 * 60;
-	else if (t.dayOfWeek == "Sábado")
-		min = (t.hours * 60 + t.minutes) + 5 * 24 * 60;
-	else if (t.dayOfWeek == "Sábado")
-		min = (t.hours * 60 + t.minutes) + 6 * 24 * 60;
+
 
 	return min;
 }

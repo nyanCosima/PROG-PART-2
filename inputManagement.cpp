@@ -17,7 +17,7 @@ int verifyInput(int low, int high)
 
 	while (!validInput)
 	{
-		cout << "Escolha uma opção (" << low << "-" << high << "): ";
+		cout << "Escolha uma opcao (" << low << "-" << high << "): ";
 
 		getline(cin, input);
 
@@ -27,11 +27,11 @@ int verifyInput(int low, int high)
 			if (stoi(input) >= low && stoi(input) <= high &&input.size()<2)
 				validInput = true;
 			else
-				cout << "Input inválido! Tente novamente..." << endl;
+				cout << "Input invalido! Tente novamente..." << endl;
 		}
 		//Qualquer outro input é recusado, e é novamente pedido ao utilizador que introduza um número.
 		else
-			cout << "Input inválido! Tente novamente..." << endl;
+			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
 	inputValue = stoi(input);

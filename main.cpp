@@ -1,7 +1,8 @@
 #include "myTypes.h"
 #include <string>
 #include "Company.h"
-#include "Time.h"
+#include <iostream>
+
 using namespace std;
 
 void mainUserInterface(Company &company);
@@ -20,6 +21,7 @@ int main(){
 	string drivers = "condutores.txt";
 
 	Company SRL("SEMPRAROLAR", lines, drivers);
+
 
 	mainUserInterface(SRL); //Invoca a interface principal
 

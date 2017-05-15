@@ -126,7 +126,7 @@ void Driver::addShift(Shift s)
 }
 
 /*
-Verifica se o condutor atingiu o serviço máximo semanal, e caso contrário, lista os períodos sem trabalho atribuido.
+Verifica se o condutor atingiu o serviï¿½o mï¿½ximo semanal, e caso contrï¿½rio, lista os perï¿½odos sem trabalho atribuido.
 */
 void Driver::checkCompleteService()
 {
@@ -147,14 +147,14 @@ void Driver::checkCompleteService()
 		else
 			for (int i = 0; i < shifts.size()+1; i++)
 			{
-				cout << "Período " << i + 1 << endl;
+				cout << "Periodo " << i + 1 << endl;
 
 				cout << "Tempo inicial: ";
-				showTime(convertMinHours());
+				//showTime(convertMinHours());
 				cout << "Tempo final: ";
-				showTime(convertMinHours());
+				//showTime(convertMinHours());
 			}
 	}
 	else
-		cout << "O condutor atingiu o tempo máximo semanal!" << endl;
+		cout << "O condutor atingiu o tempo maximo semanal!" << endl;
 }
