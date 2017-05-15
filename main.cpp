@@ -11,16 +11,18 @@ int main(){
 
 	setPTChar(); //Permite o uso de carateres portugueses no input/output
 
-	//cout << "Ficheiro das linhas: ";
-	//getline(cin, linesFileName);
+    string linesFileName,  driversFileName;
 
-	//cout << "Ficheiro dos condutores: ";
-	//getline(cin, driversFileName);
+	cout << "Ficheiro das linhas: ";
+	getline(cin, linesFileName);
 
-	string lines = "linhas.txt";
-	string drivers = "condutores.txt";
+	cout << "Ficheiro dos condutores: ";
+	getline(cin, driversFileName);
 
-	Company SRL("SEMPRAROLAR", lines, drivers);
+
+
+
+	Company SRL("SEMPRAROLAR", linesFileName, driversFileName);
 
 
 	mainUserInterface(SRL); //Invoca a interface principal
