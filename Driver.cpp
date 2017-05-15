@@ -122,7 +122,7 @@ void Driver::addShift(Shift s)
 {
 	shifts.push_back(s);
 
-	sort(shifts.begin(), shifts.end(),shiftSortHelper);
+	sort(shifts.begin(), shifts.end(),shiftSortHelper); //Garantir que os turnos estao ordenados
 }
 
 /*
