@@ -214,25 +214,32 @@ void Bus::checkBus() const
 		int min1 = schedule.at(0).getStartTime();
 		int min2 = schedule.at(0).getEndTime();
 
-		cout << "Periodo: " << counter << endl;
-		counter++;
+		
 
 		if (convertMinHours(min1).hours == convertMinHours(startingTime).hours && convertMinHours(min1).minutes == convertMinHours(startingTime).minutes)
 			for (int i = 0; i < convertMinHours(min1).numberOfDay; i++)
 			{
 				if (i == convertMinHours(min1).numberOfDay)
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(min2));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 				else
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 			}
 		else if (convertMinHours(min2).hours == convertMinHours(endingTime).hours && convertMinHours(min2).minutes == convertMinHours(endingTime).minutes)
@@ -241,17 +248,25 @@ void Bus::checkBus() const
 
 				if (i == convertMinHours(min1).numberOfDay)
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(min1));
+					cout << endl;
 				}
 				else
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 			}
 		else
@@ -259,17 +274,25 @@ void Bus::checkBus() const
 			{
 				if (i == convertMinHours(min1).numberOfDay)
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(min1));
+					cout << endl;
 				}
 				else
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 
 			}
@@ -317,24 +340,32 @@ void Bus::checkBus() const
 		int min5 = schedule.at(schedule.size() - 1).getStartTime();
 		int min6 = schedule.at(schedule.size() - 1).getEndTime();
 
-		cout << "Período: " << counter << endl;
+	
 
 		if (convertMinHours(min5).hours == convertMinHours(startingTime).hours && convertMinHours(min5).minutes == convertMinHours(startingTime).minutes)
 			for (int i = convertMinHours(min5).numberOfDay; i <= 4; i++)
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(min6));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 				else
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 			}
 		else if (convertMinHours(min6).hours == convertMinHours(endingTime).hours && convertMinHours(min6).minutes == convertMinHours(endingTime).minutes)
@@ -342,17 +373,25 @@ void Bus::checkBus() const
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(min5));
+					cout << endl;
 				}
 				else
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 			}
 		else
@@ -360,17 +399,25 @@ void Bus::checkBus() const
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(min6));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 				else
 				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
 					cout << "Tempo final: ";
 					showTime(convertMinHours(endingTime + i * 24 * 60));
+					cout << endl;
 				}
 
 			}
