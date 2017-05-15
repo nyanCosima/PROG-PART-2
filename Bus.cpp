@@ -89,9 +89,8 @@ void Bus::checkBus() const
 	int const startingTime = 6 * 60;
 	int const endingTime = 19 * 60;
 
-	if (schedule.size() == 0)
-	{
-		for (int i = 0; i < 5; i++)
+	if (schedule.size() == 0) //Ainda nao tem turnos atribuidos
+		for (int i = 0; i < 5; i++) //Mostra todos os dias da semana, sendo que o horario comeca as 6 e acaba as 19
 		{
 			cout << "Periodo " << (i + 1) << endl;
 
@@ -101,14 +100,13 @@ void Bus::checkBus() const
 			showTime(convertMinHours(endingTime + i * 24 * 60));
 			cout << endl;
 		}
-	}
-	else if (schedule.size() == 1)
+	else if (schedule.size() == 1) //Tem um unico turno atribuido
 	{
 		int min1 = schedule.at(0).getStartTime();
 		int min2 = schedule.at(0).getEndTime();
 		int numPeriods;
 
-		if (convertMinHours(min1).hours == convertMinHours(startingTime).hours && convertMinHours(min1).minutes == convertMinHours(startingTime).minutes)
+		if (convertMinHours(min1).hours == convertMinHours(startingTime).hours && convertMinHours(min1).minutes == convertMinHours(startingTime).minutes) //Se o turno comecar no inicio do dia
 		{
 			numPeriods = 5;
 
@@ -116,7 +114,7 @@ void Bus::checkBus() const
 			{
 				cout << "Periodo " << (i + 1) << endl;
 
-				if (convertMinHours(min1).numberOfDay == i)
+				if (convertMinHours(min1).numberOfDay == i) //O periodo a mostrar e o que segue o turno
 				{
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(min2));
@@ -124,7 +122,7 @@ void Bus::checkBus() const
 					showTime(convertMinHours(endingTime + i * 24 * 60));
 					cout << endl;
 				}
-				else
+				else //Senao, significa que o periodo corresponde a outro dia
 				{
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
@@ -134,7 +132,7 @@ void Bus::checkBus() const
 				}
 			}
 		}
-		else if (convertMinHours(min2).hours == convertMinHours(endingTime).hours && convertMinHours(min2).minutes == convertMinHours(endingTime).minutes)
+		else if (convertMinHours(min2).hours == convertMinHours(endingTime).hours && convertMinHours(min2).minutes == convertMinHours(endingTime).minutes) //Se o turno for o ultimo do dia
 		{
 			numPeriods = 5;
 
@@ -142,7 +140,7 @@ void Bus::checkBus() const
 			{
 				cout << "Periodo " << (i + 1) << endl;
 
-				if (convertMinHours(min1).numberOfDay == i)
+				if (convertMinHours(min1).numberOfDay == i) //O periodo a mostrar e o que antecede o turno
 				{
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
@@ -150,7 +148,7 @@ void Bus::checkBus() const
 					showTime(convertMinHours(min2));
 					cout << endl;
 				}
-				else
+				else //Senao, significa que o periodo corresponde a outro dia
 				{
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(startingTime + i * 24 * 60));
@@ -160,7 +158,7 @@ void Bus::checkBus() const
 				}
 			}
 		}
-		else
+		else //Se o turno for no meio do dia
 		{
 			numPeriods = 6;
 
@@ -176,7 +174,7 @@ void Bus::checkBus() const
 					showTime(convertMinHours(min1));
 					cout << endl;
 				}
-				else if (i>0 && convertMinHours(min1).numberOfDay == i - 1)
+				else if (i>0 && convertMinHours(min1).numberOfDay == i - 1) //O mesmo dia tera dois periodos livres
 				{
 					cout << "Tempo inicial: ";
 					showTime(convertMinHours(min2));
@@ -205,7 +203,7 @@ void Bus::checkBus() const
 		}
 
 	}
-	else
+	else //Existem varios turnos, logo e necessario calcular os periodos entre os mesmos, e caso existam os periodos ate ao primeiro turno e depois do ultimo
 	{
 		int counter = 1;
 
@@ -213,8 +211,6 @@ void Bus::checkBus() const
 
 		int min1 = schedule.at(0).getStartTime();
 		int min2 = schedule.at(0).getEndTime();
-
-		
 
 		if (convertMinHours(min1).hours == convertMinHours(startingTime).hours && convertMinHours(min1).minutes == convertMinHours(startingTime).minutes)
 			for (int i = 0; i < convertMinHours(min1).numberOfDay; i++)
@@ -304,7 +300,7 @@ void Bus::checkBus() const
 			int min3 = schedule.at(i).getEndTime();
 			int min4 = schedule.at(i + 1).getStartTime();
 
-			if (convertMinHours(min3).numberOfDay == convertMinHours(min4).numberOfDay)
+			if (convertMinHours(min3).numberOfDay == convertMinHours(min4).numberOfDay) //Se os dois turnos forem no mesmo dia
 			{
 				cout << "Periodo: " << counter << endl;
 				counter++;
@@ -314,8 +310,8 @@ void Bus::checkBus() const
 				showTime(convertMinHours(min4));
 				cout << endl;
 			}
-			else
-			{
+			else //se forem em dias diferentes, ha dois periodos a mostrar
+			{	//Desde o fim do primeiro turno ate ao fim do dia 
 				cout << "Periodo: " << counter << endl;
 				counter++;
 				cout << "Tempo inicial: ";
@@ -324,6 +320,7 @@ void Bus::checkBus() const
 				showTime(convertMinHours(endingTime + convertMinHours(min3).numberOfDay * 24 * 60));
 				cout << endl;
 
+				//Desde o inicio do dia do segundo turno ate ao inicio deste
 				cout << "Periodo: " << counter << endl;
 				counter++;
 				cout << "Tempo inicial: ";
@@ -339,8 +336,6 @@ void Bus::checkBus() const
 
 		int min5 = schedule.at(schedule.size() - 1).getStartTime();
 		int min6 = schedule.at(schedule.size() - 1).getEndTime();
-
-	
 
 		if (convertMinHours(min5).hours == convertMinHours(startingTime).hours && convertMinHours(min5).minutes == convertMinHours(startingTime).minutes)
 			for (int i = convertMinHours(min5).numberOfDay; i <= 4; i++)
