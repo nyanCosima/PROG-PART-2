@@ -237,7 +237,7 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 				//Se o turno a atribuir e o ultimo atribuido forem consecutivos
 				if (startTime - interval < drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
 				{
-					consecutiveTime += startTime;
+					consecutiveTime += endTime-startTime;
 					//Se o tempo consecutivo for menor que o tempo maximo de horas consecutivas do condutor
 					if (consecutiveTime < drivers[searchDriverIdentifier(driverId)].getShiftMaxDuration())
 					{
