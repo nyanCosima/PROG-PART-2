@@ -129,30 +129,68 @@ Verifica se o condutor atingiu o servico maximo semanal, e caso contrario, lista
 void Driver::checkCompleteService()
 {
 	int totalTime=0;
+	Time inicialT, endT;
+	inicialT.hours = 6;
+	inicialT.dayOfWeek = "Segunda";
+	endT.dayOfWeek = "Sexta";
+	endT.hours = 19;
+	endT.minutes=0;
+	inicialT.minutes = 0;
+	int counter = 1;
 
-	for (int i = 0; i < shifts.size(); i++)
-		totalTime += shifts[i].getEndTime() - shifts[i].getStartTime();
+	for (int i = 0; i < shifts.size(); i++){
+		totalTime += shifts[i].getEndTime() - shifts[i].getStartTime(); }
 
-	if (totalTime < maxWeekWorkingTime)
+
+	if (convertMinHours(totalTime).hours < maxWeekWorkingTime)
 	{
+
+
 		if (totalTime == 0)
 		{
 			cout << "Tempo inicial: ";
 			showTime(convertMinHours(6 * 60));
 			cout << "Tempo final: ";
-			showTime(convertMinHours(19 * 60 + 24 * 6 * 60));
+			showTime(convertMinHours(19 * 60 + 24 * 4 * 60))  ;
+					cout << endl;
 		}
 		else
-			for (int i = 0; i < shifts.size()+1; i++)
-			{
-				cout << "Periodo " << i + 1 << endl;
 
-				cout << "Tempo inicial: ";
-				//showTime(convertMinHours());
-				cout << "Tempo final: ";
-				//showTime(convertMinHours());
+			for (int i = 0; i < shifts.size(); i++){
+				if(convertMinHours(shifts.at(i).getStartTime()).hours!=6){
+
+					cout << "Periodo " << counter << endl;
+					counter++;
+					cout << "Tempo inicial: ";
+					showTime(inicialT);
+					cout << "Tempo final: ";
+					showTime(convertMinHours(shifts.at(i).getStartTime()));
+				cout << endl;}
+
+
+					if(i == shifts.size()-1){
+				        inicialT =  convertMinHours((shifts.at(i).getEndTime()));
+						endT.hours = 19;
+						endT.minutes = 0;}
+					else {
+						endT = convertMinHours(shifts.at(i + 1).getStartTime());
+						inicialT = convertMinHours(shifts.at(i).getEndTime());
+					}
+
+
+
+					cout << "Periodo " << counter << endl;
+				counter++;
+					cout << "Tempo inicial: ";
+					showTime(inicialT);
+					cout << "Tempo final: ";
+					showTime(endT);
+				cout << endl;
+
 			}
-	}
+	}          
 	else
 		cout << "O condutor atingiu o tempo maximo semanal!" << endl;
 }
+
+
