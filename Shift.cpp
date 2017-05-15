@@ -71,7 +71,7 @@ void Shift::showInfo() const {
   cout << "ID da linha: " << busLineId << endl;
   cout << "ID do condutor: " << driverId << endl;
   cout << "Numero de ordem do autocarro: " << busOrderNumber << endl;
-  cout << "Hora de inucio: ";
+  cout << "Hora de inicio: ";
   showTime(convertMinHours(startTime));
   cout << "Hora de fim: ";
   showTime(convertMinHours(endTime));

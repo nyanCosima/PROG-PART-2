@@ -65,6 +65,7 @@ void stopSchedule(Company company) {
     for (int i = 0; i < company.searchStop2(input).size(); ++i) {
 
    company.getLines()[company.searchStop2(input).at(i)].stopsSchedule(input);
+        cout << endl<<endl;
         }
 }
 
