@@ -311,7 +311,7 @@ void Bus::checkBus() const
 				showTime(convertMinHours(min4));
 				cout << endl;
 			}
-			else //se forem em dias diferentes, ha dois periodos a mostrar
+			else //se forem em dias diferentes, ha varios periodos a mostrar
 			{	//Desde o fim do primeiro turno ate ao fim do dia 
 				cout << "Periodo: " << counter << endl;
 				counter++;
@@ -320,6 +320,18 @@ void Bus::checkBus() const
 				cout << "Tempo final: ";
 				showTime(convertMinHours(endingTime + convertMinHours(min3).numberOfDay * 24 * 60));
 				cout << endl;
+
+				//dias que existam entretanto
+				for (int c=convertMinHours(min3).numberOfDay+1;c<convertMinHours(min4).numberOfDay;c++)
+				{
+					cout << "Periodo: " << counter << endl;
+					counter++;
+					cout << "Tempo inicial: ";
+					showTime(convertMinHours(startingTime + c * 24 * 60));
+					cout << "Tempo final: ";
+					showTime(convertMinHours(endingTime + c * 24 * 60));
+					cout << endl;
+				}
 
 				//Desde o inicio do dia do segundo turno ate ao inicio deste
 				cout << "Periodo: " << counter << endl;
