@@ -23,7 +23,7 @@ void busInfo(Company company);
 
 
 /*
-Interface principal entre o programa e o utilizador. Apresenta no ecrã as funcionalidades principais, recebe
+Interface principal entre o programa e o utilizador. Apresenta no ecra as funcionalidades principais, recebe
 a escolha do utilizador e devolve-a ao programa.
 */
 void mainUserInterface(Company &company)
@@ -62,8 +62,8 @@ void mainUserInterface(Company &company)
 }
 
 /*
-Sub-interface dedicada à gestão de condutores. Apresenta as funcionalidades disponíveis, recebe a escolha
-do utilizador e inicializa a função pedida
+Sub-interface dedicada a gestão de condutores. Apresenta as funcionalidades disponiveis, recebe a escolha
+do utilizador e inicializa a funcao pedida
 */
 void driversInterface(Company &company)
 {
@@ -107,8 +107,8 @@ void driversInterface(Company &company)
 }
 
 /*
-Sub-interface dedicada à visualizacao de informacao. Apresenta as funcionalidades disponíveis, recebe a escolha
-do utilizador e inicializa a função pedida
+Sub-interface dedicada a visualizacao de informacao. Apresenta as funcionalidades disponiveis, recebe a escolha
+do utilizador e inicializa a funcao pedida
 */
 void infoInterface(Company &company)
 {
@@ -158,8 +158,8 @@ void infoInterface(Company &company)
 }
 
 /*
-Sub-interface dedicada à pesquisa de informação. Apresenta as funcionalidades disponíveis, recebe a escolha
-do utilizador e inicializa a função pedida
+Sub-interface dedicada a pesquisa de informacao. Apresenta as funcionalidades disponiveis, recebe a escolha
+do utilizador e inicializa a funcao pedida
 */
 void searchInterface(Company &company)
 {
@@ -200,8 +200,8 @@ void searchInterface(Company &company)
 }
 
 /*
-Pergunta ao utilizador se pretente efetuar outra operação ou terminar o programa.
-Também assegura que este insere um valor válido.
+Pergunta ao utilizador se pretente efetuar outra operacao ou terminar o programa.
+Tambem assegura que este insere um valor valido.
 */
 bool quitOrContinue(Company &company)
 {
@@ -233,7 +233,7 @@ bool quitOrContinue(Company &company)
 
 
 /*
-Função simples para limpar o ecrã.
+Funcao simples para limpar o ecra.
 */
 void clearScreen()
 {

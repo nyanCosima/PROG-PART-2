@@ -67,7 +67,7 @@ void Shift::setEndTime(unsigned int endTime){
 /*
 Mostra informacao sobre um turno.
 */
-void Shift::showInfo(){
+void Shift::showInfo() const {
   cout << "ID da linha: " << busLineId << endl;
   cout << "ID do condutor: " << driverId << endl;
   cout << "Numero de ordem do autocarro: " << busOrderNumber << endl;
@@ -78,9 +78,9 @@ void Shift::showInfo(){
  }
 
 /*
-Mostra informação sobre um turno, quando este nao tem condutor atribuido
+Mostra informaçao sobre um turno, quando este nao tem condutor atribuido
 */
-void Shift::showInitialInfo() {
+void Shift::showInitialInfo() const {
 	cout << "ID da linha: " << busLineId << endl;
 	cout << "Numero de ordem do autocarro: " << busOrderNumber << endl;
 	cout << "Hora de inicio: ";

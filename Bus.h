@@ -24,7 +24,7 @@ class Bus{
     void setDriverId(unsigned int newdriverID);
 	void setLineId(unsigned int newLineID);
   // other methods
-    void showInfo();
+    void showInfo() const;
 	void addShift(Shift s);
-	void checkBus();
+	void checkBus() const;
 };

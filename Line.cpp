@@ -211,7 +211,7 @@ void Line::schedule() const
 	cout << "|" << string(busStopList.size()*(s + 3) + 3, '-') << '|' << endl;
 
 	while (horasin < 19) {
-		//hora incial de sa�da
+		//hora inicial de saida
 		cout << "|";
 		if (horasin <10)
 			cout << setfill(' ') << setw(s - 1) << "0" << horasin << ":";
@@ -219,7 +219,7 @@ void Line::schedule() const
 			cout << setfill(' ') << setw(s) << horasin << ":";
 		showMIN(minutosin);
 		cout << minutosin << "|";
-		minutos = minutosin;                                                     //comea�ar da nova hora
+		minutos = minutosin;                                                     //comecar da nova hora
 		horas = horasin;
 
 		//calcular horas restantes
@@ -243,7 +243,7 @@ void Line::schedule() const
 	cout << string(busStopList.size()*(s + 3) + 5, '-') << endl;
 
 
-	//de l� para c�
+	//de la para ca
 
 
 	int horas2 = 6, minutos2 = 0, horas2in = 6, minutos2in = 0;
@@ -270,7 +270,7 @@ void Line::schedule() const
 
 
 	while (count>0) {
-		//hora incial
+		//hora inicial
 		cout << "|";
 		if (horas2in <10)
 			cout << setfill(' ') << setw(s - 1) << "0" << horas2in << ":";
@@ -336,7 +336,7 @@ void Line::stopsSchedule(string stop) const
                         minutos = minutosin;
 
 
-                        // /obter a que horas passa sentido 1
+                        //obter a que horas passa sentido 1
                         for (int j = 0; j < searchStop2(stop); ++j) {
                             minutos += timesList.at(j);
                         }
@@ -350,7 +350,7 @@ void Line::stopsSchedule(string stop) const
                         minutosin += add;
                         dealWITHtime(horasin, minutosin);
 
-                        //de lá para cá
+                        //de la para ca
                         horas2 = horasin2;
                         minutos2 = minutosin2;
 
@@ -442,7 +442,7 @@ void Line::busesInf(unsigned int busOrder)
 }
 
 /*
-Devolve -1 se o autocarro não existir, e o seu indice no caso contrario.
+Devolve -1 se o autocarro nao existir, e o seu indice no caso contrario.
 */
 int Line::searchBusOrderNumber(unsigned int order) const {
 	for (int i = 0; i < buses.size(); i++)

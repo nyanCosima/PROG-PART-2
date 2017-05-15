@@ -31,13 +31,13 @@ public:
 	void removeShift(int index);
     // outros metodos
     void allocateService(unsigned int driverId, unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime); // funcao que implementa a afectacao de servico
-	void routeCalculator(string stop1, string stop2);
-	void searchStop(string stop);
-	vector<int> searchStop2(string stop);
-	int searchLineIdentifier(unsigned int id);
-	int searchDriverIdentifier(unsigned int id);
+	void routeCalculator(string stop1, string stop2) const;
+	void searchStop(string stop) const;
+	vector<int> searchStop2(string stop) const;
+	int searchLineIdentifier(unsigned int id) const;
+	int searchDriverIdentifier(unsigned int id) const;
 	void savingLinesData();
 	void savingDriversData();
-	int searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime);
+	int searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime) const;
 	void checkAvailableDrivers();
 };

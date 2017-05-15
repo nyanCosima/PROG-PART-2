@@ -4,8 +4,6 @@
 #include <iostream>
 
 Driver::Driver(string textLine){
-
-  // INITIALISATION CODE GOES IN HERE
   //RECOLHER O ID
   int firstPos = 0;
 
@@ -126,7 +124,7 @@ void Driver::addShift(Shift s)
 }
 
 /*
-Verifica se o condutor atingiu o servi�o m�ximo semanal, e caso contr�rio, lista os per�odos sem trabalho atribuido.
+Verifica se o condutor atingiu o servico maximo semanal, e caso contrario, lista os periodos sem trabalho atribuido.
 */
 void Driver::checkCompleteService()
 {

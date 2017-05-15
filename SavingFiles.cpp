@@ -6,7 +6,7 @@
 using namespace std;
 
 /*
-Pergunta ao utilizador se pretende guardar as alteraÁıes e age de acordo com a sua resposta.
+Pergunta ao utilizador se pretende guardar as alteracoes e age de acordo com a sua resposta.
 */
 void savingChanges(Company company)
 {

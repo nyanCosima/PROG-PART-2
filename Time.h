@@ -7,6 +7,7 @@ using namespace std;
 
 typedef struct {
 	int hours;
+	int numberOfDay;
 	double minutes;
 	string dayOfWeek;
 } Time;

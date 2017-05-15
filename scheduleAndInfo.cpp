@@ -22,11 +22,11 @@ void lineSchedule(Company company){
 		cout << "Indique o ID da linha: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		if (input.size() <= 3) //So sao aceites IDs com, no maximo 3 digitos
 		{
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um numero positivo
 			{
-				indice = company.searchLineIdentifier(stoi(input)); //Verifica a existência do ID
+				indice = company.searchLineIdentifier(stoi(input)); //Verifica a existencia do ID
 
 				if (indice != -1)
 					validInput = true;
@@ -83,11 +83,11 @@ void busInfo(Company company) {
 		cout << "Insira o id da linha que o autocarro percorre: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //Só são aceites IDs com, no máximo 3 dígitos
+		if (input.size() <= 3) //So sao aceites IDs com, no maximo 3 digitos
 		{
-			if (isNumber(input)) //Se o input for um número positivo
+			if (isNumber(input)) //Se o input for um numero positivo
 			{
-				indice = company.searchLineIdentifier(stoi(input)); //Verifica a existência do ID
+				indice = company.searchLineIdentifier(stoi(input)); //Verifica a existencia do ID
 
 				if (indice != -1)
 					validInput = true;

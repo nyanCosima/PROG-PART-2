@@ -5,8 +5,8 @@
 using namespace std;
 
 /*
-Função encarregada de verificar se o input do utilizador é válido. Em caso positivo, retorna o valor introduzido à função.
-Em caso negativo, avisa o utilizador que introduziu uma opção inválida e funciona até que o valor seja válido.
+Funcao encarregada de verificar se o input do utilizador e valido. Em caso positivo, retorna o valor introduzido a funcao.
+Em caso negativo, avisa o utilizador que introduziu uma opcao invalida e funciona ate que o valor seja valido.
 Desenvolvido para as interfaces.
 */
 int verifyInput(int low, int high)
@@ -23,13 +23,13 @@ int verifyInput(int low, int high)
 
 		if (isdigit(input[0]))
 		{
-			//Apenas aceita como input números entre o limite inferior e superior (inclusive)
+			//Apenas aceita como input numeros entre o limite inferior e superior (inclusive)
 			if (stoi(input) >= low && stoi(input) <= high &&input.size()<2)
 				validInput = true;
 			else
 				cout << "Input invalido! Tente novamente..." << endl;
 		}
-		//Qualquer outro input é recusado, e é novamente pedido ao utilizador que introduza um número.
+		//Qualquer outro input e recusado, e e novamente pedido ao utilizador que introduza um número.
 		else
 			cout << "Input invalido! Tente novamente..." << endl;
 	}
@@ -41,7 +41,7 @@ int verifyInput(int low, int high)
 
 
 /*
-Verifica se o input do utilizador é um número positivo.
+Verifica se o input do utilizador e um numero positivo.
 */
 bool isNumber(string input)
 {

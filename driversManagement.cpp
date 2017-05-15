@@ -14,8 +14,8 @@ void clearScreen();
 bool quitOrContinue(Company &company);
 
 /*
-Recebe os par�metros do utilizador (ID, nome do condutor, n�mero de horas de um turno, n�mero m�ximo de horas
-por semana e n�mero m�nimo de horas de descanso entre turnos) e guarda-os num novo Driver, que � adicionado
+Recebe os parametros do utilizador (ID, nome do condutor, numero de horas de um turno, numero maximo de horas
+por semana e numero minimo de horas de descanso entre turnos) e guarda-os num novo Driver, que e adicionado
 ao vetor criado anteriormente.
 */
 void createDriver(Company &company)
@@ -27,19 +27,19 @@ void createDriver(Company &company)
 
 	cout << "Criar condutor" << endl << endl;
 
-	//Recebe o ID do utilizador, tendo em conta o input v�lido/inv�lido.
+	//Recebe o ID do utilizador, tendo em conta o input valido/invalido.
 
 	while (!validInput)
 	{
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //S� s�o aceites IDs com, no m�ximo 3 d�gitos
+		if (input.size() <= 3) //So sao aceites IDs com, no maximo 3 digitos
 		{
 
-			if (isNumber(input)) //Se o input for um n�mero positivo
+			if (isNumber(input)) //Se o input for um numero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a exist�ncia do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existencia do ID
 
 				if (verify == -1)
 					validInput = true;
@@ -69,7 +69,7 @@ void createDriver(Company &company)
 			validInput = true;
 	}
 
-	//Recebe o n�mero de horas de um turno
+	//Recebe o numero de horas de um turno
 
 	validInput = false;
 	while (!validInput)
@@ -90,7 +90,7 @@ void createDriver(Company &company)
 			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
-	// Recebe o n�mero m�ximo de horas por semana
+	// Recebe o numero maximo de horas por semana
 
 	validInput = false;
 	while (!validInput)
@@ -111,7 +111,7 @@ void createDriver(Company &company)
 			cout << "Input invalido! Tente novamente..." << endl;
 	}
 
-	//Recebe o n�mero de horas de descanso
+	//Recebe o numero de horas de descanso
 
 	validInput = false;
 	while (!validInput)
@@ -155,11 +155,11 @@ void removeDriver(Company &company)
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //S� s�o aceites IDs com, no m�ximo 3 d�gitos
+		if (input.size() <= 3) //So sao aceites IDs com, no maximo 3 digitos
 		{
-			if (isNumber(input)) //Se o input for um n�mero positivo
+			if (isNumber(input)) //Se o input for um numero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a exist�ncia do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existencia do ID
 
 				if (verify != -1)
 					validInput = true;
@@ -179,7 +179,7 @@ void removeDriver(Company &company)
 }
 
 /*
-Altera o n�mero de horas de um turno de um condutor.
+Altera o numero de horas de um turno de um condutor.
 */
 void changeShift(Company &company, unsigned int id)
 {
@@ -222,7 +222,7 @@ void changeShift(Company &company, unsigned int id)
 }
 
 /*
-Altera o n�mero m�ximo de horas de trabalho por semana de um condutor.
+Altera o numero maximo de horas de trabalho por semana de um condutor.
 */
 void changeMaxHours(Company &company, unsigned int id)
 {
@@ -264,7 +264,7 @@ void changeMaxHours(Company &company, unsigned int id)
 }
 
 /*
-Altera o n�mero m�nimo de horas de descanso entre turnos de um condutor.
+Altera o numero minimo de horas de descanso entre turnos de um condutor.
 */
 void changeMinRest(Company &company, unsigned int id)
 {
@@ -305,8 +305,8 @@ void changeMinRest(Company &company, unsigned int id)
 }
 
 /*
-Altera o nome de um condutor. Pode ser �til, por exemplo, na eventualidade de um condutor ser substitu�do
-e o n�mero identificador de manter.
+Altera o nome de um condutor. Pode ser util, por exemplo, na eventualidade de um condutor ser substituido
+e o numero identificador de manter.
 */
 void changeName(Company &company, unsigned int id)
 {
@@ -339,7 +339,7 @@ void changeName(Company &company, unsigned int id)
 }
 
 /*
-Apresenta informa��o relativa ao trabalho atribu�do a um condutor especificado pelo utilizador, que � traduzida nos
+Apresenta informacao relativa ao trabalho atribuido a um condutor especificado pelo utilizador, que e traduzida nos
 turnos que tem que realizar.
 */
 void showShifts(Company company)
@@ -355,12 +355,12 @@ void showShifts(Company company)
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //S� s�o aceites IDs com, no m�ximo 3 d�gitos
+		if (input.size() <= 3) //So sao aceites IDs com, no maximo 3 digitos
 		{
 
-			if (isNumber(input)) //Se o input for um n�mero positivo
+			if (isNumber(input)) //Se o input for um numero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a exist�ncia do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existencia do ID
 
 				if (verify != -1)
 					validInput = true;
@@ -386,8 +386,8 @@ void showShifts(Company company)
 }
 
 /*
-Edita os condutores j� criados. Fornece meios para: alterar o n�mero de horas de um turno, o n�mero m�ximo
-de horas de trabalho por semana, e o n�mero m�nimo de horas de descanso.
+Edita os condutores ja criados. Fornece meios para: alterar o namero de horas de um turno, o numero maximo
+de horas de trabalho por semana, e o numero minimo de horas de descanso.
 */
 void editDriver(Company &company)
 {
@@ -404,12 +404,12 @@ void editDriver(Company &company)
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //S� s�o aceites IDs com, no m�ximo 3 d�gitos
+		if (input.size() <= 3) //So sao aceites IDs com, no maximo 3 digitos
 		{
 
 			if (isNumber(input)) //Se o input for um n�mero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a exist�ncia do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existencia do ID
 
 				if (verify != -1)
 					validInput = true;
@@ -430,7 +430,7 @@ void editDriver(Company &company)
 	while (anotherOp)
 	{
 
-		//Apresenta uma interface com as fun��es que permitem alterar um condutor
+		//Apresenta uma interface com as funcoes que permitem alterar um condutor
 
 		cout << endl << "Escolha o que pretende alterar" << endl << endl;
 		cout << "1 - Alterar nome" << endl;
@@ -464,7 +464,7 @@ void editDriver(Company &company)
 
 
 /*
-Atribuir interativamente o servi�o aos condutores. Mostra ao utilizador uma "lista" com os turnos a atribuir aos autocarros,
+Atribuir interativamente o servico aos condutores. Mostra ao utilizador uma "lista" com os turnos a atribuir aos autocarros,
 recebe o ID do turno a atribuir e o ID do condutor e invoca o metodo da classe.
 */
 void allocateService(Company &company)
@@ -513,12 +513,12 @@ void allocateService(Company &company)
 		cout << "Identificador do condutor: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //S� s�o aceites IDs com, no m�ximo 3 d�gitos
+		if (input.size() <= 3) //So sao aceites IDs com, no maximo 3 digitos
 		{
 
-			if (isNumber(input)) //Se o input for um n�mero positivo
+			if (isNumber(input)) //Se o input for um numero positivo
 			{
-				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a exist�ncia do ID
+				verify = company.searchDriverIdentifier(stoi(input)); //Verifica a existencia do ID
 
 				if (verify != -1)
 					validInput = true;
@@ -542,12 +542,12 @@ void allocateService(Company &company)
 		cout << "Identificador da linha: ";
 		getline(cin, input);
 
-		if (input.size() <= 3) //S� s�o aceites IDs com, no m�ximo 3 d�gitos
+		if (input.size() <= 3) //So sao aceites IDs com, no maximo 3 digitos
 		{
 
-			if (isNumber(input)) //Se o input for um n�mero positivo
+			if (isNumber(input)) //Se o input for um numero positivo
 			{
-				verify = company.searchLineIdentifier(stoi(input)); //Verifica a exist�ncia do ID
+				verify = company.searchLineIdentifier(stoi(input)); //Verifica a existencia do ID
 
 				if (verify != -1)
 					validInput = true;
@@ -569,7 +569,7 @@ void allocateService(Company &company)
 		cout << "Numero do autocarro: ";
 		getline(cin, input);
 
-			if (isNumber(input)) //Se o input for um n�mero positivo
+			if (isNumber(input)) //Se o input for um numero positivo
 			{
 				validInput = true;
 			}

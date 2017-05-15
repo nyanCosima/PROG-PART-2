@@ -1,4 +1,5 @@
 ﻿#include "Company.h"
+#include "Time.h"
 #include <fstream>
 #include <iostream>
 #include <iomanip>
@@ -59,6 +60,8 @@ Company::Company(string name, string linesFile, string driversFile){
 
 	in_stream.close();
 
+	//Ler das strings para os vetores de informacao
+
 	vector<Line> linesVector;
 
 	for (int i = 0; i < linesFileContent.size(); i++)
@@ -91,6 +94,7 @@ Company::Company(string name, string linesFile, string driversFile){
 			unsigned int end = start + 2 * lines[i].totalDuration();
 			vector<Shift> temp;
 
+			//Cria os primeiros turnos, associados aos diferentes autocarros necessarios
 			while (bus <= lines[i].numberOfBuses())
 			{
 				Shift s(lines[i].getId(), bus, start, end);
@@ -101,6 +105,7 @@ Company::Company(string name, string linesFile, string driversFile){
 				end = start + 2 * lines[i].totalDuration();
 			}
 
+			//Para cada autocarro, cria os turnos que tem que percorrer ate ao final do servico
 			for (int c = 0; c < temp.size(); c++)
 			{
 				start = temp[c].getStartTime();
@@ -182,29 +187,31 @@ void Company::removeShift(int index)
 /*
 Aloca serviço aos condutores e autocarros, recebendo a informação necessária (que antes já é verificada se consiste
 com os turnos a atribuir) e verifica a consistência com os dados do condutor que deseja atribuir. Caso seja inconsistente,
-não atribui o trabalho.
+não atribui o trabalho. Incoveniente: apenas atribui trabalho de forma sequencial, ou seja, nao permite que se atribua um turno
+anterior aos que ja se encontram no vetor de turnos do condutor.
 */
-void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime){
+void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime) {
 
-	int totalTime=0;
+	int totalTime = 0;
 	int consecutiveTime = 0;
+	int const interval = 30;
 
 	//Calcular o tempo total de trabalho do condutor
 	for (int i = 0; i < drivers[searchDriverIdentifier(driverId)].getShifts().size(); i++)
 		totalTime += drivers[searchDriverIdentifier(driverId)].getShifts()[i].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime();
 
 
-	for (int i = drivers[searchDriverIdentifier(driverId)].getShifts().size()-1; i>0; i--)
+	for (int i = drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1; i > 0; i--)
 	{
-		//Verifica se os turnos são consecutivos, para isso arbitra-se que o são se começarem 30 minutos depois do turno anterior terminar e guarda o tempo consecutivo 
-		if (drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getEndTime() < drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime() - 30)
+		//Verifica se os turnos sao consecutivos, para isso arbitra-se que o sao se começarem 30 minutos depois do turno anterior terminar e guarda o tempo consecutivo 
+		if (drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getEndTime() < drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime() - interval)
 			consecutiveTime += (drivers[searchDriverIdentifier(driverId)].getShifts()[i].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime()) + (drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getStartTime());
 		else
 			break;
 	}
 
-	//Se não existir qualquer turno, então não existe qualquer restrição e pode-se atribuir o trabalho
-	if(drivers[searchDriverIdentifier(driverId)].getShifts().size() == 0)
+	//Se nao existir qualquer turno, entao nao existe qualquer restriçao e pode-se atribuir o trabalho
+	if (drivers[searchDriverIdentifier(driverId)].getShifts().size() == 0)
 	{
 		//Atribui o turno ao condutor
 		Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
@@ -222,61 +229,84 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 		//Remove o turno da lista dos turnos a atribuir
 		removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
 	}
-	// Se o tempo total for inferior ao tempo máximo de trabalho semanal
+	// Se o tempo total for inferior ao tempo maximo de trabalho semanal
 	else if (totalTime < drivers[searchDriverIdentifier(driverId)].getMaxWeekWorkingTime() * 60)
-	{
-		//Se o turno a atribuir e o ultimo atribuido forem consecutivos
-		if (startTime - 30 < drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
+	{	
+		if(convertMinHours(startTime).dayOfWeek == convertMinHours(drivers[searchDriverIdentifier(driverId)].getShifts().at(drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1).getEndTime()).dayOfWeek)
+			if (startTime >= drivers[searchDriverIdentifier(driverId)].getShifts().at(drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1).getEndTime())  //Se o turno for posterior ao ultimo turno atribuido
+			{
+				//Se o turno a atribuir e o ultimo atribuido forem consecutivos
+				if (startTime - interval < drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
+				{
+					consecutiveTime += startTime;
+					//Se o tempo consecutivo for menor que o tempo maximo de horas consecutivas do condutor
+					if (consecutiveTime < drivers[searchDriverIdentifier(driverId)].getShiftMaxDuration())
+					{
+						Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
+						drivers[searchDriverIdentifier(driverId)].addShift(s);
+
+						vector<Bus> newB = lines[searchLineIdentifier(busLineId)].getBuses();
+						newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].addShift(s);
+						newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].setDriverId(driverId);
+
+						lines[searchLineIdentifier(busLineId)].setBus(newB);
+
+						cout << "Turno atribuido!" << endl;
+
+						removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
+					}
+					else
+						cout << "Numero maximo de horas seguidas de trabalho atingido!" << endl;
+				}
+				else //Se o turno a atribuir e o ultimo atribuido nao forem consecutivos, mas tiverem uma diferença maior ao periodo minimo de descanso
+					if (startTime - drivers[searchDriverIdentifier(driverId)].getMinRestTime() * 60 > drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
+					{
+						Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
+						drivers[searchDriverIdentifier(driverId)].addShift(s);
+
+						vector<Bus> newB = lines[searchLineIdentifier(busLineId)].getBuses();
+						newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].addShift(s);
+						newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].setDriverId(driverId);
+
+						lines[searchLineIdentifier(busLineId)].setBus(newB);
+
+						cout << "Turno atribuido!" << endl;
+
+						removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
+					}
+					else
+						cout << "Numero minimo de horas de descanso entre turnos nao esta de acordo!" << endl;
+			}
+			else //Garantir que o turno nao coincide com outros ja atribuidos
+				cout << "Nao e possivel atribuir o turno" << endl;
+		else //Se os turnos sao em dias diferentes, nao ha qualquer problema
 		{
-			consecutiveTime += startTime;
-			//Se o tempo consecutivo for menor que o tempo máximo de horas consecutivas do condutor
-			if (consecutiveTime < drivers[searchDriverIdentifier(driverId)].getShiftMaxDuration())
-			{
-				Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
-				drivers[searchDriverIdentifier(driverId)].addShift(s);
+			//Atribui o turno ao condutor
+			Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
+			drivers[searchDriverIdentifier(driverId)].addShift(s);
 
-				vector<Bus> newB = lines[searchLineIdentifier(busLineId)].getBuses();
-				newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].addShift(s);
-				newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].setDriverId(driverId);
+			//Atribui o condutor ao autocarro
+			vector<Bus> newB = lines[searchLineIdentifier(busLineId)].getBuses();
+			newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].addShift(s);
+			newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].setDriverId(driverId);
 
-				lines[searchLineIdentifier(busLineId)].setBus(newB);
+			lines[searchLineIdentifier(busLineId)].setBus(newB);
 
-				cout << "Turno atribuido!" << endl;
+			cout << "Turno atribuido!" << endl;
 
-				removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
-			}
-			else
-				cout << "Numero maximo de horas seguidas de trabalho atingido!" << endl;
+			//Remove o turno da lista dos turnos a atribuir
+			removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
 		}
-		else //Se o turno a atribuir e o ultimo atribuido nao forem consecutivos, mas tiverem uma diferença maior ao período mínimo de descanso
-			if (startTime - drivers[searchDriverIdentifier(driverId)].getMinRestTime() * 60 > drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
-			{
-				Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
-				drivers[searchDriverIdentifier(driverId)].addShift(s);
-
-				vector<Bus> newB = lines[searchLineIdentifier(busLineId)].getBuses();
-				newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].addShift(s);
-				newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].setDriverId(driverId);
-
-				lines[searchLineIdentifier(busLineId)].setBus(newB);
-
-				cout << "Turno atribuido!" << endl;
-
-				removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
-			}
-			else
-				cout << "Numero minimo de horas de descanso entre turnos nao esta de acordo!" << endl;
 	}
 	else
 		cout << "Numero total de horas de trabalho semanal atingido! Nao e possivel atribuir trabalho a este condutor." << endl;
-
 }
 
 /*
-Procura a existência de uma linha no vetor de classes, dado o ID. Caso exista, devolve o índice da linha.
-Caso contrário, devolve -1.
+Procura a existencia de uma linha no vetor de classes, dado o ID. Caso exista, devolve o indice da linha.
+Caso contrario, devolve -1.
 */
-int Company::searchLineIdentifier(unsigned int id)
+int Company::searchLineIdentifier(unsigned int id) const
 {
 	int found = -1;
 
@@ -291,10 +321,10 @@ int Company::searchLineIdentifier(unsigned int id)
 }
 
 /*
-Procura a existência de um condutor no vetor de classes, dado o ID. Caso exista, devolve o índice do condutor.
-Caso contrário, devolve -1.
+Procura a existencia de um condutor no vetor de classes, dado o ID. Caso exista, devolve o indice do condutor.
+Caso contrario, devolve -1.
 */
-int Company::searchDriverIdentifier(unsigned int id)
+int Company::searchDriverIdentifier(unsigned int id) const
 {
 	int found = -1;
 
@@ -309,7 +339,7 @@ int Company::searchDriverIdentifier(unsigned int id)
 }
 
 /*
-Guarda a informaÁ„o contida no vetor de structs no ficheiro de linhas.
+Guarda a informacao contida no vetor de Lines no ficheiro de linhas.
 */
 void Company::savingLinesData()
 {
@@ -345,7 +375,7 @@ void Company::savingLinesData()
 }
 
 /*
-Guarda a informaÁ„o contida no vetor de structs no ficheiro de condutores.
+Guarda a informacao contida no vetor de Drivers no ficheiro de condutores.
 */
 void Company::savingDriversData()
 {
@@ -365,8 +395,8 @@ void Company::savingDriversData()
 }
 
 /*
-Esta struct e a função a seguir são úteis para, na função de calcular um percurso, se poder ordenar os vários percursos
-por duração.
+Esta struct e a funcao a seguir sao uteis para, na funcao de calcular um percurso, se poder ordenar os varios percursos
+por duracao.
 */
 
 typedef struct {
@@ -380,10 +410,10 @@ bool sortHelper(const durationHelper& x, const durationHelper& y)
 }
 
 /*
-Recebe duas paragens do utilizador e procura-as nas linhas existentes. Devolve todos os percursos possíveis,
-sendo que se admite que há, no máximo, um transbordo. Também funciona para o caso de não existir.
+Recebe duas paragens do utilizador e procura-as nas linhas existentes. Devolve todos os percursos possiveis,
+sendo que se admite que ha, no maximo, um transbordo. Tambem funciona para o caso de nao existir.
 */
-void Company::routeCalculator(string stop1, string stop2)
+void Company::routeCalculator(string stop1, string stop2) const
 {
 	typedef struct {
 		int lineIndex;
@@ -392,14 +422,14 @@ void Company::routeCalculator(string stop1, string stop2)
 
 	typedef struct {
 		vector<string> stops;
-		int ID; //Identifica o percurso, útil para coordenar com a struct durationHelper
+		int ID; //Identifica o percurso, util para coordenar com a struct durationHelper
 		int lineID;
 		int duration;
 	}sameLineRoute;
 
 	typedef struct {
 		string commonStop;
-		int ID; //Identifica o percurso, útil para coordenar com a struct durationHelper
+		int ID; //Identifica o percurso, util para coordenar com a struct durationHelper
 		int line1ID;
 		vector<string> line1stops;
 		vector<string> line2stops;
@@ -416,7 +446,7 @@ void Company::routeCalculator(string stop1, string stop2)
 	vector<durationHelper> durHelper;
 	vector<difLineRoute> difLineRoutes;
 	vector<sameLineRoute> sameLineRoutes;
-	vector<stopInfo> info; //Para guardar informações sobre a paragem inicial
+	vector<stopInfo> info; //Para guardar informacoes sobre a paragem inicial
 
 	//Procurar a paragem inicial
 	for (int i = 0; i < lines.size(); i++)
@@ -436,7 +466,7 @@ void Company::routeCalculator(string stop1, string stop2)
 		for (int j = 0; j < lines[i].getBusStops().size(); j++)
 			if (lines[i].getBusStops()[j] == stop2)
 				for (int c = 0; c < info.size(); c++)
-					if (info[c].lineIndex == i) //Paragens estão na mesma linha
+					if (info[c].lineIndex == i) //Paragens estao na mesma linha
 					{
 						sameLineRoute route;
 						durationHelper dH;
@@ -466,7 +496,7 @@ void Company::routeCalculator(string stop1, string stop2)
 						dH.ID = c;
 						durHelper.push_back(dH);
 					}
-					else //Paragens estão em linhas diferentes
+					else //Paragens estao em linhas diferentes
 					{
 						vector<commonStopInfo> commonStopsInfo;
 
@@ -546,7 +576,7 @@ void Company::routeCalculator(string stop1, string stop2)
 					}
 
 
-	sort(durHelper.begin(), durHelper.end(), sortHelper); //Ordenar o vetor por ordem de duração
+	sort(durHelper.begin(), durHelper.end(), sortHelper); //Ordenar o vetor por ordem de duraçao
 
 	//Mostrar os percursos
 
@@ -564,7 +594,7 @@ void Company::routeCalculator(string stop1, string stop2)
 			if (durHelper.size() > 1)
 				cout << endl << "Percurso " << i + 1 << endl;
 			
-			//Procurar o tipo de percurso e mostrá-lo
+			//Procurar o tipo de percurso e mostra-lo
 
 			for (int c = 0; c < sameLineRoutes.size(); c++)
 			{
@@ -619,9 +649,9 @@ void Company::routeCalculator(string stop1, string stop2)
 }
 
 /*
-Recebe uma paragem, e "devolve" as linhas em que se encontra, funcionando também para o caso de não existir.
+Recebe uma paragem, e "devolve" as linhas em que se encontra, funcionando tambem para o caso de nao existir.
 */
-void Company::searchStop(string stop)
+void Company::searchStop(string stop) const
 {
 	vector<int> foundLines;
 
@@ -648,7 +678,7 @@ void Company::searchStop(string stop)
 
 
 //Recebe uma paragem, e devolve on indices do em que se encontra num vetor
-vector<int> Company::searchStop2(string stop)
+vector<int> Company::searchStop2(string stop) const
 {
     vector<int> foundLines;
 
@@ -660,12 +690,14 @@ vector<int> Company::searchStop2(string stop)
 
 }
 
-
-int Company::searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime)
+/*
+Procura um turno de autocarro no vetor, e devolve o seu indice caso exista, senao devolve -1.
+*/
+int Company::searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime)const
 {
 	for (int i = 0; i < busShifts.size(); i++)
 	{
-		if (busShifts[i].getBusLineId() == busLineId &&busShifts[i].getBusOrderNumber() == busOrderNumber && busShifts[i].getStartTime() == startTime && busShifts[i].getEndTime() == endTime)
+		if (busShifts[i].getBusLineId() == busLineId &&busShifts[i].getBusOrderNumber() == busOrderNumber && busShifts[i].getStartTime() == startTime && busShifts[i].getEndTime() == endTime) 
 			return i;
 	}
 

@@ -34,28 +34,34 @@ Time convertMinHours(int minutes)
 {
     int hours;
     int min;
+	int num;
 	double min2;
     string dayOfWeek;
     Time t;
     double temp;
 
     if(minutes>=0 && minutes<24*60) {
+		num = 0;
         dayOfWeek = "Segunda";
 		min = minutes;
     }
     else if(minutes<2*24*60) {
+		num = 1;
         dayOfWeek = "Terca";
 		min = minutes - 24*60;
     }
     else if(minutes<3*24*60){
+		num = 2;
         dayOfWeek="Quarta";
 		min = minutes - 2*24*60;
 	}
     else if(minutes<4*24*60){
+		num = 3;
         dayOfWeek="Quinta";
 		min = minutes - 3*24*60;
 	}
     else if(minutes<5*24*60){
+		num = 4;
         dayOfWeek="Sexta";
 		min = minutes - 4*24*60;
 	}
@@ -68,6 +74,7 @@ Time convertMinHours(int minutes)
     t.hours=hours;
     t.minutes=min2;
     t.dayOfWeek=dayOfWeek;
+	t.numberOfDay = num;
 
 	return t;
 }
