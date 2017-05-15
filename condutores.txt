@@ -1,2 +1,5 @@
 1 ; Antonio Manuel ; 4 ; 36 ; 2
 3 ; Joaquim Belmiro ; 8 ; 48 ; 4
+4 ; Joana Maria ; 5 ; 40 ; 2
+5 ; Lola ; 6 ; 36 ; 2
+7 ; Maria Rita ; 5 ; 36 ; 3

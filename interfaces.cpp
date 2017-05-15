@@ -215,7 +215,7 @@ bool quitOrContinue(Company &company)
 
 		if (userChoice == "S" || userChoice == "N" || userChoice == "s" || userChoice == "n")
 			validInput = true;
-		else cout << "Opçao invalida, tente novamente..." << endl << endl;
+		else cout << "Opcao invalida, tente novamente..." << endl << endl;
 	}
 
 	if (userChoice == "S" || userChoice == "s")

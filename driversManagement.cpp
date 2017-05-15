@@ -81,7 +81,7 @@ void createDriver(Company &company)
 		{
 			shift = stoi(input);
 
-			if (shift > 0 && shift <= 7)
+			if (shift > 0 && shift <= 8)
 				validInput = true;
 			else
 				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
@@ -102,7 +102,7 @@ void createDriver(Company &company)
 		{
 			numMaxHours = stoi(input);
 
-			if (numMaxHours > shift && numMaxHours <= 40)
+			if (numMaxHours > shift && numMaxHours <= 48)
 				validInput = true;
 			else
 				cout << "Ajuste o valor inserido. Tente novamente..." << endl;
