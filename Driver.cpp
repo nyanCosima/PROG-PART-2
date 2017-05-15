@@ -129,10 +129,10 @@ Verifica se o condutor atingiu o servico maximo semanal, e caso contrario, lista
 void Driver::checkCompleteService() const
 {
 	int totalTime=0;
-	Time inicialT, endT;
 	int const startingTime = 6 * 60;
 	int const endingTime = 19 * 60;
 	int counter = 1;
+	int const numDays = 5;
 
 	for (int i = 0; i < shifts.size(); i++){
 		totalTime += shifts[i].getEndTime() - shifts[i].getStartTime(); }
@@ -142,7 +142,7 @@ void Driver::checkCompleteService() const
 	{
 		if (totalTime == 0)
 		{
-			for (int i = 0; i < 5; ++i) 
+			for (int i = 0; i < numDays; ++i)
 			{
 				cout << "Periodo " << (i + 1) << endl;
 
@@ -259,8 +259,8 @@ void Driver::checkCompleteService() const
 			}
 
 		}
-	else //Existem varios turnos, logo e necessario calcular os periodos entre os mesmos, e caso existam os periodos ate ao primeiro turno e depois do ultimo
-	{
+		else //Existem varios turnos, logo e necessario calcular os periodos entre os mesmos, e caso existam os periodos ate ao primeiro turno e depois do ultimo
+		{
 		int counter = 1;
 
 		//Primeiro periodo (ate o inicio do primeiro turno)
@@ -405,7 +405,7 @@ void Driver::checkCompleteService() const
 		int min6 = shifts.at(shifts.size() - 1).getEndTime();
 
 		if (convertMinHours(min5).hours == convertMinHours(startingTime).hours && convertMinHours(min5).minutes == convertMinHours(startingTime).minutes)
-			for (int i = convertMinHours(min5).numberOfDay; i <= 4; i++)
+			for (int i = convertMinHours(min5).numberOfDay; i <= (numDays-1); i++)
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{
@@ -431,7 +431,7 @@ void Driver::checkCompleteService() const
 				}
 			}
 		else if (convertMinHours(min6).hours == convertMinHours(endingTime).hours && convertMinHours(min6).minutes == convertMinHours(endingTime).minutes)
-			for (int i = convertMinHours(min5).numberOfDay; i < 4; i++)
+			for (int i = convertMinHours(min5).numberOfDay; i < (numDays-1); i++)
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{
@@ -458,7 +458,7 @@ void Driver::checkCompleteService() const
 			}
 
 		else
-			for (int i = convertMinHours(min5).numberOfDay; i <= 4; i++)
+			for (int i = convertMinHours(min5).numberOfDay; i <= (numDays-1); i++)
 			{
 				if (i == convertMinHours(min5).numberOfDay)
 				{
@@ -484,45 +484,8 @@ void Driver::checkCompleteService() const
 				}
 
 			}
+		}
 	}
-
-			}
-
-
-
-			/*for (int i = 0; i < shifts.size(); i++){
-				if(convertMinHours(shifts.at(i).getStartTime()).hours!=6){
-
-					cout << "Periodo " << counter << endl;
-					counter++;
-					cout << "Tempo inicial: ";
-					showTime(inicialT);
-					cout << "Tempo final: ";
-					showTime(convertMinHours(shifts.at(i).getStartTime()));
-				cout << endl;}
-
-
-					if(i == shifts.size()-1){
-				        inicialT =  convertMinHours((shifts.at(i).getEndTime()));
-						endT.hours = 19;
-						endT.minutes = 0;}
-					else {
-						endT = convertMinHours(shifts.at(i + 1).getStartTime());
-						inicialT = convertMinHours(shifts.at(i).getEndTime());
-					}
-
-
-
-					cout << "Periodo " << counter << endl;
-				counter++;
-					cout << "Tempo inicial: ";
-					showTime(inicialT);
-					cout << "Tempo final: ";
-					showTime(endT);
-				cout << endl;
-
-			}*/
-
 	else
 		cout << "O condutor atingiu o tempo maximo semanal!" << endl;
 }
