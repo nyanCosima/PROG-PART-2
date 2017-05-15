@@ -40,4 +40,5 @@ public:
 	void savingDriversData();
 	int searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime) const;
 	void checkAvailableDrivers();
+	void checkBuses() const;
 };

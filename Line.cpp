@@ -453,3 +453,13 @@ int Line::searchBusOrderNumber(unsigned int order) const {
 
 	return -1;
 }
+
+void Line::busesChecker() const
+{
+	for (int i = 0; i < buses.size(); i++)
+	{
+		cout << "Numero de ordem: " << buses.at(i).getBusOrderInLine() << endl << endl;
+		
+		buses.at(i).checkBus();
+	}
+}

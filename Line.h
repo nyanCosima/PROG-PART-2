@@ -37,4 +37,5 @@ class Line{
   void horarioPARAGEMlilhelper(string stop, int i) const;
   void busesInf(unsigned int busOrder);
   int searchBusOrderNumber(unsigned int order) const;
+  void busesChecker() const;
 }; 

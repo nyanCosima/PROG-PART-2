@@ -22,7 +22,6 @@ bool quitOrContinue(Company &company);
 void busInfo(Company company);
 void viewDriversFreePeriod(Company company);
 
-
 /*
 Interface principal entre o programa e o utilizador. Apresenta no ecra as funcionalidades principais, recebe
 a escolha do utilizador e devolve-a ao programa.
@@ -127,9 +126,10 @@ void infoInterface(Company &company)
 		cout << "3 - Informacao de um autocarro" << endl;
 		cout << "4 - Trabalho de um condutor" << endl;
         cout << "5 - Verificar periodos de condutores sem o servico completo atribuido" << endl;
+		cout << "6 - Verificar periodos de autocarros sem condutor atribuido" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
-		userChoice = verifyInput(0, 5);
+		userChoice = verifyInput(0, 6);
 
 		clearScreen();
 
@@ -147,9 +147,14 @@ void infoInterface(Company &company)
 		case 4: showShifts(company);
 			anotherOp = quitOrContinue(company);
 			break;
-        case 5:viewDriversFreePeriod(company);
-            anotherOp = quitOrContinue(company);
-            break;
+        case 5:
+			viewDriversFreePeriod(company);
+			anotherOp = quitOrContinue(company);
+			break;
+		case 6:
+			company.checkBuses();
+			anotherOp = quitOrContinue(company);
+			break;
 		case 0: return;
 			break;
 		}
@@ -173,11 +178,10 @@ void searchInterface(Company &company)
 		cout << "Pesquisa" << endl;
 		cout << "Funcionalidades disponiveis" << endl << endl;
 		cout << "1 - Procurar paragem" << endl;
-		cout << "2 - Condutores disponiveis" << endl;
-		cout << "3 - Percurso entre paragens" << endl;
+		cout << "2 - Percurso entre paragens" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
-		userChoice = verifyInput(0, 3);
+		userChoice = verifyInput(0, 2);
 
 		clearScreen();
 
@@ -186,10 +190,7 @@ void searchInterface(Company &company)
 		case 1: searchStop(company);
 			anotherOp = quitOrContinue(company);
 			break;
-		case 2: //availableDrivers();
-			anotherOp = quitOrContinue(company);
-			break;
-		case 3: routeCalculator(company);
+		case 2: routeCalculator(company);
 			anotherOp = quitOrContinue(company);
 			break;
 		case 0: return;
