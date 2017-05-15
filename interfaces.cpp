@@ -20,6 +20,7 @@ void searchInterface(Company &company);
 void allocateService(Company &company);
 bool quitOrContinue(Company &company);
 void busInfo(Company company);
+void viewDriversFreePeriod(Company company);
 
 
 /*
@@ -125,7 +126,7 @@ void infoInterface(Company &company)
 		cout << "2 - Horario de uma linha " << endl;
 		cout << "3 - Informacao de um autocarro" << endl;
 		cout << "4 - Trabalho de um condutor" << endl;
-        cout << "5 - Verificar periodos de condutores sem o serviço completo atribuido" << endl;
+        cout << "5 - Verificar periodos de condutores sem o servico completo atribuido" << endl;
 		cout << "0 - Voltar" << endl << endl;
 
 		userChoice = verifyInput(0, 5);
@@ -146,8 +147,7 @@ void infoInterface(Company &company)
 		case 4: showShifts(company);
 			anotherOp = quitOrContinue(company);
 			break;
-        case 5:
-            //do stuff
+        case 5:viewDriversFreePeriod(company);
             anotherOp = quitOrContinue(company);
             break;
 		case 0: return;
