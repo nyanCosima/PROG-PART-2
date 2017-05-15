@@ -4,12 +4,18 @@
 
 bool shiftSortHelper(const Shift &x, const Shift &y);
 
-Bus::Bus(unsigned int id, unsigned int driver, unsigned int line){
+Bus::Bus(unsigned int order, unsigned int driver, unsigned int line){
 
 	lineId = line;
 	driverId = driver;
-	orderInLine = id;
-  
+	orderInLine = order;
+}
+
+Bus::Bus(unsigned int order, unsigned int line) {
+
+	lineId = line;
+	orderInLine = order;
+	driverId = 0;
 }
 
 ////////////////////////////////
@@ -49,18 +55,32 @@ void Bus::setLineId(unsigned int newLineID)
 ////////////////////////////
 // outher methods
 ///////////////////////////
-void Bus:: showInfo(){
-    cout << "Número de ordem: " << orderInLine << endl;
-    cout << "ID do condutor; " << driverId << endl;
-    cout << "ID da linha: " << lineId << endl;
-    for(int i=0;i<schedule.size();i++)
-        schedule.at(i).showInfo();
-}
 
+/*
+Mostra informação sobre um autocarro tendo em conta se ele tem turnos atribuidos ou nao.
+*/
+void Bus:: showInfo(){
+	if (driverId == 0)
+		cout << "Ainda nao tem trabalho atribuido!" << endl;
+	else
+		for (int i = 0; i < schedule.size(); i++)
+		{
+			cout << "Turno " << i + 1 << endl << endl;
+			schedule.at(i).showInfo();
+		}
+}
 
 void Bus::addShift(Shift s)
 {
 	schedule.push_back(s);
 
 	sort(schedule.begin(), schedule.end(), shiftSortHelper);
+}
+
+/*
+Verifica os períodos em que o autocarro não tem condutor atribuído e lista-os.
+*/
+void Bus::checkBus()
+{
+
 }

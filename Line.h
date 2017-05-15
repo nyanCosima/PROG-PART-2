@@ -21,10 +21,12 @@ class Line{
   unsigned int getFrequency() const;
   vector<string> getBusStops() const;
   vector<int> getTimings() const;
+  vector<Bus> getBuses() const;
   // set methods
   void setFrequency(unsigned int newFrequency);
   void setBusStops(vector<string> newStopsList);
   void setTimings(vector<int> newTimings);
+  void setBus(vector<Bus> newBus);
   // other methods
   int numberOfBuses() const;
   int totalDuration() const;
@@ -33,5 +35,6 @@ class Line{
   void schedule() const;
   void stopsSchedule(string stop) const;
   void horarioPARAGEMlilhelper(string stop, int i) const;
-  void busesInf();
-};
+  void busesInf(unsigned int busOrder);
+  int searchBusOrderNumber(unsigned int order) const;
+}; 

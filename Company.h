@@ -20,7 +20,7 @@ public:
     // metodos get
     string getName() const;
 	vector<Driver> getDrivers() const;
-	static vector<Line> getLines() const;
+	vector<Line> getLines() const;
 	unsigned int getStartingTime() const;
 	unsigned int getEndingTime() const;
 	vector<Shift> getBusShifts() const;
@@ -39,5 +39,5 @@ public:
 	void savingLinesData();
 	void savingDriversData();
 	int searchShift(unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime);
-    void viewBusesInf();
+	void checkAvailableDrivers();
 };

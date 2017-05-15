@@ -34,5 +34,5 @@ class Driver{
   void addShift(Shift s);
 
   // outher methods
-
+  void checkCompleteService();
 };

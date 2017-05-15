@@ -27,7 +27,9 @@ int verificarLENGTHparagemMAIOR(vector<string> busStops){
     return i;
 }
 
-
+/*
+Recebe uma hora representada em minutos e devolve uma struct que a representa em horas, minutos, e dia da semana.
+*/
 Time convertMinHours(int minutes)
 {
     int hours;
@@ -77,6 +79,9 @@ Time convertMinHours(int minutes)
 	return t;
 }
 
+/*
+Mostra uma hora representada em horas,minutos e dia da semana.
+*/
 void showTime(Time t){
     cout << setprecision(0);
 
@@ -87,6 +92,9 @@ void showTime(Time t){
     cout << t.dayOfWeek << endl;
 }
 
+/*
+Faz o inverso da funcao acima.
+*/
 int convertHoursMin(Time t) {
 	int min;
 

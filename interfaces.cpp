@@ -19,6 +19,7 @@ void infoInterface(Company &company);
 void searchInterface(Company &company);
 void allocateService(Company &company);
 bool quitOrContinue(Company &company);
+void busInfo(Company company);
 
 
 /*
@@ -139,7 +140,7 @@ void infoInterface(Company &company)
 		case 2: lineSchedule(company);
 			anotherOp = quitOrContinue(company);
 			break;
-		case 3: //busInfo();
+		case 3: busInfo(company);
 			anotherOp = quitOrContinue(company);
 			break;
 		case 4: showShifts(company);

@@ -70,6 +70,14 @@ Line::Line(string textLine){
   int dur = stoi(duration);
   timesList.push_back(dur);
 
+  //Criar vetor com autocarros necessarios para servir a linha
+
+  for (int i = 1; i <= numberOfBuses(); i++)
+  {
+	  Bus b(i, id);
+	  buses.push_back(b);
+  }
+
 }
 
 Line::Line(unsigned int id, unsigned int frequency, vector<string> busStopsList, vector<int> timesList)
@@ -99,6 +107,10 @@ vector<int> Line::getTimings() const{
   return timesList;
 }
 
+vector<Bus> Line::getBuses() const {
+	return buses;
+}
+
 
 //set methods
 
@@ -118,10 +130,15 @@ void Line::setTimings(vector<int> newTimings)
 }
 
 
+void Line::setBus(vector<Bus> newBus)
+{
+	buses = newBus;
+}
+
 //other methods
 
 /*
-Calcula o n�mero de autocarros necess�rios para cobrir o servi�o de uma dada linha.
+Calcula o numero de autocarros necessarios para cobrir o servico de uma dada linha.
 */
 int Line::numberOfBuses() const
 {
@@ -131,7 +148,7 @@ int Line::numberOfBuses() const
 }
 
 /*
-Calcula a dura��o total de um percurso de uma linha(apenas um sentido, para saber quanto demora at� voltar ao in�cio
+Calcula a duracao total de um percurso de uma linha(apenas um sentido, para saber quanto demora ate voltar ao inicio
 basta calcular o dobro)
 */
 int Line::totalDuration() const
@@ -145,7 +162,7 @@ int Line::totalDuration() const
 }
 
 /*
-Devolve true se a paragem existir na linha, e false no caso contr�rio.
+Devolve true se a paragem existir na linha, e false no caso contrario.
 */
 bool Line::searchStop(string stop) const
 {
@@ -156,6 +173,9 @@ bool Line::searchStop(string stop) const
 	return false;
 }
 
+/*
+Devolve -1 se a paragem nao existir na linha, e o seu indice caso contrario.
+*/
 int Line::searchStop2(string stop) const {
     for (int i = 0; i < busStopList.size(); i++)
         if (busStopList[i] == stop)
@@ -164,6 +184,9 @@ int Line::searchStop2(string stop) const {
     return -1;
 }
 
+/*
+Devolve o horario formatado da linha, em ambos os sentidos.
+*/
 void Line::schedule() const
 {
     int count =0;
@@ -271,7 +294,9 @@ void Line::schedule() const
 	cin.ignore(1000, '\n');
 }
 
-
+/*
+Devolve o horario formatado de uma paragem.
+*/
 void Line::stopsSchedule(string stop) const
 {
     int s;
@@ -341,7 +366,6 @@ void Line::stopsSchedule(string stop) const
             }
 
 
-
 void Line::horarioPARAGEMlilhelper(string stop,int i) const
 {
 
@@ -400,34 +424,25 @@ void Line::horarioPARAGEMlilhelper(string stop,int i) const
     cout  << string(s+5, '-')  << endl;
 }
 
+/*
+Apresenta ao utilizador uma lista com informacao de um autocarro.
+*/
+void Line::busesInf(unsigned int busOrder)
+{
+	unsigned int index=searchBusOrderNumber(busOrder);
 
-void Line::busesInf(){
+	buses[index].showInfo();
+}
 
-    unsigned int busOrder;
-    unsigned int j;
-    Time temp1, temp2;
+/*
+Devolve -1 se o autocarro não existir, e o seu indice no caso contrario.
+*/
+int Line::searchBusOrderNumber(unsigned int order) const {
+	for (int i = 0; i < buses.size(); i++)
+	{
+		if (buses[i].getBusOrderInLine() == order)
+			return i;
+	}
 
-    cout << "Indique o número de ordem do autocarro: ";
-    cin >> busOrder;
-    cout << "Autocarro da linha " << id << endl;
-
-    for (int i = 0; i < buses.size(); ++i) {
-        if (busOrder == buses.at(i).getBusOrderInLine())
-            j = buses.at(i).getBusOrderInLine();
-    }
-
-    cout << "Número de ordem: " << busOrder << endl;
-    cout << "ID do condutor do autocarro: " << buses.at(j).getDriverId() << endl << endl;
-    cout << "Turnos:" << endl;
-
-    for (int k = 0; k < buses.at(j).getSchedule().size(); ++k) {
-        cout << "Turno nº " << k+1 << endl;
-
-        temp1=convertMinHours(buses.at(j).getSchedule().at(k).getStartTime());
-        temp2 = convertMinHours(buses.at(j).getSchedule().at(k).getEndTime());
-
-        cout << "Hora de início: " << temp1.hours << ":" << temp1.minutes << endl;
-        cout << "Hora de fim: " << temp2.hours << ":" << temp2.minutes << endl << endl;
-    }
-
+	return -1;
 }
