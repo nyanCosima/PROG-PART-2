@@ -1,5 +1,7 @@
 #include "Driver.h"
+#include "Time.h"
 #include <algorithm>
+#include <iostream>
 
 Driver::Driver(string textLine){
 
@@ -121,4 +123,38 @@ void Driver::addShift(Shift s)
 	shifts.push_back(s);
 
 	sort(shifts.begin(), shifts.end(),shiftSortHelper);
+}
+
+/*
+Verifica se o condutor atingiu o serviço máximo semanal, e caso contrário, lista os períodos sem trabalho atribuido.
+*/
+void Driver::checkCompleteService()
+{
+	int totalTime=0;
+
+	for (int i = 0; i < shifts.size(); i++)
+		totalTime += shifts[i].getEndTime() - shifts[i].getStartTime();
+
+	if (totalTime < maxWeekWorkingTime)
+	{
+		if (totalTime == 0)
+		{
+			cout << "Tempo inicial: ";
+			showTime(convertMinHours(6 * 60));
+			cout << "Tempo final: ";
+			showTime(convertMinHours(19 * 60 + 24 * 6 * 60));
+		}
+		else
+			for (int i = 0; i < shifts.size()+1; i++)
+			{
+				cout << "Período " << i + 1 << endl;
+
+				cout << "Tempo inicial: ";
+				showTime(convertMinHours());
+				cout << "Tempo final: ";
+				showTime(convertMinHours());
+			}
+	}
+	else
+		cout << "O condutor atingiu o tempo máximo semanal!" << endl;
 }

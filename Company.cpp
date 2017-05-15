@@ -80,7 +80,7 @@ Company::Company(string name, string linesFile, string driversFile){
 	lines = linesVector;
 	drivers = driversVector;
 
-	//Construir o vetor com os turnos a atribuir aos autocarros 
+	//Construir o vetor com os turnos a atribuir aos autocarros para toda a semana (um turno equivale a uma viagem de ida e volta)
 
 	for (int days = 0; days < 6; days++)
 	{
@@ -178,44 +178,68 @@ void Company::removeShift(int index)
 ////////////////////////////
 // outros metodos
 ///////////////////////////
+
+/*
+Aloca serviço aos condutores e autocarros, recebendo a informação necessária (que antes já é verificada se consiste
+com os turnos a atribuir) e verifica a consistência com os dados do condutor que deseja atribuir. Caso seja inconsistente,
+não atribui o trabalho.
+*/
 void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber, unsigned int busLineId, unsigned int startTime, unsigned int endTime){
 
 	int totalTime=0;
 	int consecutiveTime = 0;
 
+	//Calcular o tempo total de trabalho do condutor
 	for (int i = 0; i < drivers[searchDriverIdentifier(driverId)].getShifts().size(); i++)
 		totalTime += drivers[searchDriverIdentifier(driverId)].getShifts()[i].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime();
 
 
 	for (int i = drivers[searchDriverIdentifier(driverId)].getShifts().size()-1; i>0; i--)
 	{
+		//Verifica se os turnos são consecutivos, para isso arbitra-se que o são se começarem 30 minutos depois do turno anterior terminar e guarda o tempo consecutivo 
 		if (drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getEndTime() < drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime() - 30)
 			consecutiveTime += (drivers[searchDriverIdentifier(driverId)].getShifts()[i].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i].getStartTime()) + (drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getEndTime() - drivers[searchDriverIdentifier(driverId)].getShifts()[i - 1].getStartTime());
 		else
 			break;
 	}
 
+	//Se não existir qualquer turno, então não existe qualquer restrição e pode-se atribuir o trabalho
 	if(drivers[searchDriverIdentifier(driverId)].getShifts().size() == 0)
 	{
+		//Atribui o turno ao condutor
 		Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
 		drivers[searchDriverIdentifier(driverId)].addShift(s);
 
+		//Atribui o condutor ao autocarro
+		vector<Bus> newB = lines[searchLineIdentifier(busLineId)].getBuses();
+		newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].addShift(s);
+		newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].setDriverId(driverId);
+
+		lines[searchLineIdentifier(busLineId)].setBus(newB);
+
 		cout << "Turno atribuído!" << endl;
 
+		//Remove o turno da lista dos turnos a atribuir
 		removeShift(searchShift(busOrderNumber, busLineId, startTime, endTime));
 	}
-
+	// Se o tempo total for inferior ao tempo máximo de trabalho semanal
 	else if (totalTime < drivers[searchDriverIdentifier(driverId)].getMaxWeekWorkingTime() * 60)
 	{
-
+		//Se o turno a atribuir e o ultimo atribuido forem consecutivos
 		if (startTime - 30 < drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
 		{
 			consecutiveTime += startTime;
-
+			//Se o tempo consecutivo for menor que o tempo máximo de horas consecutivas do condutor
 			if (consecutiveTime < drivers[searchDriverIdentifier(driverId)].getShiftMaxDuration())
 			{
 				Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
 				drivers[searchDriverIdentifier(driverId)].addShift(s);
+
+				vector<Bus> newB = lines[searchLineIdentifier(busLineId)].getBuses();
+				newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].addShift(s);
+				newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].setDriverId(driverId);
+
+				lines[searchLineIdentifier(busLineId)].setBus(newB);
 
 				cout << "Turno atribuído!" << endl;
 
@@ -224,11 +248,17 @@ void Company::allocateService(unsigned int driverId, unsigned int busOrderNumber
 			else
 				cout << "Número máximo de horas seguidas de trabalho atingido!" << endl;
 		}
-		else
+		else //Se o turno a atribuir e o ultimo atribuido nao forem consecutivos, mas tiverem uma diferença maior ao período mínimo de descanso
 			if (startTime - drivers[searchDriverIdentifier(driverId)].getMinRestTime() * 60 > drivers[searchDriverIdentifier(driverId)].getShifts()[drivers[searchDriverIdentifier(driverId)].getShifts().size() - 1].getEndTime())
 			{
 				Shift s(busLineId, driverId, busOrderNumber, startTime, endTime);
 				drivers[searchDriverIdentifier(driverId)].addShift(s);
+
+				vector<Bus> newB = lines[searchLineIdentifier(busLineId)].getBuses();
+				newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].addShift(s);
+				newB[lines[searchLineIdentifier(busLineId)].searchBusOrderNumber(busOrderNumber)].setDriverId(driverId);
+
+				lines[searchLineIdentifier(busLineId)].setBus(newB);
 
 				cout << "Turno atribuído!" << endl;
 
@@ -642,14 +672,7 @@ int Company::searchShift(unsigned int busOrderNumber, unsigned int busLineId, un
 	return -1;
 }
 
-
-void Company::viewBusesInf()
+void Company::checkAvailableDrivers()
 {
-	int id, busOrder;
-
-	cout << "Insira o id da linha que o autocarro percorre: ";
-	cin >> id;
-
-	getLines().at(searchLineIdentifier(id)).busesInf();
-
+	for(int i=0;i<drivers.size();i++)
 }
